@@ -1,0 +1,33 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "taskName": "markdown-it (Render to HTML)",
+            "command": "markdown-it",
+            "isShellCommand": true,
+            "args": [
+                "api_doc.md",
+                "-o",
+                "api_doc.html"
+            ],
+            "showOutput": "always"
+        },
+        {
+            "taskName": "markdown-pdf (Render to PDF)",
+            "command": "markdown-pdf",
+            "isShellCommand": true,
+            "isBuildCommand": true,
+            "args": [
+                "-o",
+                "api_doc_A4.pdf",
+                "-f",
+                "A4",
+                // "-b",
+                // "2.5cm",
+                "api_doc.md"
+            ]
+        }
+    ]
+}
