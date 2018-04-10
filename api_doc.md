@@ -8,15 +8,16 @@
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
   * Bearer, using the API token provided by the `/api/token` call.
 
-  If a call is made to a URL that the anonymous user has access to, auth headers will be ignored.
+  If a call is made to a URL that the anonymous user has access/permissions to, auth headers will be ignored.
 
-  For the time being permissions are global and all permissions need to be on the 'unsecured' network.
-  (The Admin Panel will only allow changes on the correct network at this time.)
-  This is scheduled to change in Q3 2017.
+  **Permissions are per network per gateway. If multiple gateways are being accessed simultaneously, care should be taken by the XIG administrator (i.e., the user logging into and configuring the gateways through the XIG Admin Panel) to ensure that the permissions for a given user are consistent across gateways they are given access to.**
+
 ----
 
 **Get Token (Login Required)**
 ----
+**Change Status:** No API call changes made in V1.7.0. 
+
   Returns a JSON Web Token to be used with Bearer Authorization.
 * **URL:**
 
@@ -28,7 +29,7 @@
 
 * **Permission:**
 
-  N/A. Tokens are accessible for all non-anonymous users.
+  N/A. Tokens are accessible once a user has logged in (i.e., non-anonymous user).
 
 * **URL Parameters:**
 
@@ -54,10 +55,15 @@
 
 **Check User Permissions (Login Required)**
 ----
-  Returns a JSON Web Token to be used with Bearer Authorization.
-* **URL:**
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
-  `/check_user`
+  Returns the permissions that the currently logged in user has. 
+* **URLs:**
+
+    `/check_user/:network`
+    
+    If :network is omitted, the permissions for the unsecured network will be returned.
+
 
 * **Method:**
 
@@ -65,11 +71,11 @@
 
 * **Permission:**
 
-  N/A. Permissions checks are accessible for all non-anonymous users.
+  N/A. Permissions checks are accessible once a user has logged in (i.e., non-anonymous user).
 
 * **URL Parameters:**
 
-  None.
+  /None.
 
 * **Data Parameters:**
 
@@ -78,19 +84,21 @@
 * **Success Response:**
 
   * **Code:** 200<br/>
-  **Content:** `/check_user` returns a string with the list of permissions for the user that is logged in.
+  **Content:** `/check_user/:network` returns a string with the list of permissions on the specified secure network for the user that is logged in.
 
 * **Error Responses:**
   * **Code:** 403 Forbidden<br/>
   **Meaning:** Bad credentials were used.
 
 * **Notes:**
-  Current as of 2017-7-31.
+  Current as of 2018-4-9.
 ----
 
 **Show Devices**
 ----
-  Return a list of devices at the given gateway, along with some information about the gateway's status.
+ **Change Status:** No API call changes made in V1.7.0. 
+ 
+  Return a list of devices seen by the given gateway, along with some information about the gateway's status.
 * **URL:**
 
   `/devices`
@@ -165,23 +173,25 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
 
   Current as of 2017-7-12
 
-  To see a pretty-printed version of this call, issue a `GET` request to `/devices/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render properly.
+  To see a pretty-printed version of this call, issue a `GET` request to `/devices/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
 
 ----
 
 **Show Devices with Groups**
 ----
+**Change Status:** No API call changes made in V1.7.0. 
+ 
   Return a list of devices at the given gateway, along with some information
 * **URL**
 
@@ -271,12 +281,12 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
 
@@ -286,7 +296,9 @@
 
 **Show Devices with Scenes**
 ----
-  Return a list of devices at the given gateway, along with some information
+**Change Status:** No API call changes made in V1.7.0.  
+ 
+  Return a list of devices at the given gateway, along with scene information
 * **URLs:**
 
   `/devices/with_scenes`
@@ -371,12 +383,12 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
 
@@ -387,6 +399,8 @@
 
 **Show Devices with Groups and Scenes**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+ 
   Return a list of devices at the given gateway, along with some information
 * **URLs**
 
@@ -488,12 +502,12 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
 
@@ -505,6 +519,8 @@
 
 **Set Intensity (with Optional Fading)**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+ 
   Set intensity for a device or a group of devices, with optional fade time.
 * **URLs:**
 
@@ -524,7 +540,7 @@
 * **URL Parameters:**
 
   Required:
-    * `network` : The network of the target device.
+    * `network` : The secure network of the target device. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
     * `id` : The device id of the target device or group of devices. For groups add `0xC000` to the int value of the group id before casting to a string.
     * `intensity` : The target intensity, in percent. This can be 0 or any positive float or integer between 0.1 and 100.0
 
@@ -550,13 +566,13 @@
 * **Error Response:**
 
   * **Code:** 403 Forbidden <br />
-  **Meaning** Controls haven't been enabled for this gateway. Enable controls and try again.
+  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server is not online.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -570,6 +586,8 @@
 
 **Recall Scene (with Optional Fading)**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
   Recall a scene on a light or a group of lights, with optional fade time.
 * **URLs:**
 
@@ -589,7 +607,8 @@
 * **URL Parameters:**
 
   Required:
-    * `id` : The device id of the target device or group of devices. For groups add `0xC000` to the int value of the group id before casting to a string.
+    * `network` : The secure network the recall scene command should be issued on. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
+    * `device_id` : The device id of the target device or group of devices. For groups add `0xC000` (49152) to the integer value of the group id before casting to a string.
     * `sceneNumber` : The target scene number (an integer).
 
   Optional:
@@ -614,17 +633,17 @@
 * **Error Response:**
 
   * **Code:** 403 Forbidden <br />
-  **Meaning** Controls haven't been enabled for this gateway. Enable controls and try again.
+  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server is not online.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the (server) error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
-  `curl <gateway address: port>/device/recallscene/111/50/5000` Recall the device with id 111 to scene 50 over 5 seconds
+  `curl <gateway address: port>/device/recallscene/unsecured/49263/50/6000` Recall scene 50 from group 111 (49263 = 49152 + 111) not on a secure network with a fade time of 6 seconds
 
 * **Notes:**
 
@@ -634,6 +653,8 @@
 
 **Histograms**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
   Return an intensity or temperature histogram for a given device.
 
 * **URLs**
@@ -651,6 +672,7 @@
 * **URL Parameters:**
 
   Required:
+    * `network` : The secure network the device that the histogram data is being collected from. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
     * `type` : The type of histogram: either `temperature` or `intensity`
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
@@ -674,16 +696,16 @@
   **Meaning:** The device requested could not be found.
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
-  `curl <gateway address: port>/device/histogram/temperature/111` gets the temperature histogram for device 111.
+  `curl <gateway address: port>/device/histogram/temperature/Xicato/111` gets the temperature histogram for device 111 on the Xicato secure network.
 
 * **Notes:**
 
@@ -695,7 +717,9 @@
 
 **Device Details**
 ----
-  Retrieve more detailed information for a given device.
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
+  Retrieve detailed information for a given device.
 
 * **URLs**
 
@@ -712,6 +736,7 @@
 * **URL Parameters:**
 
   Required:
+    * `network` : The secure network the target device is on. 
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
 * **Data Parameters:**
@@ -750,16 +775,16 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
-  `curl <gateway address: port>/device/details/111` gets the details for device 111.
+  `curl <gateway address: port>/device/details/MyNetwork/1131` gets the details for device 1131 on the secure network MyNetwork.
 
 * **Notes:**
 
@@ -769,6 +794,8 @@
 
 **Get Device Groups**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
   Gets the group membership for a given device (XID or XIM).
 
 * **URLs**
@@ -788,6 +815,7 @@
 * **URL Parameters:**
 
   Required:
+    * `network` : The secure network the given device is on. If the  network value is not entered, the return value for network will be null and other data may not be complete.
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
 * **Data Parameters:**
@@ -797,16 +825,17 @@
 * **Success Response:**
 
   * **Code:** 200 <br />
-  **Content:** `/device/groups` returns JSON:
+  **Content:** `/device/groups/:network` returns JSON:
   ```
-  { "device_id" : String
+  { "network" : String
+  , "device_id" : String
   , "groups" : List Integer
   }
   ```
 
 * **Error Responses:**
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -815,7 +844,7 @@
 
 * **Example Call:**
 
-  `curl <gateway address: port>/device/groups/111` gets the group membership for device 111.
+  `curl <gateway address: port>/device/groups/unsecured/111` gets the group membership from device 111 that is not on a secure network (network name is a null value).
 * **Notes:**
 
   Current as of 2017-9-20.
@@ -823,6 +852,8 @@
 ----
 **Set Device Groups**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
   Sets the group membership for a given device (XID or XIM).
 
 * **URLs**
@@ -840,6 +871,7 @@
 * **URL Parameters:**
 
   Required:
+    * `network` : The secure network for the target device.  
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
 * **Data Parameters:**
@@ -866,7 +898,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -880,9 +912,9 @@
           -H "Content-Type:application/json"
           -d '[51,52,53]'
           -u <username>:<password>
-          <gateway address: port>/device/setgroups/111
+          <gateway address: port>/device/setgroups/Xicato2/1250
   ```
-  sets the group membership for device 111 to 51, 52, and 53.
+  sets the group membership for device 125 on secure network Xicato2 to 51, 52, and 53.
 * **Notes:**
 
   Current as of 2017-9-18.
@@ -891,6 +923,8 @@
 
 **Get Device Scenes**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
   Gets the scene configuration for a given device (XID or XIM).
 
 * **URLs**
@@ -910,6 +944,7 @@
 * **URL Parameters:**
 
   Required:
+    * `network` : The secure network for the target device.  
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
 * **Data Parameters:**
@@ -936,7 +971,7 @@
 
 * **Error Responses:**
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1004,8 +1039,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
+  **Meaning:** The server isn't up or an incorrect URL was requested.
     OR
 
   * **Code:** 500 Internal Server Error<br />
@@ -1112,7 +1146,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1198,7 +1232,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1267,7 +1301,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1336,7 +1370,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1406,7 +1440,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1912,7 +1946,7 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -1970,7 +2004,7 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2032,7 +2066,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2099,7 +2133,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2164,8 +2198,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
+  **Meaning:** The server isn't up or an incorrect URL was requested.
     OR
 
   * **Code:** 500 Internal Server Error<br />
@@ -2281,7 +2314,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2342,7 +2375,7 @@
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2396,7 +2429,7 @@
 * **Error Response**
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2538,7 +2571,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2602,7 +2635,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
@@ -2663,7 +2696,7 @@
     OR
 
   * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
+  **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
