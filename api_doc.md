@@ -1427,6 +1427,452 @@
 
 ----
 
+**Get Device iBeacon Configuration**
+----
+  Retrieve the iBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/ibeacon/get/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/ibeacon/get` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "ibeacon_config":
+      { "uuid": List Int
+      , "major": Int
+      , "minor": Int
+      , "measured_power": Int
+      , "tx_power": Int
+      , "period": Int
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/get/Xicato/1`
+  will get the iBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Get Device Eddystone URL Configuration**
+----
+  Retrieve the Eddystone URL configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/eddystone/get/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/eddystone/get` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "eddystone_config":
+      { "url": String
+      , "flags": Int (should always be 16 if enabled)
+      , "tx_power_mode": Int (0 = Lowest, 1 = Low, 2 = Medium, 3 = High)
+      , "tx_power_levels": List Int
+      , "period": Int
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/get/Xicato/1` will get the Eddystone URL configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Get Device AltBeacon Config**
+----
+  Retrieve the AltBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/altbeacon/get/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/altbeacon/get` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "altbeacon_config":
+      { "company_id": List Int[2]
+      , "beacon_id": List Int[18]
+      , "mfg_data": Int
+      , "measured_power": Int
+      , "period": Int
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/get/Xicato/1` will get the AltBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Set Device iBeacon Configuration**
+----
+  Set the iBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/ibeacon/set/:network/:device_id`
+
+* **Methods:**
+
+  `PUT`|`POST`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  Required:
+  * In the body: A JSON object having the following structure:
+    ```
+    { "uuid": List Int
+    , "major": Int
+    , "minor": Int
+    , "measured_power": Int
+    , "tx_power": Int
+    , "period": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/ibeacon/set` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "ibeacon_config":
+      { "uuid": List Int
+      , "major": Int
+      , "minor": Int
+      , "measured_power": Int
+      , "tx_power": Int
+      , "period": Int
+      }
+  , "results":
+      { "uuid": Bool
+      , "major": Bool
+      , "minor": Bool
+      , "measured_power": Bool
+      , "tx_power": Bool
+      , "period": Bool
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
+* **Example Call:**
+
+  ```
+  curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/set/Xicato/1 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    --data-binary '{"uuid":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"major":1,"minor":1,"measured_power":-50,"tx_power":10,"period":5000}'
+  ```
+    will set the iBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Set Device Eddystone URL Configuration**
+----
+  Set the Eddystone URL configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/eddystone/set/:network/:device_id`
+
+* **Methods:**
+
+  `PUT`|`POST`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  Required:
+  * In the body: A JSON object having the following structure:
+    ```
+    { "url": String
+    , "flags": 16
+    , "tx_power_mode": Int
+    , "tx_power_levels": List Int
+    , "period": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/eddystone/set` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "eddystone_config":
+      { "url": String
+      , "flags": 16
+      , "tx_power_mode": Int
+      , "tx_power_levels": List Int
+      , "period": Int
+      }
+  , "results":
+      { "url": Bool
+      , "flags": Bool
+      , "tx_power_mode": Bool
+      , "tx_power_levels": Bool
+      , "period": Bool
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
+* **Example Call:**
+
+  ```
+  curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/set/Xicato/1 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    --data-binary '{"url":"http://xicato.com","flags":16,"tx_power_mode":3,"tx_power_levels":[-80,-70,-60,-50],"period":5000}'
+  ```
+    will set the Eddystone URL configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Set Device AltBeacon Configuration**
+----
+  Set the AltBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/altbeacon/set/:network/:device_id`
+
+* **Methods:**
+
+  `PUT`|`POST`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  Required:
+  * In the body: A JSON object having the following structure:
+    ```
+    { "company_id": List Int[2]
+    , "beacon_id": List Int[18]
+    , "mfg_data": Int
+    , "measured_power": Int
+    , "period": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/altbeacon/set` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "altbeacon_config":
+      { "company_id": List Int[2]
+      , "beacon_id": List Int[18]
+      , "mfg_data": Int
+      , "measured_power": Int
+      , "period": Int
+      }
+  , "results":
+      { "company_id": Bool
+      , "beacon_id": Bool
+      , "mfg_data": Bool
+      , "measured_power": Bool
+      , "period": Bool
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
+* **Example Call:**
+
+  ```
+  curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/set/Xicato/1 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    --data-binary '{"company_id":[16,16],"beacon_id":[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8],"mfg_data":37,"measured_power":-45,"period":5000}'
+  ```
+    will set the AltBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
 **Name Group**
 ----
   Name or change the name of a group. It will also save the name through software restarts.
