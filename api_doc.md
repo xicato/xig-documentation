@@ -1235,6 +1235,80 @@
   Current as of 2017-9-18.
 
 ----
+**Get Device Light Setup**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Gets the light configuration for a given device (XID or XIM).
+
+* **URLs**
+
+  `/device/getlightsetup/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/getlightsetup` returns JSON:
+    ```
+    { "setup":
+        { "max_level" : Float 0.1-100.0
+        , "min_level" : Float 0.1-100.0
+        , "power_on_type" : Int -- 0 for 'Direct', 1 for 'Last', 2 for 'Wired'
+        , "power_on_level" : Float 0.1-100.0
+        , "power_on_fade_time" : Int 0-6500000
+        , "power_on_start_time" : Int 0-2500
+        , "dimming_curve" : Int -- 0 for logarithmic, 1 for linear
+        , "fade_smoothing" : Int -- 0 for disabled, 1 for enabled
+        }
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/getlightsetup/Unsecured/111'
+  ``` 
+  gets the communication configuration for device 111.
+* **Notes:**
+
+  Current as of 2018-4-11.
+
+----
 **Set Device Light Setup**
 ----
 **Change Status:** Initial release in V1.7.0. 
@@ -1898,6 +1972,97 @@
 * **Notes:**
 
   Current as of 2017-11-21.
+
+----
+**Get Device Communication Configuration**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Gets the communication configuration for a given device (XID or XIM).
+
+* **URLs**
+
+  `/device/getconfig/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/getconfig` returns JSON:
+    ```
+    { "config":
+        { txPower : Float
+        , highRxGain : Bool
+        , dynamicLightStatusConfiguration :
+            { warnInterval : Int
+            , warnIntensityMax : Float
+            , warnIntensityMin : Float
+            , warnTemperatureMax : Int
+            , warnTemperatureMin : Int
+            , warnVinMax : Float
+            , warnVinMin : Float
+            , changeBursts : Int
+            , changeBurstInterval : Int
+            , changeIntervalMin : Int
+            , changeIntensity : Float
+            , changeTemperature : Int
+            , changeVin : Float
+            }
+        , advertisementSettings :
+            { lightStatusAdvInterval : Int
+            , lightHistoryAdvInterval : Int
+            , lightChangeBursts : Int
+            , lightChangeBurstInterval : Int
+            , alwaysConnectable : Bool
+            }
+        }
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/getconfig/Unsecured/111'
+  ``` 
+  gets the communication configuration for device 111.
+* **Notes:**
+
+  Current as of 2018-4-11.
 
 ----
 **Set Device Communication Configuration**
