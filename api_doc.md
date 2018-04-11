@@ -62,7 +62,7 @@
 
     `/check_user/:network`
     
-    If :network is omitted, the permissions for the unsecured network will be returned.
+    If network is omitted, the user permissions for the unsecured network will be returned.
 
 
 * **Method:**
@@ -94,6 +94,9 @@
   Current as of 2018-4-9.
 ----
 
+***View Permission API Calls***
+----
+----
 **Show Devices**
 ----
  **Change Status:** No API call changes made in V1.7.0. 
@@ -187,7 +190,6 @@
   To see a pretty-printed version of this call, issue a `GET` request to `/devices/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
 
 ----
-
 **Show Devices with Groups**
 ----
 **Change Status:** No API call changes made in V1.7.0. 
@@ -293,7 +295,6 @@
   Current as of 2017-10-3
 
 ----
-
 **Show Devices with Scenes**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
@@ -396,7 +397,6 @@
 
 
 ----
-
 **Show Devices with Groups and Scenes**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
@@ -516,141 +516,6 @@
   To see a pretty-printed version of this call, issue a `GET` request to `/devices/with_everything/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render properly.
 
 ----
-
-**Set Intensity (with Optional Fading)**
-----
-**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
- 
-  Set intensity for a device or a group of devices, with optional fade time.
-* **URLs:**
-
-  `/device/setintensity/:network/:device_id/:intensity/`
-
-  To use fading:
-  `/device/setintensity/:network/:device_id/:intensity/:fading`
-
-* **Methods:**
-
-  `GET` | `POST`
-
-* **Permission:**
-
-  `control`
-
-* **URL Parameters:**
-
-  Required:
-    * `network` : The secure network of the target device. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
-    * `id` : The device id of the target device or group of devices. For groups add `0xC000` to the int value of the group id before casting to a string.
-    * `intensity` : The target intensity, in percent. This can be 0 or any positive float or integer between 0.1 and 100.0
-
-  Optional:
-    * `fading` : The fade time, in milliseconds. This can be any positive integer but obviously very large values will not have particularly useful results.
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** JSON:
-    ```
-    { "device_id" : String
-    , "intensity" : Float
-    , "fading" : Optional Integer
-    }
-    ```
-    (Optional means that the field may or may not be present. In this case, fading will only be present if a fading value is used.)
-
-* **Error Response:**
-
-  * **Code:** 403 Forbidden <br />
-  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
-
-* **Example Call:**
-
-  ` curl <gateway address: port>/device/setintensity/unsecured/111/50/5000` sets the intensity of the device with id 111 to 50% over 5 seconds
-
-* **Notes:**
-
-  Current as of 2016-12-20
-
-----
-
-**Recall Scene (with Optional Fading)**
-----
-**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
-
-  Recall a scene on a light or a group of lights, with optional fade time.
-* **URLs:**
-
-  `/device/recallscene/:network/:device_id/:sceneNumber/`
-
-  To use fading:
-  `/device/recallscene/:network/:device_id/:sceneNumber/:fading`
-
-* **Methods:**
-
-  `GET` | `POST`
-
-* **Permission:**
-
-  `control`
-
-* **URL Parameters:**
-
-  Required:
-    * `network` : The secure network the recall scene command should be issued on. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
-    * `device_id` : The device id of the target device or group of devices. For groups add `0xC000` (49152) to the integer value of the group id before casting to a string.
-    * `sceneNumber` : The target scene number (an integer).
-
-  Optional:
-    * `fading` : The fade time, in milliseconds. This can be any positive integer but obviously very large values will not have particularly useful results.
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** JSON:
-    ```
-    { "device_id" : String
-    , "sceneNumber" : Integer
-    , "fading" : Optional Integer
-    }
-    ```
-    (Optional means that the field may or may not be present. In this case, fading will only be present if a fading value is used in the call.)
-
-* **Error Response:**
-
-  * **Code:** 403 Forbidden <br />
-  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
-
-* **Example Call:**
-
-  `curl <gateway address: port>/device/recallscene/unsecured/49263/50/6000` Recall scene 50 from group 111 (49263 = 49152 + 111) not on a secure network with a fade time of 6 seconds
-
-* **Notes:**
-
-  Current as of 2016-12-20
-
-----
-
 **Histograms**
 ----
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
@@ -714,7 +579,6 @@
   Occasionally, the gateway may return an empty list. This means it hasn't had the opportunity to retrieve the histogram from the device yet. Please allow some time for histograms to populate into the device list.
 
 ----
-
 **Device Details**
 ----
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
@@ -791,7 +655,6 @@
   Current as of 2017-7-31.
 
 ----
-
 **Get Device Groups**
 ----
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
@@ -815,7 +678,7 @@
 * **URL Parameters:**
 
   Required:
-    * `network` : The secure network the given device is on. If the  network value is not entered, the return value for network will be null and other data may not be complete.
+    * `network` : The secure network the given device is on. If the  network value is not entered, the return value for network will be null and other data returned may be incorrect.
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
 * **Data Parameters:**
@@ -840,7 +703,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means device ID provided did not match an ID on the device list.
+  **Meaning:** The server had an error. Generally this means device ID provided did not match an ID in the device list.
 
 * **Example Call:**
 
@@ -850,77 +713,6 @@
   Current as of 2017-9-20.
 
 ----
-**Set Device Groups**
-----
-**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
-
-  Sets the group membership for a given device (XID or XIM).
-
-* **URLs**
-
-  `/device/setgroups/:network/:device_id`
-
-* **Methods:**
-
-  `PUT` | `POST`
-
-* **Permission:**
-
-  `manage`
-
-* **URL Parameters:**
-
-  Required:
-    * `network` : The secure network for the target device.  
-    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
-
-* **Data Parameters:**
-
-  Required:
-    * In the body: A list of integers, each separated by a comma and an optional space, and surrounded by brackets e.g. `[51, 53, 55]`. *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/device/setgroups` returns JSON:
-    ```
-    { "device_id" : String
-    , "groups" : List Integer
-    , "result" : Boolean
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 400 Bad Request<br />
-  **Meaning:** The device requested could not be found.
-
-    OR
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
-
-* **Example Call:**
-
-  ```
-     curl -X PUT
-          -H "Content-Type:application/json"
-          -d '[51,52,53]'
-          -u <username>:<password>
-          <gateway address: port>/device/setgroups/Xicato2/1250
-  ```
-  sets the group membership for device 125 on secure network Xicato2 to 51, 52, and 53.
-* **Notes:**
-
-  Current as of 2017-9-18.
-
-----
-
 **Get Device Scenes**
 ----
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
@@ -980,14 +772,397 @@
 
 * **Example Call:**
 
-  `curl <gateway address: port>/device/scenes/111` gets the scene configuration for device 111.
+  `curl <gateway address: port>/device/scenes/GalaXi/111` gets the scene configuration for device 111 on the secure network GalaXi.
 * **Notes:**
 
   Current as of 2017-9-20.
 
 ----
+**Basic Gateway Info**
+----
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Returns some basic information about the gateway.
+
+* **URLs**
+
+  `/gateway_info/`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `view`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** /devices returns JSON:
+    ```
+    { "network" : Nullable String
+    , "networks" : List String
+    , "connectable" : Boolean
+    , "temperature" : Float
+    }
+    ```
+    (Nullable means that the field contains either just a value of that type, or null. This is equivalent to Haskell's, Elm's, etc. Maybe-Just-Nothing concept.)
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call:**
+
+  `curl <gateway address: port>/gateway_info` gets the basic gateway info
+
+* **Notes:**
+
+  Current as of 2017-2-24
+
+----
+**Gateway Status**
+----
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Get the status of the gateway, in string form (as opposed to the `/gateway_info` call).
+
+* **URLs**
+
+  `/status`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `view`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** /devices returns one of two strings:
+    * "Gateway running, CPU at {temperature}" -- The gateway is up, and the CPU temperature is {temperature}.
+    * "Gateway not running" -- This shouldn't appear, now that the gateway auto-reloads on internal errors; if it does, restart the gateway.
+
+* **Error Responses**
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/status` gets the gateway's status.
+
+* **Notes**
+
+  Current as of 2017-2-24
+
+----
+
+***Control Permission API Calls***
+----
+----
+**Set Intensity (with Optional Fading)**
+----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+ 
+  Set intensity for a device or a group of devices, with optional fade time.
+* **URLs:**
+
+  `/device/setintensity/:network/:device_id/:intensity/`
+
+  To use fading:
+  `/device/setintensity/:network/:device_id/:intensity/:fading`
+
+* **Methods:**
+
+  `GET` | `POST`
+
+* **Permission:**
+
+  `control`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` : The secure network of the target device. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
+    * `id` : The device id of the target device or group of devices. For groups add `0xC000` to the int value of the group id before casting to a string.
+    * `intensity` : The target intensity, in percent. This can be 0 or any positive float or integer between 0.1 and 100.0
+
+  Optional:
+    * `fading` : The fade time, in milliseconds. This can be any positive integer but obviously very large values will not have particularly useful results.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** JSON:
+    ```
+    { "device_id" : String
+    , "intensity" : Float
+    , "fading" : Optional Integer
+    }
+    ```
+    (Optional means that the field may or may not be present. In this case, fading will only be present if a fading value is used.)
+
+* **Error Response:**
+
+  * **Code:** 403 Forbidden <br />
+  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
+
+* **Example Call:**
+
+  ` curl <gateway address: port>/device/setintensity/unsecured/111/50/5000` sets the intensity of the device with id 111 to 50% over 5 seconds
+
+* **Notes:**
+
+  Current as of 2016-12-20
+
+----
+**Recall Scene (with Optional Fading)**
+----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
+
+  Recall a scene on a light or a group of lights, with optional fade time.
+* **URLs:**
+
+  `/device/recallscene/:network/:device_id/:sceneNumber/`
+
+  To use fading:
+  `/device/recallscene/:network/:device_id/:sceneNumber/:fading`
+
+* **Methods:**
+
+  `GET` | `POST`
+
+* **Permission:**
+
+  `control`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` : The secure network that the recall scene command will be issued to. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
+    * `device_id` : The device id of the target device or group of devices. For groups an offset value of `0xC000` (49152) must be added to the integer value of the group id before casting to a string.
+    * `sceneNumber` : The target scene number (an integer).
+
+  Optional:
+    * `fading` : The fade time, in milliseconds. This can be any positive integer but obviously very large values will not have particularly useful results.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** JSON:
+    ```
+    { "device_id" : String
+    , "sceneNumber" : Integer
+    , "fading" : Optional Integer
+    }
+    ```
+    (Optional means that the field may or may not be present. In this case, fading will only be present if a fading value is used in the call.)
+
+* **Error Response:**
+
+  * **Code:** 403 Forbidden <br />
+  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
+
+* **Example Call:**
+
+  `curl <gateway address: port>/device/recallscene/unsecured/49263/50/6000` Recall scene 50 from group 111 (49263 = 49152 + 111) not on a secure network with a fade time of 6 seconds
+
+* **Notes:**
+
+  Current as of 2016-12-20
+
+----
+**Device Dismissal**
+----
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Remove a device from the device list.
+
+* **URLs**
+
+  `/device/remove/:network/:device_id`
+
+* **Methods:**
+
+  `GET` | `POST`
+
+* **Permission:**
+
+  `control`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/remove` returns JSON:
+    ```
+    { "result": Boolean
+      "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call:**
+
+  `curl <gateway address: port>/device/remove/Xicato/111` will remove device 111 on secure network Xicato from the device list.
+
+* **Notes:**
+
+  Current as of 2017-7-31.
+
+  If a valid device is errantly dismissed then it will automatically re-appear the next time an advertising packet is received from it.
+
+  It is _strongly recommended_ that device failures and failure to respond be investigated before dismissing a device.
+
+
+----
+
+
+***Configure Permission API Calls***
+----
+----
+**Set Device Groups**
+----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
+
+  Sets the group membership for a given device (XID or XIM).
+
+* **URLs**
+
+  `/device/setgroups/:network/:device_id`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` : The secure network for the target device.  
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+
+* **Data Parameters:**
+
+  Required:
+    * In the body: A list of up to 16 integers (Group ID values) without the group ID offset of `0xC000` added to them (i.e., Group ID `1` should be entered as `1` not `49153`), each separated by a comma and an optional space, and surrounded by brackets e.g. `[51, 53, 55]`. The list of Group IDs will replace the existing Group ID list in the target device; therefore, a read-modify-write operation must be performed to append Group IDs to any list already stored in the device.   *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/setgroups` returns JSON:
+    ```
+    { "device_id" : String
+    , "groups" : List Integer
+    , "result" : Boolean
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+     curl -X PUT
+          -H "Content-Type:application/json"
+          -d '[51,52,53]'
+          -u <username>:<password>
+          <gateway address: port>/device/setgroups/Xicato2/1250
+  ```
+  sets the group membership for device 125 on secure network Xicato2 to 51, 52, and 53.
+* **Notes:**
+
+  Current as of 2017-9-18.
+
+----
 **Set Device Scenes**
 ----
+**Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
+
   Sets the scene configuration for a given device (XID or XIM).
 
 * **URLs**
@@ -1000,7 +1175,7 @@
 
 * **Permission:**
 
-  `manage`
+  `configure`
 
 * **URL Parameters:**
 
@@ -1010,7 +1185,7 @@
 * **Data Parameters:**
 
   Required:
-    * In the body: A list of JSON objects, each having the following structure:
+    * In the body: A list of up to 32 JSON objects, each having the following structure:
     ```
     { "sceneNumber" : Integer, 0 < n < 65535
     , "intensity" : Float, 0.0 <= m <= 100.0
@@ -1018,7 +1193,7 @@
     , "fadeTime" : Integer, 0 <= n <= 1.44e7
     }
     ```
-    , separated by a comma and an optional space, and surrounded by brackets e.g. `[{"sceneNumber":11, "intensity":34.5, "delayTime":0, "fadeTime":4000}, {"sceneNumber":12, "intensity":0, "delayTime":0, "fadeTime":0}]`. *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    , separated by a comma and an optional space, and surrounded by brackets e.g. `[{"sceneNumber":11, "intensity":34.5, "delayTime":0, "fadeTime":4000}, {"sceneNumber":12, "intensity":0, "delayTime":0, "fadeTime":0}]`. The list of scene objects will replace the existing scene list in the target device; therefore, a read-modify-write operation must be performed to append scene settings to the scene list already stored in the device. *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
 
 * **Success Response:**
 
@@ -1052,130 +1227,19 @@
           -H "Content-Type:application/json"
           -d '[{"sceneNumber":12, "intensity":34.5, "delayTime":0, "fadeTime":4000}, {"sceneNumber":13, "intensity":0, "delayTime":0, "fadeTime":0}]'
           -u <username>:<password>
-          <gateway address: port>/device/setscenes/111
+          <gateway address: port>/device/setscenes/GalaXi/111
   ``` 
-  sets the scene response configuration for scenes 12 and 13 on device 111.
+  sets the scene response configuration for scenes 12 and 13 in device 111 on the secure network GalaXi.
 * **Notes:**
 
   Current as of 2017-9-18.
 
 ----
-
-**Set Device Communication Configuration**
-----
-  Sets the communication configuration for a given device (XID or XIM).
-
-* **URLs**
-
-  `/device/setconfig/:network/:device_id`
-
-* **Methods:**
-
-  `PUT` | `POST`
-
-* **Permission:**
-
-  `manage`
-
-* **URL Parameters:**
-
-  Required:
-    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
-    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
-
-* **Data Parameters:**
-
-  Required:
-    * In the body: A JSON object having the following structure:
-    ```
-    { txPower : Float, either -2.5, 3.5, or 9.5. This will only work with PA-equipped devices.
-    , highRxGain : Bool
-    , dynamicLightStatusConfiguration : DynamicLightStatusConfiguration
-    , advertisementSettings : AdvertisementSettings
-    }
-    ```
-    , where `dynamicLightStatusConfiguration` is structured as:
-    ```
-    { warnInterval : Int
-    , warnIntensityMax : Float
-    , warnIntensityMin : Float
-    , warnTemperatureMax : Int
-    , warnTemperatureMin : Int
-    , warnVinMax : Float
-    , warnVinMin : Float
-    , changeBursts : Int
-    , changeBurstInterval : Int
-    , changeIntervalMin : Int
-    , changeIntensity : Float
-    , changeTemperature : Int
-    , changeVin : Float
-    }```
-    and `advertisementSettings` is:
-    ```
-    { lightStatusAdvInterval : Int
-    , lightHistoryAdvInterval : Int
-    , lightChangeBursts : Int
-    , lightChangeBurstInterval : Int
-    , alwaysConnectable : Bool
-    }
-    ```. *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
-    You should _probably_ include a Content-Length header as well.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/device/setconfig` returns JSON:
-    ```
-    { "results": Results for each setting
-        { "txPower": Bool
-        , "highRxGain": Bool
-        , "dynamicLightStatusConfiguration": Bool
-        , "advertisementSettings": Bool
-        }
-    , "config": Config (should be what was passed in)
-    , "network": String
-    , "device_id": String
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 400 Bad Request<br />
-  **Meaning:** The device requested could not be found.
-
-    OR
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
-
-* **Example Call:**
-
-  ```
-    curl 'http://<gateway>:8000/device/setconfig/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
-      -H 'Accept-Encoding: gzip, deflate' \
-      -H 'Content-Length: 500' \
-      --data-binary '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":{"warnInterval":1000,\
-        "warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,"warnTemperatureMin":0,"warnVinMax":53,\
-        "warnVinMin":43,"changeBursts":3,"changeBurstInterval":100,"changeIntervalMin":1000,"changeIntensity":0,\
-        "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,\
-        "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,"alwaysConnectable":false}}'
-  ``` 
-  sets the communication configuration for device 111.
-* **Notes:**
-
-  Current as of 2018-4-5.
-
-----
 **Set Device Light Setup**
 ----
-  Sets the communication configuration for a given device (XID or XIM).
+**Change Status:** Initial release in V1.7.0. 
+
+  Sets the light configuration for a given device (XID or XIM).
 
 * **URLs**
 
@@ -1254,9 +1318,14 @@
   Current as of 2018-4-6.
 
 ----
+***Manage Permission API Calls***
+----
+----
 **Set Device Name**
 ----
-  Sets the scene configuration for a given device.
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Sets the name value for a given device.
 
 * **URLs**
 
@@ -1273,7 +1342,7 @@
 * **URL Parameters:**
 
   Required:
-    * `network` : The network the target device is on. For unsecured devices, use 'Unsecured'.
+    * `network` : The network the target device is on. For unsecured devices, use 'unsecured'.
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
     * `name` : The desired name (URL-encoded).
 
@@ -1313,7 +1382,7 @@
   ```
      curl -X PUT
           -u <username>:<password>
-          <gateway address: port>/device/setname/Unsecured/111/Experience%20Room%20Front
+          <gateway address: port>/device/setname/unsecured/111/Experience%20Room%20Front
   ``` 
   sets the name for unsecured device 111 to 'Experience Room Front'.
 * **Notes:**
@@ -1321,10 +1390,11 @@
   Current as of 2017-11-21.
 
 ----
-
 **Set Device ID**
 ----
-  Sets the scene configuration for a given device.
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Sets the device (node) ID value for a given device.
 
 * **URLs**
 
@@ -1341,7 +1411,7 @@
 * **URL Parameters:**
 
   Required:
-    * `network` : The network the target device is on. For unsecured devices, use 'Unsecured'.
+    * `network` : The network the target device is on. For unsecured devices, use 'unsecured'.
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
     * `new_id` : The desired ID that the device will move to.
 
@@ -1382,7 +1452,7 @@
   ```
      curl -X PUT
           -u <username>:<password>
-          <gateway address: port>/device/setid/Unsecured/111/2112
+          <gateway address: port>/device/setid/unsecured/111/2112
   ``` 
   sets the device ID for unsecured device 111 to 2112.
 
@@ -1391,10 +1461,11 @@
   Current as of 2017-11-21.
 
 ----
-
 **Set Device Network**
 ----
-  Sets the scene configuration for a given device.
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Sets the secure network for a given device.
 
 * **URLs**
 
@@ -1406,14 +1477,14 @@
 
 * **Permission:**
 
-  `manage`. *NOTE*: You will need permissions for both networks for this operation to proceed.
+  `manage`. *NOTE*: This permission is required for both the current and new networks for the operation to proceed.
 
 * **URL Parameters:**
 
   Required:
     * `network` : The network the target device is on. For unsecured devices, use 'Unsecured'.
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
-    * `new_network` : The desired network that the device will move to. To remove a secure network from a device, use 'Unsecured'.
+    * `new_network` : The desired network that the device will move to. To remove a secure network from a device, use 'unsecured'. *NOTE*: A device cannot be moved directly from one secure network to a second secure network, the operation must be first secure network to unsecured to second secure network.  
 
 * **Data Parameters:**
 
@@ -1460,456 +1531,11 @@
   Current as of 2017-11-21.
 
 ----
-
-**Get Device iBeacon Configuration**
-----
-  Retrieve the iBeacon configuration of a selected device.
-
-* **URL:**
-
-  `/device/beacon/ibeacon/get/:network/:device_id`
-
-* **Methods:**
-
-  `GET`
-
-* **Permission:**
-
-  `beacon`
-
-* **URL Parameters:**
-
-  Required:
-    * `network`: The network the target device is one.
-    * `device_id`: The target device ID.
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200<br/>
-  **Content:** `/device/beacon/ibeacon/get` returns JSON:
-  ```
-  { "device_id": String
-  , "network": String
-  , "ibeacon_config":
-      { "uuid": List Int
-      , "major": Int
-      , "minor": Int
-      , "measured_power": Int
-      , "tx_power": Int
-      , "period": Int
-      }
-  }
-  ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/get/Xicato/1`
-  will get the iBeacon configuration for device 1 on the network named "Xicato".
-
-* **Notes:**
-
-  Current as of 2018-04-10.
-
-----
-**Get Device Eddystone URL Configuration**
-----
-  Retrieve the Eddystone URL configuration of a selected device.
-
-* **URL:**
-
-  `/device/beacon/eddystone/get/:network/:device_id`
-
-* **Methods:**
-
-  `GET`
-
-* **Permission:**
-
-  `beacon`
-
-* **URL Parameters:**
-
-  Required:
-    * `network`: The network the target device is one.
-    * `device_id`: The target device ID.
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200<br/>
-  **Content:** `/device/beacon/eddystone/get` returns JSON:
-  ```
-  { "device_id": String
-  , "network": String
-  , "eddystone_config":
-      { "url": String
-      , "flags": Int (should always be 16 if enabled)
-      , "tx_power_mode": Int (0 = Lowest, 1 = Low, 2 = Medium, 3 = High)
-      , "tx_power_levels": List Int
-      , "period": Int
-      }
-  }
-  ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/get/Xicato/1` will get the Eddystone URL configuration for device 1 on the network named "Xicato".
-
-* **Notes:**
-
-  Current as of 2018-04-10.
-
-----
-**Get Device AltBeacon Config**
-----
-  Retrieve the AltBeacon configuration of a selected device.
-
-* **URL:**
-
-  `/device/beacon/altbeacon/get/:network/:device_id`
-
-* **Methods:**
-
-  `GET`
-
-* **Permission:**
-
-  `beacon`
-
-* **URL Parameters:**
-
-  Required:
-    * `network`: The network the target device is one.
-    * `device_id`: The target device ID.
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200<br/>
-  **Content:** `/device/beacon/altbeacon/get` returns JSON:
-  ```
-  { "device_id": String
-  , "network": String
-  , "altbeacon_config":
-      { "company_id": List Int[2]
-      , "beacon_id": List Int[18]
-      , "mfg_data": Int
-      , "measured_power": Int
-      , "period": Int
-      }
-  }
-  ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/get/Xicato/1` will get the AltBeacon configuration for device 1 on the network named "Xicato".
-
-* **Notes:**
-
-  Current as of 2018-04-10.
-
-----
-**Set Device iBeacon Configuration**
-----
-  Set the iBeacon configuration of a selected device.
-
-* **URL:**
-
-  `/device/beacon/ibeacon/set/:network/:device_id`
-
-* **Methods:**
-
-  `PUT`|`POST`
-
-* **Permission:**
-
-  `beacon`
-
-* **URL Parameters:**
-
-  Required:
-    * `network`: The network the target device is one.
-    * `device_id`: The target device ID.
-
-* **Data Parameters:**
-
-  Required:
-  * In the body: A JSON object having the following structure:
-    ```
-    { "uuid": List Int
-    , "major": Int
-    , "minor": Int
-    , "measured_power": Int
-    , "tx_power": Int
-    , "period": Int
-    }
-    ```
-    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
-    You should _probably_ include a Content-Length header as well.
-
-* **Success Response:**
-
-  * **Code:** 200<br/>
-  **Content:** `/device/beacon/ibeacon/set` returns JSON:
-  ```
-  { "device_id": String
-  , "network": String
-  , "ibeacon_config":
-      { "uuid": List Int
-      , "major": Int
-      , "minor": Int
-      , "measured_power": Int
-      , "tx_power": Int
-      , "period": Int
-      }
-  , "results":
-      { "uuid": Bool
-      , "major": Bool
-      , "minor": Bool
-      , "measured_power": Bool
-      , "tx_power": Bool
-      , "period": Bool
-      }
-  }
-  ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
-* **Example Call:**
-
-  ```
-  curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/set/Xicato/1 \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Encoding: gzip, deflate' \
-    --data-binary '{"uuid":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"major":1,"minor":1,"measured_power":-50,"tx_power":10,"period":5000}'
-  ```
-    will set the iBeacon configuration for device 1 on the network named "Xicato".
-
-* **Notes:**
-
-  Current as of 2018-04-10.
-
-----
-**Set Device Eddystone URL Configuration**
-----
-  Set the Eddystone URL configuration of a selected device.
-
-* **URL:**
-
-  `/device/beacon/eddystone/set/:network/:device_id`
-
-* **Methods:**
-
-  `PUT`|`POST`
-
-* **Permission:**
-
-  `beacon`
-
-* **URL Parameters:**
-
-  Required:
-    * `network`: The network the target device is one.
-    * `device_id`: The target device ID.
-
-* **Data Parameters:**
-
-  Required:
-  * In the body: A JSON object having the following structure:
-    ```
-    { "url": String
-    , "flags": 16
-    , "tx_power_mode": Int
-    , "tx_power_levels": List Int
-    , "period": Int
-    }
-    ```
-    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
-    You should _probably_ include a Content-Length header as well.
-
-* **Success Response:**
-
-  * **Code:** 200<br/>
-  **Content:** `/device/beacon/eddystone/set` returns JSON:
-  ```
-  { "device_id": String
-  , "network": String
-  , "eddystone_config":
-      { "url": String
-      , "flags": 16
-      , "tx_power_mode": Int
-      , "tx_power_levels": List Int
-      , "period": Int
-      }
-  , "results":
-      { "url": Bool
-      , "flags": Bool
-      , "tx_power_mode": Bool
-      , "tx_power_levels": Bool
-      , "period": Bool
-      }
-  }
-  ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
-* **Example Call:**
-
-  ```
-  curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/set/Xicato/1 \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Encoding: gzip, deflate' \
-    --data-binary '{"url":"http://xicato.com","flags":16,"tx_power_mode":3,"tx_power_levels":[-80,-70,-60,-50],"period":5000}'
-  ```
-    will set the Eddystone URL configuration for device 1 on the network named "Xicato".
-
-* **Notes:**
-
-  Current as of 2018-04-10.
-
-----
-**Set Device AltBeacon Configuration**
-----
-  Set the AltBeacon configuration of a selected device.
-
-* **URL:**
-
-  `/device/beacon/altbeacon/set/:network/:device_id`
-
-* **Methods:**
-
-  `PUT`|`POST`
-
-* **Permission:**
-
-  `beacon`
-
-* **URL Parameters:**
-
-  Required:
-    * `network`: The network the target device is one.
-    * `device_id`: The target device ID.
-
-* **Data Parameters:**
-
-  Required:
-  * In the body: A JSON object having the following structure:
-    ```
-    { "company_id": List Int[2]
-    , "beacon_id": List Int[18]
-    , "mfg_data": Int
-    , "measured_power": Int
-    , "period": Int
-    }
-    ```
-    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
-    You should _probably_ include a Content-Length header as well.
-
-* **Success Response:**
-
-  * **Code:** 200<br/>
-  **Content:** `/device/beacon/altbeacon/set` returns JSON:
-  ```
-  { "device_id": String
-  , "network": String
-  , "altbeacon_config":
-      { "company_id": List Int[2]
-      , "beacon_id": List Int[18]
-      , "mfg_data": Int
-      , "measured_power": Int
-      , "period": Int
-      }
-  , "results":
-      { "company_id": Bool
-      , "beacon_id": Bool
-      , "mfg_data": Bool
-      , "measured_power": Bool
-      , "period": Bool
-      }
-  }
-  ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
-* **Example Call:**
-
-  ```
-  curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/set/Xicato/1 \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Encoding: gzip, deflate' \
-    --data-binary '{"company_id":[16,16],"beacon_id":[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8],"mfg_data":37,"measured_power":-45,"period":5000}'
-  ```
-    will set the AltBeacon configuration for device 1 on the network named "Xicato".
-
-* **Notes:**
-
-  Current as of 2018-04-10.
-
-----
 **Name Group**
 ----
-  Name or change the name of a group. It will also save the name through software restarts.
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Name or change the name of a group. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
 
 * **URLs**
 
@@ -1961,13 +1587,14 @@
 
   Current as of 2017-09-21.
 
-  Names are *not* shared between gateways currently, and are *not* stored on the devices in the group.
+  Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
 
 ----
-
 **Name Scene**
 ----
-  Name or change the name of a scene. It will also save the name through software restarts.
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Name or change the name of a scene. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
 
 * **URLs**
 
@@ -2019,77 +1646,13 @@
 
   Current as of 2017-09-21.
 
-  Names are *not* shared between gateways currently, and are *not* stored on the devices configured to respond to that scene.
+  Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
 
 ----
-
-**Device Dismissal**
-----
-  Remove a device from the device list.
-
-* **URLs**
-
-  `/device/remove/:network/:device_id`
-
-* **Methods:**
-
-  `GET` | `POST`
-
-* **Permission:**
-
-  `control`
-
-* **URL Parameters:**
-
-  Required:
-    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/device/remove` returns JSON:
-    ```
-    { "result": Boolean
-      "device_id": String
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 400 Bad Request<br />
-  **Meaning:** The device requested could not be found.
-
-    OR
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
-
-* **Example Call:**
-
-  `curl <gateway address: port>/device/remove/111` will remove device 111 from the device list.
-
-* **Notes:**
-
-  Current as of 2017-7-31.
-
-  If a valid device is errantly dismissed then it will automatically re-appear the next time an advertising packet is received from it.
-
-  It is _strongly recommended_ that device failures and failure to respond be investigated before dismissing a device.
-
-
-----
-
 **Get Firmware Available**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+
   Returns the available firmware for a device.
 
 * **URLs**
@@ -2102,7 +1665,7 @@
 
 * **Permission:**
 
-  `firmware`
+  `manage`
 
 * **URL Parameters:**
 
@@ -2155,6 +1718,8 @@
 ----
 **Enqueue A Firmware Update**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+
   Enqueue a firmware update for a device.
 
 * **URLs**
@@ -2167,7 +1732,7 @@
 
 * **Permission:**
 
-  `firmware`
+  `manage`
 
 * **URL Parameters:**
 
@@ -2217,9 +1782,10 @@
   Current as of 2017-11-21.
 
 ----
-
 **Check Firmware Update Status**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+
   Check on the status of a firmware update.
 
 * **URLs**
@@ -2232,12 +1798,12 @@
 
 * **Permission:**
 
-  `firmware`
+  `manage`
 
 * **URL Parameters:**
 
   Required:
-    * `network` : The network the target device is on. For unsecured devices, use 'Unsecured'.
+    * `network` : The network the target device is on. For unsecured devices, use 'unsecured'.
     * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
 
 * **Data Parameters:**
@@ -2334,45 +1900,92 @@
   Current as of 2017-11-21.
 
 ----
-
-**Basic Gateway Info**
+**Set Device Communication Configuration**
 ----
-  Returns some basic information about the gateway.
+**Change Status:** Initial release in V1.7.0. 
+
+  Sets the communication configuration for a given device (XID or XIM).
 
 * **URLs**
 
-  `/gateway_info/`
+  `/device/setconfig/:network/:device_id`
 
-* **Method:**
+* **Methods:**
 
-  `GET`
+  `PUT` | `POST`
 
 * **Permission:**
 
-  `view`
+  `manage`
 
-* **URL Parameters**
+* **URL Parameters:**
 
-  None.
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
 
-* **Data Parameters**
+* **Data Parameters:**
 
-  None.
+  Required:
+    * In the body: A JSON object having the following structure:
+    ```
+    { txPower : Float
+    , highRxGain : Bool
+    , dynamicLightStatusConfiguration : DynamicLightStatusConfiguration
+    , advertisementSettings : AdvertisementSettings
+    }
+    ```
+    * The valid `txPower` setting are -2.5, 3.5 or 9.5 for XIM devices and 1.5 or 7.5 for XID devices. 
+    * `dynamicLightStatusConfiguration` is structured as:
+    ```
+    { warnInterval : Int
+    , warnIntensityMax : Float
+    , warnIntensityMin : Float
+    , warnTemperatureMax : Int
+    , warnTemperatureMin : Int
+    , warnVinMax : Float
+    , warnVinMin : Float
+    , changeBursts : Int
+    , changeBurstInterval : Int
+    , changeIntervalMin : Int
+    , changeIntensity : Float
+    , changeTemperature : Int
+    , changeVin : Float
+    }```
+    and `advertisementSettings` is:
+    ```
+    { lightStatusAdvInterval : Int
+    , lightHistoryAdvInterval : Int
+    , lightChangeBursts : Int
+    , lightChangeBurstInterval : Int
+    , alwaysConnectable : Bool
+    }
+    ```. *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
 
 * **Success Response:**
 
   * **Code:** 200 <br />
-  **Content:** /devices returns JSON:
+  **Content:** `/device/setconfig` returns JSON:
     ```
-    { "network" : Nullable String
-    , "networks" : List String
-    , "connectable" : Boolean
-    , "temperature" : Float
+    { "results": Results for each setting
+        { "txPower": Bool
+        , "highRxGain": Bool
+        , "dynamicLightStatusConfiguration": Bool
+        , "advertisementSettings": Bool
+        }
+    , "config": Config (should be what was passed in)
+    , "network": String
+    , "device_id": String
     }
     ```
-    (Nullable means that the field contains either just a value of that type, or null. This is equivalent to Haskell's, Elm's, etc. Maybe-Just-Nothing concept.)
 
 * **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
 
   * **Code:** 404 NOT FOUND <br />
   **Meaning:** The server isn't up or an incorrect URL was requested.
@@ -2380,21 +1993,503 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
-  `curl <gateway address: port>/gateway_info` gets the basic gateway info
+  ```
+    curl 'http://<gateway>:8000/device/setconfig/Unsecured/111' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -H 'Accept-Encoding: gzip, deflate' \
+      -H 'Content-Length: 500' \
+      --data-binary '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":{"warnInterval":1000,\
+        "warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,"warnTemperatureMin":0,"warnVinMax":53,\
+        "warnVinMin":43,"changeBursts":3,"changeBurstInterval":100,"changeIntervalMin":1000,"changeIntensity":0,\
+        "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,\
+        "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,"alwaysConnectable":false}}'
+  ``` 
+  sets the communication configuration for device 111.
+* **Notes:**
+
+  Current as of 2018-4-5.
+
+----
+
+***Beacon Permission API Calls***
+----
+----
+**Get Device iBeacon Configuration**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Retrieve the iBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/ibeacon/get/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/ibeacon/get` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "ibeacon_config":
+      { "uuid": List Int
+      , "major": Int
+      , "minor": Int
+      , "measured_power": Int
+      , "tx_power": Int
+      , "period": Int
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/get/Xicato/1`
+  will get the iBeacon configuration for device 1 on the network named "Xicato".
 
 * **Notes:**
 
-  Current as of 2017-2-24
+  Current as of 2018-04-10.
+
+----
+**Get Device Eddystone URL Configuration**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Retrieve the Eddystone URL configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/eddystone/get/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/eddystone/get` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "eddystone_config":
+      { "url": String
+      , "flags": Int (should always be 16 if enabled)
+      , "tx_power_mode": Int (0 = Lowest, 1 = Low, 2 = Medium, 3 = High)
+      , "tx_power_levels": List Int
+      , "period": Int
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/get/Xicato/1` will get the Eddystone URL configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Get Device AltBeacon Config**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Retrieve the AltBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/altbeacon/get/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/altbeacon/get` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "altbeacon_config":
+      { "company_id": List Int[2]
+      , "beacon_id": List Int[18]
+      , "mfg_data": Int
+      , "measured_power": Int
+      , "period": Int
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/get/Xicato/1` will get the AltBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Set Device iBeacon Configuration**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Set the iBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/ibeacon/set/:network/:device_id`
+
+* **Methods:**
+
+  `PUT`|`POST`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  Required:
+  * In the body: A JSON object having the following structure:
+    ```
+    { "uuid": List Int
+    , "major": Int
+    , "minor": Int
+    , "measured_power": Int
+    , "tx_power": Int
+    , "period": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/ibeacon/set` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "ibeacon_config":
+      { "uuid": List Int
+      , "major": Int
+      , "minor": Int
+      , "measured_power": Int
+      , "tx_power": Int
+      , "period": Int
+      }
+  , "results":
+      { "uuid": Bool
+      , "major": Bool
+      , "minor": Bool
+      , "measured_power": Bool
+      , "tx_power": Bool
+      , "period": Bool
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
+* **Example Call:**
+
+  ```
+  curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/set/Xicato/1 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    --data-binary '{"uuid":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"major":1,"minor":1,"measured_power":-50,"tx_power":10,"period":5000}'
+  ```
+    will set the iBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Set Device Eddystone URL Configuration**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Set the Eddystone URL configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/eddystone/set/:network/:device_id`
+
+* **Methods:**
+
+  `PUT`|`POST`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  Required:
+  * In the body: A JSON object having the following structure:
+    ```
+    { "url": String
+    , "flags": 16
+    , "tx_power_mode": Int
+    , "tx_power_levels": List Int
+    , "period": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/eddystone/set` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "eddystone_config":
+      { "url": String
+      , "flags": 16
+      , "tx_power_mode": Int
+      , "tx_power_levels": List Int
+      , "period": Int
+      }
+  , "results":
+      { "url": Bool
+      , "flags": Bool
+      , "tx_power_mode": Bool
+      , "tx_power_levels": Bool
+      , "period": Bool
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
+* **Example Call:**
+
+  ```
+  curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/set/Xicato/1 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    --data-binary '{"url":"http://xicato.com","flags":16,"tx_power_mode":3,"tx_power_levels":[-80,-70,-60,-50],"period":5000}'
+  ```
+    will set the Eddystone URL configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
+
+----
+**Set Device AltBeacon Configuration**
+----
+**Change Status:** Initial release in V1.7.0. 
+
+  Set the AltBeacon configuration of a selected device.
+
+* **URL:**
+
+  `/device/beacon/altbeacon/set/:network/:device_id`
+
+* **Methods:**
+
+  `PUT`|`POST`
+
+* **Permission:**
+
+  `beacon`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The network the target device is one.
+    * `device_id`: The target device ID.
+
+* **Data Parameters:**
+
+  Required:
+  * In the body: A JSON object having the following structure:
+    ```
+    { "company_id": List Int[2]
+    , "beacon_id": List Int[18]
+    , "mfg_data": Int
+    , "measured_power": Int
+    , "period": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200<br/>
+  **Content:** `/device/beacon/altbeacon/set` returns JSON:
+  ```
+  { "device_id": String
+  , "network": String
+  , "altbeacon_config":
+      { "company_id": List Int[2]
+      , "beacon_id": List Int[18]
+      , "mfg_data": Int
+      , "measured_power": Int
+      , "period": Int
+      }
+  , "results":
+      { "company_id": Bool
+      , "beacon_id": Bool
+      , "mfg_data": Bool
+      , "measured_power": Bool
+      , "period": Bool
+      }
+  }
+  ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the input data was not formatted properly
+* **Example Call:**
+
+  ```
+  curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/set/Xicato/1 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    --data-binary '{"company_id":[16,16],"beacon_id":[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8],"mfg_data":37,"measured_power":-45,"period":5000}'
+  ```
+    will set the AltBeacon configuration for device 1 on the network named "Xicato".
+
+* **Notes:**
+
+  Current as of 2018-04-10.
 
 ----
 
+
+
+
+
+***Administrate Permission API Calls***
+----
+----
 **Randomize Local ID**
 ----
-  Randomize the local logical address.
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Randomize the local logical BLE address.
   __DO NOT USE THIS UNLESS YOU KNOW WHAT YOU ARE DOING__
 
 * **URLs**
@@ -2445,54 +2540,10 @@
   Current as of 2016-12-20
 
 ----
-
-**Gateway Status**
-----
-  Get the status of the gateway, in string form (as opposed to the `/gateway_info` call).
-
-* **URLs**
-
-  `/status`
-
-* **Method:**
-
-  `GET`
-
-* **Permission:**
-
-  `view`
-
-* **URL Parameters**
-
-  None.
-
-* **Data Parameters**
-
-  None.
-
-* **Success Response**
-
-  * **Code:** 200 <br />
-  **Content:** /devices returns one of two strings:
-    * "Gateway running, CPU at {temperature}" -- The gateway is up, and the CPU temperature is {temperature}.
-    * "Gateway not running" -- This shouldn't appear, now that the gateway auto-reloads on internal errors; if it does, restart the gateway.
-
-* **Error Responses**
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
-
-* **Example Call**
-
-  `curl <gateway address: port>/status` gets the gateway's status.
-
-* **Notes**
-
-  Current as of 2017-2-24
-
-----
-
 **Reload Gateway**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+
   Manually reload the gateway by restarting the process.
 
 * **URLs**
@@ -2526,7 +2577,6 @@
   **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). Tail the error log and send it over for someone to examine.
 
 ----
-
 **Set Advertising Interval**
 ----
   Set the minimum advertising interval for outgoing commands. Default is 500ms.
@@ -2588,9 +2638,10 @@
 
 
 ----
-
 **Enable/Disable Network Time Sync**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+
   Set the minimum advertising interval for outgoing commands. Default is 500ms.
 
 * **URLs**
@@ -2650,8 +2701,11 @@
 
   Current as of 2017-5-10
 
+  ----
 **Enable/Disable Device Autoremoval**
 ----
+**Change Status:** No API call changes made in V1.7.0.  
+
   Enable or disable auto-purging (removal from the device list) after a specified period. If an update has not been received from a device after that period, the device will be removed. (Of course, it may reappear if it is still advertising). This function is not present in the Dashboard. *We strongly recommend that you do not enable this setting except in testing and as otherwise required.* The default timeout is 600 seconds (10 minutes).
 
 * **URLs**
@@ -2714,9 +2768,12 @@
 
 ----
 
-Change Notes:
+***Change Notes***
+----
+----
 * 2016-12-20: Document created.
 * 2017-2-24: Document updated to include latest updates; largest update is temperature reporting.
 * 2017-5-10: Add `/set_advertising_interval` documentation.
 * 2017-7-31: Add permissions information and some new calls.
 * 2018-1-31: (Many intervening changes) Documentation should be complete up to ms1.6.12.
+* 2018-4-11: Many clarifications, reordering calls based on permission required. New API calls added to the end of the respective permission list.
