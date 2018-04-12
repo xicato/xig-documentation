@@ -2650,6 +2650,57 @@
 ***Administrate Permission API Calls***
 ----
 ----
+**Get Local ID**
+----
+**Change Status:** No API call changes made in V1.7.0.
+
+  Reports the local logical BLE address.
+
+* **URL:**
+
+  `/local_id`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/local_id` returns JSON:
+    ```
+    { local_id : Integer
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/reload/local_id` gets the gateway's local ID.
+
+* **Notes**
+
+  Current as of 2017-11-30
+
+----
+
 **Randomize Local ID**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
