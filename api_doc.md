@@ -1392,6 +1392,7 @@
   Current as of 2018-4-6.
 
 ----
+
 ***Manage Permission API Calls***
 ----
 ----
@@ -1976,7 +1977,7 @@
 ----
 **Get Device Communication Configuration**
 ----
-**Change Status:** Initial release in V1.7.0. 
+**Change Status:** V1.7.0 API call changes: Corrected reported values of txPower and highRxGain, added JSON dict entry for device specific Tx power settings (availableTxPowers). The list of device specific Tx power settings should be used to ensure only valid values are used in the Set Device Communication Configuration call.   
 
   Gets the communication configuration for a given device (XID or XIM).
 
@@ -2011,6 +2012,7 @@
     { "config":
         { txPower : Float
         , highRxGain : Bool
+        , availableTxPowers : List Float
         , dynamicLightStatusConfiguration :
             { warnInterval : Int
             , warnIntensityMax : Float
@@ -2059,7 +2061,7 @@
   ```
     curl 'http://<gateway>:8000/device/getconfig/Unsecured/111'
   ``` 
-  gets the communication configuration for device 111.
+  gets the communication configuration for device 111 on an unsecured network.
 * **Notes:**
 
   Current as of 2018-4-11.
@@ -2100,7 +2102,7 @@
     , advertisementSettings : AdvertisementSettings
     }
     ```
-    * The valid `txPower` setting are -2.5, 3.5 or 9.5 for XIM devices and 1.5 or 7.5 for XID devices. 
+    * The available `txPower` settings for a given device are provided bn the Get Device Communication Configuration call. 
     * `dynamicLightStatusConfiguration` is structured as:
     ```
     { warnInterval : Int
@@ -2174,7 +2176,7 @@
         "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,\
         "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,"alwaysConnectable":false}}'
   ``` 
-  sets the communication configuration for device 111.
+  sets the communication configuration for device 111 on an unsecured network.
 * **Notes:**
 
   Current as of 2018-4-5.
@@ -2700,7 +2702,6 @@
   Current as of 2017-11-30
 
 ----
-
 **Randomize Local ID**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
@@ -2992,4 +2993,4 @@
 * 2017-5-10: Add `/set_advertising_interval` documentation.
 * 2017-7-31: Add permissions information and some new calls.
 * 2018-1-31: (Many intervening changes) Documentation should be complete up to ms1.6.12.
-* 2018-4-11: Many clarifications, reordering calls based on permission required. New API calls added to the end of the respective permission list.
+* 2018-4-11: Many clarifications, reordering calls based on permission required. New API calls added to the end of the respective permission sections.
