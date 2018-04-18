@@ -1084,7 +1084,69 @@
 
 
 ----
+**Enable and Disable Sensor Response**
+----
+**Change Status:** Disable calls are new in 1.7.0. Documentation was added for _all_ calls with the release of 1.7.0. 
 
+  Enable or disable the sensor mode for a given ID.
+
+* **URLs:**
+
+  To enable:
+  `/device/reset_response/:network/:device_id`
+  `/group/reset_response/:network/:group_id`
+  `/broadcast/reset_response/:network`
+
+  To disable:
+  `/device/disable_response/:network/:device_id`
+  `/group/disable_response/:network/:group_id`
+  `/broadcast/disable_response/:network`
+
+* **Methods:**
+
+  `GET` | `POST`
+
+* **Permission:**
+
+  `control` | `broadcast`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` (for all calls): The secure network that the command will be issued to.
+    * `device_id` (for `/device` calls): The target device ID.
+    * `group_id` (for `/group` calls): The target group ID.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** JSON:
+    ```
+    { "result" : Boolean
+    , "device_id" : String
+    , "network" : Nullable String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  `curl <gateway address: port>/group/reset_response/unsecured/111/50/6000` Reset sensor response for group 111 not on a secure network.
+
+* **Notes:**
+
+  Current as of 2018-4-17
 
 ***Configure Permission API Calls***
 ----
@@ -2983,6 +3045,119 @@
 
   Current as of 2018-1-31.
 
+----
+
+**Enable/Disable Packet Logging**
+----
+**Change Status:** New in V1.7.0.  
+
+  Enable or disable packet logging. You will know if you need this.
+
+* **URLs**
+
+  `/enable_packet_logging`
+  `/disable_packet_logging`
+
+* **Methods**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/enable_packet_logging` returns JSON:
+    ```
+    { packet_logging : Boolean
+    }
+    ```
+
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call**
+
+  `curl <gateway address: port>/enable_packet_logging` will enable packet logging.
+
+* **Notes**
+
+  Current as of 28 Germinal CCXXVI.
+
+----
+
+**Enable/Disable Event Logging**
+----
+**Change Status:** New in V1.7.0.  
+
+  Enable or disable event logging. Generally event logging should be enabled.
+
+* **URLs**
+
+  `/enable_event_logging`
+  `/disable_event_logging`
+
+* **Methods**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/enable_event_logging` returns JSON:
+    ```
+    { event_logging : Boolean
+    }
+    ```
+
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call**
+
+  `curl <gateway address: port>/enable_event_logging` will enable event logging.
+
+* **Notes**
+
+  Current as of 2018-4-17.
 
 ----
 
