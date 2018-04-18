@@ -10,7 +10,7 @@
 
   If a call is made to a URL that the anonymous user has access/permissions to, auth headers will be ignored.
 
-  **Permissions are per network per gateway. If multiple gateways are being accessed simultaneously, care should be taken by the XIG administrator (i.e., the user logging into and configuring the gateways through the XIG Admin Panel) to ensure that the permissions for a given user are consistent across gateways they are given access to.**
+  **Permissions are per network per gateway. If multiple gateways are being accessed simultaneously, care should be taken by the XIG administrator (i.e., the user logging into and configuring the gateways through the XIG Admin Panel) to ensure that the permissions for a given user are consistent across the gateways they are given access to.**
 
 ----
 
@@ -2207,7 +2207,7 @@
 * **URL Parameters:**
 
   Required:
-    * `network`: The network the target device is one.
+    * `network`: The network the target device is on.
     * `device_id`: The target device ID.
 
 * **Data Parameters:**
@@ -2226,8 +2226,9 @@
       , "major": Int
       , "minor": Int
       , "measured_power": Int
-      , "tx_power": Int
+      , "tx_power": Float
       , "period": Int
+      , "available_tx_power": List Float
       }
   }
   ```
