@@ -910,7 +910,7 @@
 
   Required:
     * `network` : The secure network of the target device. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
-    * `id` : The device id of the target device or group of devices. For groups add `0xC000` to the int value of the group id before casting to a string.
+    * `id` : The device id of the target device or group of devices. For groups add 49152 (`0xC000`) to the int value of the group id before casting to a string.
     * `intensity` : The target intensity, in percent. This can be 0 or any positive float or integer between 0.1 and 100.0
 
   Optional:
@@ -1142,7 +1142,7 @@
 
 * **Example Call:**
 
-  `curl <gateway address: port>/group/reset_response/unsecured/111/50/6000` Reset sensor response for group 111 not on a secure network.
+  `curl <gateway address: port>/group/reset_response/unsecured/111` Reset sensor response for group 111 not on a secure network.
 
 * **Notes:**
 
@@ -1445,8 +1445,7 @@
     curl 'http://<gateway>:8000/device/setlightsetup/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      -H 'Accept-Encoding: gzip, deflate' \
-      --data-binary '{"max_level":100,"min_level":0.1,"power_on_type":1,"power_on_level":0,"power_on_fade_time":0,"power_on_start_time":0,"dimming_curve":1,"fade_smoothing":1}'
+      --data '{"max_level":100,"min_level":0.1,"power_on_type":1,"power_on_level":0,"power_on_fade_time":0,"power_on_start_time":0,"dimming_curve":1,"fade_smoothing":1}'
   ``` 
   sets the communication configuration for device 111.
 * **Notes:**
@@ -2229,16 +2228,11 @@
   ```
     curl 'http://<gateway>:8000/device/setconfig/Unsecured/111' \
       -X POST \
+      -u <user>:<password>
       -H 'Content-Type: application/json' \
-      -H 'Accept-Encoding: gzip, deflate' \
-      -H 'Content-Length: 500' \
-      --data-binary '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":{"warnInterval":1000,\
-        "warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,"warnTemperatureMin":0,"warnVinMax":53,\
-        "warnVinMin":43,"changeBursts":3,"changeBurstInterval":100,"changeIntervalMin":1000,"changeIntensity":0,\
-        "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,\
-        "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,"alwaysConnectable":false}}'
+      --data '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":{"warnInterval":1000,        "warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,"warnTemperatureMin":0,"warnVinMax":53,        "warnVinMin":43,"changeBursts":3,"changeBurstInterval":100,"changeIntervalMin":1000,"changeIntensity":0,        "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,        "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,"alwaysConnectable":false}}'
   ``` 
-  sets the communication configuration for device 111 on an unsecured network.
+  sets the communication configuration for device 111 on an unsecured network. Note that the `--data` value when submitted must be on a single line.
 * **Notes:**
 
   Current as of 2018-4-5.
@@ -3046,12 +3040,11 @@
   Current as of 2018-1-31.
 
 ----
-
 **Enable/Disable Packet Logging**
 ----
 **Change Status:** New in V1.7.0.  
 
-  Enable or disable packet logging. You will know if you need this.
+  Enable or disable packet logging. By default this feature is disabled and should only be enabled when debugging specific issues in conjuction with the Xicato technical support team. 
 
 * **URLs**
 
@@ -3103,12 +3096,11 @@
   Current as of 28 Germinal CCXXVI.
 
 ----
-
 **Enable/Disable Event Logging**
 ----
 **Change Status:** New in V1.7.0.  
 
-  Enable or disable event logging. Generally event logging should be enabled.
+  Enable or disable event logging. By default this feature is disabled and should only be enabled when debugging specific issues in conjuction with the Xicato technical support team.
 
 * **URLs**
 
@@ -3169,4 +3161,4 @@
 * 2017-5-10: Add `/set_advertising_interval` documentation.
 * 2017-7-31: Add permissions information and some new calls.
 * 2018-1-31: (Many intervening changes) Documentation should be complete up to ms1.6.12.
-* 2018-4-11: Many clarifications, reordering calls based on permission required. New API calls added to the end of the respective permission sections.
+* 2018-4-18: Many clarifications and ensured that the device network was properly included in the API calls, reordering calls based on permission required. New API calls added to the end of the respective permission sections.
