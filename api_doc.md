@@ -882,7 +882,98 @@
   Current as of 2017-2-24
 
 ----
+**Download Gateway Groups**
+----
+**Change Status:** No API call changes made in V1.7.0.  
 
+  Download `groups.txt` from the XIG.
+
+* **URLs**
+
+  `/groups.txt`
+  `/Groups.txt`
+  `/download_groups`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `view`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/groups.txt` will return the `groups.txt` file that the server used last.
+
+* **Error Responses**
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/groups.txt` gets the gateway's `groups.txt`.
+
+* **Notes**
+
+  Current as of 5 Floréal CCXXVI.
+
+----
+**Download Gateway Scenes**
+----
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Download `scenes.txt` from the XIG.
+
+* **URLs**
+
+  `/scenes.txt`
+  `/Scenes.txt`
+  `/download_scenes`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `view`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/groups.txt` will return the `scenes.txt` file that the server used last.
+
+* **Error Responses**
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/scenes.txt` gets the gateway's `scenes.txt`.
+
+* **Notes**
+
+  Current as of 2018-4-25.
+
+----
 ***Control Permission API Calls***
 ----
 ----
@@ -2238,7 +2329,112 @@
   Current as of 2018-4-5.
 
 ----
+**Upload Gateway Groups**
+----
+**Change Status:** No API call changes made in V1.7.0.  
 
+  Upload `groups.txt` to the XIG.
+
+* **URL:**
+
+  `/upload_groups`
+
+* **Method:**
+
+  `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/upload_groups` will return the same JSON as `/groups/light`.
+
+* **Error Responses**
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  ```
+  var formData = new FormData();
+  formData.append('file', document.getElementById('groupsUploadField').files[0]);
+  var url = "http://" + address + "/upload_groups";
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Authorization", "Bearer " + token);
+  xhr.send(formData);
+  ``` 
+  will upload the `groups.txt` file selected in the `groupsUploadField` input (n.b. `groupsUploadField` should be type `file`) to the gateway at `address` using the token `token`.
+
+* **Notes**
+
+  Current as of 2018-4-25.
+
+----
+**Upload Gateway Scenes**
+----
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Upload `scenes.txt` to the XIG.
+
+* **URL:**
+
+  `/upload_scenes`
+
+* **Method:**
+
+  `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/upload_scenes` will return the same JSON as `/devices/with_scenes`.
+
+* **Error Responses**
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  ```
+  var formData = new FormData();
+  formData.append('file', document.getElementById('scenesUploadField').files[0]);
+  var url = "http://" + address + "/upload_scenes";
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Authorization", "Bearer " + token);
+  xhr.send(formData);
+  ``` 
+  will upload the `scenes.txt` file selected in the `scenesUploadField` input (n.b. `scenesUploadField` should be type `file`) to the gateway at `address` using the token `token`.
+
+* **Notes**
+
+  Current as of 2018-4-25.
+
+----
 ***Beacon Permission API Calls***
 ----
 ----
