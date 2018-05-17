@@ -1544,6 +1544,194 @@
   Current as of 2018-4-6.
 
 ----
+**Get Device Wired Light Setup**
+----
+**Change Status:** Initial release in V1.7.1. 
+
+  Gets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
+
+* **URLs**
+
+  `/device/getwiredsetup/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/setwiredsetup` returns JSON:
+    ```
+    { "result": Bool
+    , "wired_setup": Setup (should be what was passed in--this is a place to check for serialization errors)
+    , "network": String
+    , "device_id": String
+    }
+    ```
+    The setup object will be different for 1-10V and DALI devices.
+    For **1-10V** devices it is as follows:
+    ```
+    { modes : 4-bit bitfield cast to Int (b0 is MSB)
+              b0 : Dimming Curve -- 0 for linear, 1 for logarithmic
+              b1 : Limit Mode -- 0 for disabled, 1 for enabled
+              b2 : Control Mode -- 0 for enabled, 1 for disabled
+              b3 : (Reserved, use the value that's currently set)
+              b4 : Fading Curve -- 0 for logarithmic, 1 for linear
+    , min_level : Float 0.1-100.0
+    , warmup_time : Int 0-25000
+    }
+    ```
+    For **DALI** devices:
+    ```
+    { max_level : Int 1-254
+    , min_level : Int 1-254
+    , power_on_level : Int 0-255, 255 for last level
+    , system_failure_level : Int 0-255, 255 to ignore
+    , dimming_curve : Int -- 0 for logarithmic, 1 for linear
+    , fade_rate : Int 0-15
+    , fade_time : Int 0-15
+    , fast_fade_time : Int 0-27
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl http://<gateway>:8000/device/getwiredsetup/Unsecured/111
+  ``` 
+  gets the wired light setup for Unsecured device 111.
+* **Notes:**
+
+  Current as of 2018-5-17.
+
+----
+**Set Device Wired Light Setup**
+----
+**Change Status:** Initial release in V1.7.1. 
+
+  Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
+  *Currently there is not a server-side check to verify that the data provided is appropriate for the device. _Caveat usor._*
+
+* **URLs**
+
+  `/device/setwiredsetup/:network/:device_id`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  Required:
+    * In the body: A JSON object. \
+    For **1-10V** devices this is as follows:
+    ```
+    { modes : 4-bit bitfield cast to Int (b0 is MSB)
+              b0 : Dimming Curve -- 0 for linear, 1 for logarithmic
+              b1 : Limit Mode -- 0 for disabled, 1 for enabled
+              b2 : Control Mode -- 0 for enabled, 1 for disabled
+              b3 : (Reserved, use the value that's currently set)
+              b4 : Fading Curve -- 0 for logarithmic, 1 for linear
+    , min_level : Float 0.1-100.0
+    , warmup_time : Int 0-25000
+    }
+    ```
+    For **DALI** devices:
+    ```
+    { max_level : Int 1-254
+    , min_level : Int 1-254
+    , power_on_level : Int 0-255, 255 for last level
+    , system_failure_level : Int 0-255, 255 to ignore
+    , dimming_curve : Int -- 0 for logarithmic, 1 for linear (usually you will want logarithmic)
+    , fade_rate : Int 0-15
+    , fade_time : Int 0-15
+    , fast_fade_time : Int 0-27
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/setwiredsetup` returns JSON:
+    ```
+    { "result": Bool
+    , "wired_setup": Setup (should be what was passed in--this is a place to check for serialization errors)
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      --data '{"max_level":254,"min_level":1,"power_on_level":0,"system_failure_level":255,"dimming_curve":1,"fade_rate":7,"fade_time":4,"fast_fade_time":27}'
+  ``` 
+  sets the wired light setup for device 111, assuming it is a DALI device.
+* **Notes:**
+
+  Current as of 2018-5-17.
+
+----
 
 ***Manage Permission API Calls***
 ----
