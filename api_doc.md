@@ -1575,7 +1575,7 @@
 * **Success Response:**
 
   * **Code:** 200 <br />
-  **Content:** `/device/setwiredsetup` returns JSON:
+  **Content:** `/device/getwiredsetup` returns JSON:
     ```
     { "result": Bool
     , "wired_setup": Setup (should be what was passed in--this is a place to check for serialization errors)
@@ -2621,6 +2621,150 @@
 * **Notes**
 
   Current as of 2018-4-25.
+
+----
+**Get Device Relay Configuration**
+----
+**Change Status:** Initial release in V1.7.1. 
+
+  Gets the light configuration for a given device (XID or XIM).
+
+* **URLs**
+
+  `/device/getrelayconfig/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/getrelayconfig` returns JSON:
+    ```
+    { "relay_config":
+        { "repeatEnabled" : Boolean
+        , "ttlStart" : Int
+        }
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/getrelayconfig/Unsecured/111'
+  ``` 
+  gets the relay config for device 111.
+* **Notes:**
+
+  Current as of 2018-5-17.
+
+----
+**Set Device Relay Configuration**
+----
+**Change Status:** Initial release in V1.7.1. 
+
+  Gets the light configuration for a given device (XID or XIM).
+
+* **URLs**
+
+  `/device/setrelayconfig/:network/:device_id`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+  * In the body: A JSON object having the following structure:
+      ```
+      { "repeatEnabled" : Boolean
+      , "ttlStart" : Int
+      }
+      ```
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/setrelayconfig` returns JSON:
+    ```
+    { "relay_config":
+        { "repeatEnabled" : Boolean
+        , "ttlStart" : Int
+        }
+    , "network": String
+    , "device_id": String
+    , "result": Boolean
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/setrelayconfig/Unsecured/111' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      --data '{"repeatEnabled":true,"ttlStart":4}'
+  ```
+  sets the relay config for device 111.
+* **Notes:**
+
+  Current as of 2018-5-17.
 
 ----
 ***Beacon Permission API Calls***
