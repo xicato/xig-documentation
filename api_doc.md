@@ -3849,6 +3849,116 @@
   Current as of 2018-5-17
 
 ----
+**Get Local Transmission Power**
+----
+**Change Status:** New in V1.7.1.
+
+  Get the local transmission (Tx) power in decibel-milliwatts (dBm).
+
+* **URL:**
+
+  `/get_local_tx_power`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/get_local_tx_power` returns JSON:
+    ```
+    { tx_power : Float
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/get_local_tx_power` gets the gateway's local Tx power.
+
+* **Notes**
+
+  Current as of 2018-5-17
+
+----
+**Set Local Transmission Power**
+----
+**Change Status:** New in V1.7.1.
+
+  Set the local transmission (Tx) power in decibel-milliwatts (dBm).
+
+* **URL:**
+
+  `/set_local_tx_power/:power`
+
+* **Method:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  Required:
+    * `power`: The desired Tx power, in dBm.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/get_local_tx_power` returns JSON:
+    ```
+    { tx_power : Float
+    , result : 
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/set_local_tx_power/9.5` sets the gateway's local Tx power to 9.5 dBm.
+
+* **Notes**
+
+  Current as of 2018-5-17.
+
+----
 ***Change Notes***
 ----
 ----
