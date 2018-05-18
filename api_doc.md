@@ -3959,6 +3959,117 @@
   Current as of 2018-5-17.
 
 ----
+**Get Local Receiver Sensitivity**
+----
+**Change Status:** New in V1.7.1.
+
+  Reports whether the radio in the XIG is configured to use high gain when receiving.
+
+* **URL:**
+
+  `/get_local_rx_gain`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/get_local_rx_gain` returns JSON:
+    ```
+    { high_gain : Boolean
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/get_local_rx_gain` gets the gateway's local Rx gain.
+
+* **Notes**
+
+  Current as of 2018-5-17
+
+----
+**Enable/Disable Local Receiver High Gain**
+----
+**Change Status:** New in V1.7.0.  
+
+  Enable or disable high receiver (Rx) gain for the XIG radio.
+
+* **URLs**
+
+  `/enable_local_rx_gain`
+  `/disable_local_rx_gain`
+
+* **Methods**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/enable_local_rx_gain` and `/disable_local_rx_gain` return JSON:
+    ```
+    { high_gain : Boolean
+    , result : Boolean
+    }
+    ```
+
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call**
+
+  `curl <gateway address: port>/enable_local_rx_gain` will set the local receiver to high-gain mode.
+
+* **Notes**
+
+  Current as of 2018-5-17.
+
+----
 ***Change Notes***
 ----
 ----
