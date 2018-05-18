@@ -3280,11 +3280,67 @@
 
 * **Example Call**
 
-  `curl <gateway address: port>/reload/local_id` gets the gateway's local ID.
+  `curl <gateway address: port>/local_id` gets the gateway's local ID.
 
 * **Notes**
 
   Current as of 2017-11-30
+
+----
+**Set Local ID**
+----
+**Change Status:** New in V1.7.1.
+
+  Set the local logical BLE address.
+
+* **URL:**
+
+  `/set_local_id/:local_id`
+
+* **Method:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  Required:
+    * `local_id`: The desired local ID.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/set_local_id` returns JSON:
+    ```
+    { local_id : Integer
+      result : Boolean
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/set_local_id/31212` sets the gateway's local ID to 31212.
+
+* **Notes**
+
+  Current as of 2018-5-17
 
 ----
 **Randomize Local ID**
