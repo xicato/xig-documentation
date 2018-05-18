@@ -3736,7 +3736,119 @@
   Current as of 2018-4-17.
 
 ----
+**Get Local TTL**
+----
+**Change Status:** New in V1.7.1.
 
+  Get the local TTL for a given network.
+
+* **URL:**
+
+  `/get_local_ttl/:network/`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The name of the target network.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/get_local_ttl` returns JSON:
+    ```
+    { network : String
+      ttl : Integer
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/get_local_ttl/Experience%20Room` gets the gateway's local TTL on the "Experience Room" network.
+
+* **Notes**
+
+  Current as of 2018-5-17
+
+----
+**Set Local TTL**
+----
+**Change Status:** New in V1.7.1.
+
+  Set the local TTL for a given network.
+
+* **URL:**
+
+  `/set_local_ttl/:network/:ttl`
+
+* **Method:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  Required:
+    * `network`: The name of the target network.
+    * `ttl`: The desired Time-To-Live for packets coming from the gateway on the target network.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/get_local_ttl` returns JSON:
+    ```
+    { network : String
+      ttl : Integer
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/set_local_ttl/Xicato/4` sets the gateway's local TTL on the "Xicato" network to 4.
+
+* **Notes**
+
+  Current as of 2018-5-17
+
+----
 ***Change Notes***
 ----
 ----
