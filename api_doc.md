@@ -3933,10 +3933,10 @@
 * **Success Response**
 
   * **Code:** 200 <br />
-  **Content:** `/get_local_tx_power` returns JSON:
+  **Content:** `/set_local_tx_power` returns JSON:
     ```
     { tx_power : Float
-    , result : 
+    , result : Boolean
     }
     ```
 
@@ -4064,6 +4064,116 @@
 * **Example Call**
 
   `curl <gateway address: port>/enable_local_rx_gain` will set the local receiver to high-gain mode.
+
+* **Notes**
+
+  Current as of 2018-5-17.
+
+----
+**Get Local RSSI Cutoff**
+----
+**Change Status:** New in V1.7.1.
+
+  Get the local RSSI cutoff. Below this level, packets are discarded.
+
+* **URL:**
+
+  `/get_rssi_filter`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  None.
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/get_rssi_filter` returns JSON:
+    ```
+    { rssi_filter : Int
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/get_rssi_filter` gets the gateway's local RSSI filter cutoff.
+
+* **Notes**
+
+  Current as of 2018-5-17
+
+----
+**Set Local RSSI Cutoff**
+----
+**Change Status:** New in V1.7.1.
+
+  Set the RSSI cutoff. Below this RSSI, packets will not be decoded.
+
+* **URL:**
+
+  `/set_rssi_filter/:rssi_filter`
+
+* **Method:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `administrate`
+
+* **URL Parameters:**
+
+  Required:
+    * `rssi_filter`: The desired cutoff for the local RSSI filter, in dBm (integer values only).
+
+* **Data Parameters**
+
+  None.
+
+* **Success Response**
+
+  * **Code:** 200 <br />
+  **Content:** `/set_rssi_filter` returns JSON:
+    ```
+    { rssi_filter : Int
+    , result : Boolean
+    }
+    ```
+
+* **Error Response**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+
+* **Example Call**
+
+  `curl <gateway address: port>/set_rssi_filter/-75` sets the gateway's RSSI cutoff to -75 dBm.
 
 * **Notes**
 
