@@ -2357,6 +2357,94 @@
   * **Code:** 200 <br />
   **Content:** `/device/getconfig` returns JSON:
     ```
+    { txPower : Float
+    , highRxGain : Bool
+    , availableTxPowers : List Float
+    , dynamicLightStatusConfiguration :
+        { warnInterval : Int
+        , warnIntensityMax : Float
+        , warnIntensityMin : Float
+        , warnTemperatureMax : Int
+        , warnTemperatureMin : Int
+        , warnVinMax : Float
+        , warnVinMin : Float
+        , changeBursts : Int
+        , changeBurstInterval : Int
+        , changeIntervalMin : Int
+        , changeIntensity : Float
+        , changeTemperature : Int
+        , changeVin : Float
+        }
+    , advertisementSettings :
+        { lightStatusAdvInterval : Int
+        , lightHistoryAdvInterval : Int
+        , lightChangeBursts : Int
+        , lightChangeBurstInterval : Int
+        , alwaysConnectable : Bool
+        }
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/getconfig/Unsecured/111'
+  ``` 
+  gets the communication configuration for device 111 on an unsecured network.
+* **Notes:**
+
+  Current as of 2018-4-11.
+
+----
+**Get Device Communication Configuration (New Call)**
+----
+**Change Status:** V1.7.1 API call changes: This call is new; it duplicates all the existing functionality of the `/device/getconfig` call, but in a way that's more consistent with other device configuration calls.
+
+  Gets the communication configuration for a given device (XID or XIM).
+
+* **URLs**
+
+  `/device/getcommconfig/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/getcommconfig` returns JSON:
+    ```
     { "config":
         { txPower : Float
         , highRxGain : Bool
@@ -2407,12 +2495,12 @@
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/getconfig/Unsecured/111'
+    curl 'http://<gateway>:8000/device/getcommconfig/Unsecured/111'
   ``` 
   gets the communication configuration for device 111 on an unsecured network.
 * **Notes:**
 
-  Current as of 2018-4-11.
+  Current as of 2018-5-22.
 
 ----
 **Set Device Communication Configuration**
