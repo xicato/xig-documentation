@@ -825,7 +825,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -871,7 +871,7 @@
 
 * **Error Responses**
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -882,11 +882,11 @@
   Current as of 2017-2-24
 
 ----
-**Download Gateway Groups**
+**Download Gateway Groups List**
 ----
-**Change Status:** No API call changes made in V1.7.0.  
+**Change Status:** Add API call to documentation. No API call changes made in V1.7.0.  
 
-  Download `groups.txt` from the XIG.
+  Download `groups.txt` list from the XIG.
 
 * **URLs**
 
@@ -913,11 +913,14 @@
 * **Success Response**
 
   * **Code:** 200 <br />
-  **Content:** `/groups.txt` will return the `groups.txt` file that the server used last.
+  **Content:** `/groups.txt` will return the `groups.txt` file from the specified server.
 
 * **Error Responses**
+  * **Code:** 404 NOT FOUND<br />
+  **Meaning:** The `groups.txt` file doesn't exist on the gateway or the server isn't up.
+
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -925,14 +928,14 @@
 
 * **Notes**
 
-  Current as of 5 Floréal CCXXVI.
+  Current as of 2018-5-21.
 
 ----
-**Download Gateway Scenes**
+**Download Gateway Scenes List**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
 
-  Download `scenes.txt` from the XIG.
+  Download `scenes.txt` list from the XIG.
 
 * **URLs**
 
@@ -959,11 +962,15 @@
 * **Success Response**
 
   * **Code:** 200 <br />
-  **Content:** `/groups.txt` will return the `scenes.txt` file that the server used last.
+  **Content:** `/scenes.txt` will return the `scenes.txt` file from the specified server.
 
 * **Error Responses**
+* **Error Responses**
+  * **Code:** 404 NOT FOUND<br />
+  **Meaning:** The `scenes.txt` file doesn't exist on the gateway or the server isn't up.
+
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -971,7 +978,7 @@
 
 * **Notes**
 
-  Current as of 2018-4-25.
+  Current as of 2018-5-21.
 
 ----
 ***Control Permission API Calls***
@@ -1159,7 +1166,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -1229,7 +1236,7 @@
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -1449,7 +1456,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -1732,6 +1739,7 @@
   Current as of 2018-5-17.
 
 ----
+
 
 ***Manage Permission API Calls***
 ----
@@ -2133,7 +2141,7 @@
 ----
 **Enqueue A Firmware Update**
 ----
-**Change Status:** No API call changes made in V1.7.0.  
+**Change Status:** Updated API call in V1.7.1 to match documented method (`PUT` | `POST`) used to perform update. Previous API versions were supporting the incorrect method (`GET`).   
 
   Enqueue a firmware update for a device.
 
@@ -2146,6 +2154,7 @@
   `POST` | `PUT`
 
 * **Permission:**
+
 
   `manage`
 
@@ -2305,8 +2314,7 @@
 * **Example Call:**
 
   ```
-     curl -X PUT
-          -u <username>:<password>
+     curl -u <username>:<password>
           <gateway address: port>/device/firmware/update/check/Unsecured/111
   ``` 
   checks on the status of a firmware update for unsecured device 111.
@@ -2394,7 +2402,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -2500,7 +2508,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
@@ -2517,7 +2525,7 @@
   Current as of 2018-4-5.
 
 ----
-**Upload Gateway Groups**
+**Upload Gateway Groups List**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2570,7 +2578,7 @@
   Current as of 2018-4-25.
 
 ----
-**Upload Gateway Scenes**
+**Upload Gateway Scenes List**
 ----
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2603,8 +2611,8 @@
 
 * **Error Responses**
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
-
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
+ 
 * **Example Call**
 
   ```
@@ -3276,7 +3284,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3289,9 +3297,10 @@
 ----
 **Set Local ID**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
   Set the local logical BLE address.
+  __This command should only be used if the network logical ID structure is known to prevent potential ID conflicts.__
 
 * **URL:**
 
@@ -3336,7 +3345,12 @@
 
 * **Example Call**
 
-  `curl <gateway address: port>/set_local_id/31212` sets the gateway's local ID to 31212.
+  ```
+     curl -X PUT
+          -H "Authorization: Bearer <token>"
+          <gateway address: port>/set_local_id/31212
+  ``` 
+  Sets the gateway's local ID to 31212.
 
 * **Notes**
 
@@ -3348,7 +3362,7 @@
 **Change Status:** No API call changes made in V1.7.0.  
 
   Randomize the local logical BLE address.
-  __DO NOT USE THIS UNLESS YOU KNOW WHAT YOU ARE DOING__
+  __THIS COMMAND SHOULD NOT BE USED. IF IT IS NECESSARY TO CHANGE THE XIG LOCAL ID, USE SET LOCAL ID__
 
 * **URLs**
 
@@ -3387,7 +3401,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3432,7 +3446,7 @@
   **Meaning:** The credentials provided were not correct.
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). Tail the error log and send it over for someone to examine.
+  **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 ----
 **Set Advertising Interval**
@@ -3484,7 +3498,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Gather the logs and send them over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3549,7 +3563,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Gather the logs and send them over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3613,7 +3627,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Gather the logs and send them over for someone to examine.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3669,7 +3683,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3725,7 +3739,7 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error.
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
@@ -3738,7 +3752,7 @@
 ----
 **Get Local TTL**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
   Get the local TTL for a given network.
 
@@ -3794,7 +3808,7 @@
 ----
 **Set Local TTL**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
   Set the local TTL for a given network.
 
@@ -3842,7 +3856,12 @@
 
 * **Example Call**
 
-  `curl <gateway address: port>/set_local_ttl/Xicato/4` sets the gateway's local TTL on the "Xicato" network to 4.
+   ```
+     curl -X PUT
+          -u <username>:<password>
+          <gateway address: port>/set_local_ttl/Test/4
+  ``` 
+  Sets the gateway's local TTL on the "Test" network to 4.  
 
 * **Notes**
 
@@ -3851,7 +3870,7 @@
 ----
 **Get Local Transmission Power**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
   Get the local transmission (Tx) power in decibel-milliwatts (dBm).
 
@@ -3905,9 +3924,9 @@
 ----
 **Set Local Transmission Power**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
-  Set the local transmission (Tx) power in decibel-milliwatts (dBm).
+  Set the local BLE radio transmission (Tx) power in decibel-milliwatts (dBm). The default value is the maximum supported setting and it should not be modified except for specific diagnostic purposes.
 
 * **URL:**
 
@@ -3924,7 +3943,7 @@
 * **URL Parameters:**
 
   Required:
-    * `power`: The desired Tx power, in dBm.
+    * `power`: The desired Tx power, in dBm. 
 
 * **Data Parameters**
 
@@ -3952,7 +3971,12 @@
 
 * **Example Call**
 
-  `curl <gateway address: port>/set_local_tx_power/9.5` sets the gateway's local Tx power to 9.5 dBm.
+  ```
+     curl -X PUT
+          -H "Authorization: Bearer <token>"
+          <gateway address: port>/set_local_tx_power/9.5
+  ``` 
+  Sets the gateway's local Tx power to 9.5 dBm.
 
 * **Notes**
 
@@ -3961,7 +3985,7 @@
 ----
 **Get Local Receiver Sensitivity**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
   Reports whether the radio in the XIG is configured to use high gain when receiving.
 
@@ -4063,7 +4087,12 @@
 
 * **Example Call**
 
-  `curl <gateway address: port>/enable_local_rx_gain` will set the local receiver to high-gain mode.
+  ```
+     curl -X PUT
+          -H "Authorization: Bearer <token>"
+          <gateway address: port>/enable_local_rx_gain
+  ``` 
+  Sets the local receiver to high-gain mode.
 
 * **Notes**
 
@@ -4072,9 +4101,9 @@
 ----
 **Get Local RSSI Cutoff**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
-  Get the local RSSI cutoff. Below this level, packets are discarded.
+  Get the local RSSI (Received Signal Strength Indication) cutoff. This is a global value applied to all received packets. Any packets received with an RSSI value below this level are discarded.
 
 * **URL:**
 
@@ -4126,7 +4155,7 @@
 ----
 **Set Local RSSI Cutoff**
 ----
-**Change Status:** New in V1.7.1.
+**Change Status:** Initial release in V1.7.1.
 
   Set the RSSI cutoff. Below this RSSI, packets will not be decoded.
 
@@ -4173,7 +4202,12 @@
 
 * **Example Call**
 
-  `curl <gateway address: port>/set_rssi_filter/-75` sets the gateway's RSSI cutoff to -75 dBm.
+  ```
+     curl -X PUT
+          -u <username>:<password>
+          <gateway address: port>/set_rssi_filter/-75
+  ``` 
+  Sets the gateway's RSSI cutoff to -75 dBm.
 
 * **Notes**
 
@@ -4189,3 +4223,4 @@
 * 2017-7-31: Add permissions information and some new calls.
 * 2018-1-31: (Many intervening changes) Documentation should be complete up to ms1.6.12.
 * 2018-4-18: Many clarifications and ensured that the device network was properly included in the API calls, reordering calls based on permission required. New API calls added to the end of the respective permission sections.
+* 2018-5-21: Add new API calls for local radio settings and device (node) configuration
