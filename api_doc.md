@@ -1739,6 +1739,193 @@
   Current as of 2018-5-17.
 
 ----
+**Get Device Sensor Response**
+----
+**Change Status:** Initial release in V1.7.1. 
+
+  Gets the sensor response configuration for a given device. 
+
+* **URLs**
+
+  `/device/getsensorresponse/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/getsensorresponse` returns a JSON-serialized representation of the sensor response state machine programmed into the device:
+    ```
+    { "sensor_response": List State
+    , "network": String
+    , "device_id": String
+    }
+    ```
+    Each State has the following JSON structure:
+    ```
+    { "action": Action
+    , "conditions": List Condition
+    , "to_state": Int
+    , "from_states": Int (or List Int, apparently)
+    }
+    ```
+    Each Action has the following JSON structure:
+    ```
+    { "delay_time": Int
+    , "length": Int
+    , "command": Int
+    }
+    ```
+    Each Condition has the following JSON structure:
+    ```
+    { "type": Int
+    , "port": Int
+    , "hub": Int
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl http://<gateway>:8000/device/getsensorresponse/Unsecured/111
+  ``` 
+  gets the wired light setup for Unsecured device 111.
+* **Notes:**
+
+  Current as of 2018-8-10.
+
+----
+**Set Device Sensor Response**
+----
+**Change Status:** Initial release in V1.7.1. 
+
+  Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
+  *Currently there is not a server-side check to verify that the data provided is appropriate for the device. _Caveat usor._*
+
+* **URLs**
+
+  `/device/setsensorresponse/:network/:device_id`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  Required:
+    * In the body: A List (`[]`) of JSON objects, one for each state. \
+    Each State has the following JSON structure:
+    ```
+    { "action": Action
+    , "conditions": List Condition
+    , "to_state": Int
+    , "from_states": Int (or List Int, apparently)
+    }
+    ```
+    Each Action has the following JSON structure (depending on the command, some of these fields are optional or unused):
+    ```
+    { "delay_time": Int
+    , "intensity": Float
+    , "fade_time": Int
+    , "length": Int
+    , "command": Int
+    , "special": Nullable Int
+    }
+    ```
+    Each Condition has the following JSON structure:
+    ```
+    { "type": Int
+    , "port": Int
+    , "hub": Int
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+    _For appropriate values to use here, please consult the Sensor Programming Guide._
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/setsensorresponse` returns JSON:
+    ```
+    { "result": Bool
+    , "sensor_response": List State (should be what was passed in--this is a place to check for serialization errors)
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      --data '[{"action": {"length": 4, "fade_time": 2.0, "intensity": 100.0, "command": 1, "delay_time": 0.0, "special": null}, "conditions": [{"type": 32, "port": 0, "hub": 0}], "to_state": 0, "from_states": 1}, {"action": {"length": 4, "fade_time": 2.0, "intensity": 0.0, "command": 1, "delay_time": 0.0, "special": null}, "conditions": [{"type": 32, "port": 1, "hub": 0}], "to_state": 0, "from_states": 1}, {"action": {"length": 4, "fade_time": 2.0, "intensity": 0.1, "command": 1, "delay_time": 0.0, "special": null}, "conditions": [{"type": 32, "port": 2, "hub": 0}], "to_state": 0, "from_states": 1}, {"action": {"delay_time": 0.0, "length": 1, "command": 2}, "conditions": [{"type": 32, "port": 3, "hub": 0}], "to_state": 0, "from_states": 1}]'
+  ``` 
+  sets the sensor response for device 111.
+* **Notes:**
+
+  Current as of 2018-8-10.
+
+----
 
 
 ***Manage Permission API Calls***
