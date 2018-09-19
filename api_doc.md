@@ -1050,6 +1050,77 @@
   Current as of 2016-12-20
 
 ----
+**Multi-Channel Set Intensity (with Optional Fading)**
+----
+**Change Status:** New in 1.7.2. 
+ 
+  Set intensity for a device or a group of devices, with optional fade time.
+* **URLs:**
+
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/`
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities`
+
+  To use fading:
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/:fading`
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities/:fading`
+
+* **Methods:**
+
+  `GET` | `POST`
+
+* **Permission:**
+
+  `control`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` : The secure network of the target device. If a network value is not provided, the results of the command are non-deterministic. To access devices that have not been assigned to a secure network, the name unsecured should be used.
+    * `id` : The device id of the target device (master channel).
+    * `master_intensity` : The target intensity of the master channel, in percent. This can be 0 or any positive float or integer between 0.1 and 100.0
+    * Channel intensities: either each one in its own field (`/1/2/3/4`), or in list form (`[1,2,3,4]`).
+
+  Optional:
+    * `fading` : The fade time, in milliseconds. This can be any positive integer but obviously very large values will not have particularly useful results.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** JSON:
+    ```
+    { "device_id" : String
+    , "network" : String
+    , "master_intensity" : Float
+    , "channel_intensities" : List Float
+    , "fading" : Optional Integer
+    }
+    ```
+    (Optional means that the field may or may not be present. In this case, fading will only be present if a fading value is used.)
+
+* **Error Response:**
+
+  * **Code:** 403 Forbidden <br />
+  **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request.
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ` curl <gateway address: port>/device/multisetintensity/unsecured/4445/100/[1.0,20,3.0,40]/5000` sets device 111's master channel to 100%, and its 4 individual channels to 1.0%, 20%, 3.0%, and 40% respectively, over 5 seconds.
+
+* **Notes:**
+
+  Current as of 2018-8-14.
+
+----
 **Recall Scene (with Optional Fading)**
 ----
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
