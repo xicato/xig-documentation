@@ -1850,24 +1850,13 @@
     ```
     Each State has the following JSON structure:
     ```
-    { "action": Action
-    , "conditions": List Condition
-    , "to_state": Int
-    , "from_states": Int (or List Int, apparently)
-    }
-    ```
-    Each Action has the following JSON structure:
-    ```
-    { "delay_time": Int
-    , "length": Int
-    , "command": Int
-    }
-    ```
-    Each Condition has the following JSON structure:
-    ```
-    { "type": Int
-    , "port": Int
-    , "hub": Int
+    { "Action": String
+    , "Conditions": String
+    , "Delay/Lx-": String
+    , "Fade/Lx+": String
+    , "From #'s": String
+    , "To #": String
+    , "Value":String
     }
     ```
 
@@ -1894,7 +1883,7 @@
   gets the wired light setup for Unsecured device 111.
 * **Notes:**
 
-  Current as of 2018-8-10.
+  Current as of 2018-9-20.
 
 ----
 **Set Device Sensor Response**
@@ -1928,27 +1917,13 @@
     * In the body: A List (`[]`) of JSON objects, one for each state. \
     Each State has the following JSON structure:
     ```
-    { "action": Action
-    , "conditions": List Condition
-    , "to_state": Int
-    , "from_states": Int (or List Int, apparently)
-    }
-    ```
-    Each Action has the following JSON structure (depending on the command, some of these fields are optional or unused):
-    ```
-    { "delay_time": Int
-    , "intensity": Float
-    , "fade_time": Int
-    , "length": Int
-    , "command": Int
-    , "special": Nullable Int
-    }
-    ```
-    Each Condition has the following JSON structure:
-    ```
-    { "type": Int
-    , "port": Int
-    , "hub": Int
+    { "Action": String
+    , "Conditions": String
+    , "Delay/Lx-": String
+    , "Fade/Lx+": String
+    , "From #'s": String
+    , "To #": String
+    , "Value":String
     }
     ```
     *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
@@ -1989,12 +1964,12 @@
     curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '[{"action": {"length": 4, "fade_time": 2.0, "intensity": 100.0, "command": 1, "delay_time": 0.0, "special": null}, "conditions": [{"type": 32, "port": 0, "hub": 0}], "to_state": 0, "from_states": 1}, {"action": {"length": 4, "fade_time": 2.0, "intensity": 0.0, "command": 1, "delay_time": 0.0, "special": null}, "conditions": [{"type": 32, "port": 1, "hub": 0}], "to_state": 0, "from_states": 1}, {"action": {"length": 4, "fade_time": 2.0, "intensity": 0.1, "command": 1, "delay_time": 0.0, "special": null}, "conditions": [{"type": 32, "port": 2, "hub": 0}], "to_state": 0, "from_states": 1}, {"action": {"delay_time": 0.0, "length": 1, "command": 2}, "conditions": [{"type": 32, "port": 3, "hub": 0}], "to_state": 0, "from_states": 1}]'
+      --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.1 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.1", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.2 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "", "To #": "0", "Value": "", "From #'s": "0", "Action": "Stop Fading", "Conditions": "B0.3 Press "}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]'
   ``` 
   sets the sensor response for device 111.
 * **Notes:**
 
-  Current as of 2018-8-10.
+  Current as of 2018-9-20.
 
 ----
 
