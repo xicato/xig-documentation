@@ -2132,7 +2132,162 @@
   Current as of 2018-9-27.
 
 ----
+**Get Device Schedules**
+----
+**Change Status:** Initial release in V1.7.2. 
 
+  Gets the scheduling configuration for a given device. 
+
+* **URLs**
+
+  `/device/getschedules/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/getschedules` returns JSON:
+    ```
+    { "schedules": List Schedules
+    , "network": String
+    , "device_id": String
+    }
+    ```
+    Each Schedule has the following JSON structure:
+    ```
+    { "#": String
+    , "Days": String
+    , "End Time": String
+    , "Start Time": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl http://<gateway>:8000/device/getschedules/Unsecured/111
+  ``` 
+  gets the scheduling setup for Unsecured device 111.
+* **Notes:**
+
+  Current as of 2018-9-27.
+
+----
+**Set Device Schedules**
+----
+**Change Status:** Initial release in V1.7.2. 
+
+  Sets the scheduling configuration on a given device. 
+  *Currently there is not a server-side check to verify that the data provided is appropriate for the device. _Caveat usor._*
+
+* **URLs**
+
+  `/device/setschedules/:network/:device_id`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  Required:
+    * In the body:A List (`[]`) of JSON objects, one for each schedule. \
+    Each Schedule has the following JSON structure:
+    ```
+    { "#": String
+    , "Days": String
+    , "End Time": String
+    , "Start Time": String
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+    _For appropriate values to use here, please consult the Sensor Programming Guide._
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/setschedules` returns JSON:
+    ```
+    { "result": Bool
+    , "tracked": List Schedule
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      --data '[{"#":"T0","Days":"","End Time":"00:00:00","Start Time":"00:00:00"},{"#":"T1","Days":"M,W,F","End Time":"00:00:00","Start Time":"03:30:45"},{"#":"T2","Days":"Tu,Th","End Time":"11:00:00","Start Time":"23:00:00"},{"#":"T3","Days":"Sa,Su","End Time":"00:00:00","Start Time":"00:00:00"}]'
+  ``` 
+  sets the schedules for device 111.
+* **Notes:**
+
+  Current as of 2018-9-27.
+
+----
 ***Manage Permission API Calls***
 ----
 ----
