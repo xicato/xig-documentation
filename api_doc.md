@@ -1812,7 +1812,7 @@
 ----
 **Get Device Sensor Response**
 ----
-**Change Status:** Initial release in V1.7.1. 
+**Change Status:** Initial release in V1.7.2. 
 
   Gets the sensor response configuration for a given device. 
 
@@ -1888,7 +1888,7 @@
 ----
 **Set Device Sensor Response**
 ----
-**Change Status:** Initial release in V1.7.1. 
+**Change Status:** Initial release in V1.7.2. 
 
   Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
   *Currently there is not a server-side check to verify that the data provided is appropriate for the device. _Caveat usor._*
@@ -1961,7 +1961,7 @@
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111' \
+    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
       --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.1 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.1", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.2 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "", "To #": "0", "Value": "", "From #'s": "0", "Action": "Stop Fading", "Conditions": "B0.3 Press "}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]'
@@ -1972,7 +1972,166 @@
   Current as of 2018-9-20.
 
 ----
+**Get Device Tracking**
+----
+**Change Status:** Initial release in V1.7.2. 
 
+  Gets the tracked ID configuration for a given device. 
+
+* **URLs**
+
+  `/device/gettracked/:network/:device_id`
+
+* **Methods:**
+
+  `GET`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/gettracked` returns JSON:
+    ```
+    { "tracked": Tracked
+    , "network": String
+    , "device_id": String
+    }
+    ```
+    Tracked has the following JSON structure:
+    ```
+    { "motion": List Int
+    , "lux": List Int
+    , "intensity": List Int
+    , "buttons": List (List Int)
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error.
+
+* **Example Call:**
+
+  ```
+    curl http://<gateway>:8000/device/gettracked/Unsecured/111
+  ``` 
+  gets the tracked ID setup for Unsecured device 111.
+* **Notes:**
+
+  Current as of 2018-9-27.
+
+----
+**Set Device Tracking**
+----
+**Change Status:** Initial release in V1.7.2. 
+
+  Sets the lux, intensity, buttons, and motion sensors to track on a given device. 
+  *Currently there is not a server-side check to verify that the data provided is appropriate for the device. _Caveat usor._*
+
+* **URLs**
+
+  `/device/settracked/:network/:device_id`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `configure`
+
+* **URL Parameters:**
+
+  Required:
+    * `device_id` : The target device ID. This _cannot_ be a group or a sensor.
+    * `network` : The network the target device is on. If this is not included there may be unexpected behavior.
+
+* **Data Parameters:**
+
+  Required:
+    * In the body: A JSON objects, with the following structure:
+    ```
+    { "motion": List Int
+    , "lux": List Int
+    , "intensity": List Int
+    , "buttons": List (List Int)
+    }
+    ```
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    You should _probably_ include a Content-Length header as well.
+
+    _For appropriate values to use here, please consult the Sensor Programming Guide._
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/device/settracked` returns JSON:
+    ```
+    { "results": 
+      { "motion": Bool
+      , "lux": Bool
+      , "intensity": Bool
+      , "buttons": Bool
+      }
+    , "tracked": (should be what was passed in--this is a place to check for serialization errors)
+    , "network": String
+    , "device_id": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+  **Meaning:** The device requested could not be found.
+
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      --data '{"motion":[11,22,33,44],"lux":[55,66,77,88],"intensity":[99,1234,56],"buttons":[[24,45,67,32,41,32]]}'
+  ``` 
+  sets the tracked device IDs for device 111.
+* **Notes:**
+
+  Current as of 2018-9-27.
+
+----
 
 ***Manage Permission API Calls***
 ----
