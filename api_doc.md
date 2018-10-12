@@ -1928,6 +1928,8 @@
     ```
     *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
     You should _probably_ include a Content-Length header as well.
+    
+    * Alternatively, you may attach the sensor response file produced by the Xicato Control Panel. The `name` of the file should be `"file"`.
 
     _For appropriate values to use here, please consult the Sensor Programming Guide._
 
@@ -2244,6 +2246,8 @@
     ```
     *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
     You should _probably_ include a Content-Length header as well.
+    
+    * Alternatively, you may attach the sensor response file produced by the Xicato Control Panel. The `name` of the file should be `"file"`.
 
     _For appropriate values to use here, please consult the Sensor Programming Guide._
 
