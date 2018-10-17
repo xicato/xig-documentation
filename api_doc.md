@@ -1966,7 +1966,7 @@
     curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.1 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.1", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.2 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "", "To #": "0", "Value": "", "From #'s": "0", "Action": "Stop Fading", "Conditions": "B0.3 Press "}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]'
+      --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.1 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.1", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.2 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "", "To #": "0", "Value": "", "From #'s": "0", "Action": "Stop Fading", "Conditions": "B0.3 Press "}]'
   ``` 
   sets the sensor response for device 111.
 * **Notes:**
