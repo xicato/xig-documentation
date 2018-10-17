@@ -1321,7 +1321,8 @@
 ----
 **Change Status:** <>
 
-  <description>
+  Sends or clears a button press to a device or group (add `0xC000` to the group ID to use this API).
+  Currently this API only supports pressing one button at a time.
 
 * **URLs:**
 
@@ -1345,10 +1346,15 @@
 
 * **URL Parameters:**
 
-  Required:
-    * `network` (for all calls): The secure network that the command will be issued to.
-    * `device_id` (for `/device` calls): The target device ID.
-    *
+  Required (for both):
+    * `network` : The secure network that the command will be issued to.
+    * `device_id` : The target device ID.
+
+  Required (to send):
+    * `button_id` : The button to "press". Buttons are zero-indexed.
+
+  Optional (for both):
+    * `number_of_buttons` : The number of buttons on the "switch".
 
 * **Data Parameters:**
 
@@ -1357,19 +1363,27 @@
 * **Success Response:**
 
   * **Code:** 200 <br />
-  **Content:** JSON:
+  **Content:** Both APIs return JSON:
     ```
-    {
+    { "device_id" : String
+    , "network" : String
+    , "local_id" : Int
+    , "number_of_buttons" : Int
+    , "button_id" : Int (send only)
     }
     ```
 
 * **Error Response:**
 
-  * **Code:** <br />
-  **Meaning:** 
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
+  `curl <gateway address: port>/device/sendbutton/Xicato/219/4/16` will send device 219 on Xicato a virtual button press on the 5th "button" of a 16 "button" "switch".
 
 * **Notes:**
 
