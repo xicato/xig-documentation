@@ -1317,6 +1317,64 @@
 
   Current as of 2018-4-17
 
+**Send and Clear Button Presses**
+----
+**Change Status:** <>
+
+  <description>
+
+* **URLs:**
+
+  To send:
+  `/device/button/:network/:device_id/:button_id`
+  `/device/sendbutton/:network/:device_id/:button_id`
+  `/device/button/:network/:device_id/:button_id/:number_of_buttons`
+  `/device/sendbutton/:network/:device_id/:button_id/:number_of_buttons`
+
+  To clear:
+  `/device/clearbutton/:network/:device_id`
+  `/device/clearbutton/:network/:device_id/:number_of_buttons`
+
+* **Methods:**
+
+  `GET` | `POST` | `PUT`
+
+* **Permission:**
+
+  `control`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` (for all calls): The secure network that the command will be issued to.
+    * `device_id` (for `/device` calls): The target device ID.
+    *
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** JSON:
+    ```
+    {
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** <br />
+  **Meaning:** 
+
+* **Example Call:**
+
+
+* **Notes:**
+
+  Current as of 2018-10-16
+----
 ***Configure Permission API Calls***
 ----
 ----
