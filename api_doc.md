@@ -975,8 +975,8 @@
 
 * **URLs**
 
-  `/groups.txt`
-  `/Groups.txt`
+  `/groups.txt`<br/>
+  `/Groups.txt`<br/>
   `/download_groups`
 
 * **Method:**
@@ -1139,11 +1139,11 @@
   Set intensity for a device or a group of devices, with optional fade time.
 * **URLs:**
 
-  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/`
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/`<br/>
   `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities`
 
   To use fading:
-  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/:fading`
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/:fading`<br/>
   `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities/:fading`
 
 * **Methods:**
@@ -3533,6 +3533,126 @@
 
   Current as of 2018-5-17.
 
+----
+## Set Group Name
+**Change Status:** Accepts a network parameter as of 1.7.2.  
+
+  Sets the name for a given group.
+
+* **URLs**
+
+  `/device/setname/:network/:group_id/:name`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` : The network the target device is on. For unsecured devices, use 'unsecured'.
+    * `group_id` : The target group ID.
+    * `name` : The desired name (URL-encoded).
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/group/setname` returns JSON:
+    ```
+    { "name": String
+    , "id": Int
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+     curl -X PUT
+          -u <username>:<password>
+          <gateway address: port>/group/setname/Xicato/25/Boardroom
+  ``` 
+  sets the name for Xicato group 25 to 'Boardroom'.
+* **Notes:**
+
+  Current as of 2018-10-19.
+----
+## Set Scene Name
+**Change Status:** Accepts a network parameter as of 1.7.2.  
+
+  Sets the name for a given scene.
+
+* **URLs**
+
+  `/scene/setname/:network/:scene_id/:name`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `network` : The network the target scene is on. For scenes using unsecured devices, use 'unsecured'.
+    * `scene_id` : The target scene ID.
+    * `name` : The desired name (URL-encoded).
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/scene/setname` returns JSON:
+    ```
+    { "name": String
+    , "number": Int
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+
+* **Example Call:**
+
+  ```
+     curl -X PUT
+          -u <username>:<password>
+          <gateway address: port>/scene/setname/Xicato/41/Track%20On
+  ``` 
+  sets the name for Xicato scene 41 to 'Track On'.
+* **Notes:**
+
+  Current as of 2018-10-19.
 ----
 # Beacon Permission API Calls
 ----
