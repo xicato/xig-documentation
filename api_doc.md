@@ -1,8 +1,8 @@
-***API Calls for the Xicato Intelligent Gateway***
+# API Calls for the Xicato Intelligent Gateway
 ----
 -----
 
-**A Note on Authorization**
+# A Note on Authorization
 ----
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
@@ -14,8 +14,7 @@
 
 ----
 
-**Get Token (Login Required)**
-----
+## Get Token (Login Required)
 **Change Status:** No API call changes made in V1.7.0. 
 
   Returns a JSON Web Token to be used with Bearer Authorization.
@@ -53,8 +52,7 @@
   Current as of 2017-7-31.
 ----
 
-**Check User Permissions (Login Required)**
-----
+## Check User Permissions (Login Required)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Returns the permissions that the currently logged in user has. 
@@ -93,18 +91,19 @@
 * **Notes:**
   Current as of 2018-4-9.
 ----
-
-***View Permission API Calls***
 ----
-----
-**Show Devices**
-----
+# View Permission API Calls
+## Show Devices
  **Change Status:** No API call changes made in V1.7.0. 
  
-  Return a list of devices seen by the given gateway, along with some information about the gateway's status.
+  Return a list of devices seen by the given gateway, along with some information about the gateway's status. 
+
+  To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
 * **URL:**
 
   `/devices`
+
+  `/devices/pretty`
 
 * **Method:**
 
@@ -132,6 +131,7 @@
     , "connectable" : Boolean
     , "devices" : List Device
     , "sensors" : List Sensor
+    , "switches" : List Switch
     , "temperature" : Float
     }
     ```
@@ -172,6 +172,25 @@
     , "LuxHours" : List (Nullable Float)
     }
     ```
+    Each Switch is a JSON dict containing the following fields and their associated types:
+    ```
+    { "01. Device ID" : String
+    , "02. Name" : Nullable String
+    , "03. Device" : Nullable String
+    , "04. Button Data" : List 
+      { "last_press": Nullable Float
+      , "last_release": Nullable Float
+      , "state": Boolean
+      }
+    , "05. PCB temperature" : Nullable Int
+    , "06. supply_voltage" : Nullable Float
+    , "07. signal_strength" : Nullable Integer
+    , "08. status" : Nullable Integer
+    , "09. Last Update" : Nullable Float
+    , "10. Last Press" : Nullable Float
+    , "NetworkName" : Nullable String
+    }
+    ```
 
 * **Error Response:**
 
@@ -187,11 +206,86 @@
 
   Current as of 2017-7-12
 
-  To see a pretty-printed version of this call, issue a `GET` request to `/devices/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
+----
+## Show Groups with Devices
+ **Change Status:** API call added in V1.7.2. 
+ 
+  Return a list of groups with all devices contained in each group as seen by the given gateway, along with some information about the gateway's status.
 
-----
-**Show Devices with Groups**
-----
+  To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
+* **URL:**
+
+  `/groups`
+  
+  `/groups/pretty`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `view`
+
+* **URL Parameters:**
+
+  None.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/groups` returns JSON:
+    ```
+    { "network" : Nullable String
+    , "networks" : List String
+    , "connectable" : Boolean
+    , "groups" : List Group
+    , "temperature" : Float
+    }
+    ```
+    (Nullable means that the field contains either just a value of that type, or null. This is equivalent to Haskell's, Elm's, etc. Maybe-Just-Nothing concept)
+
+    Each Group is a JSON dict containing the following fields and their associated types:
+    ```
+    { "devices": List
+      { "01. Device ID" : String
+      , "02. Name" : Nullable String
+      , "03. Device" : Nullable String
+      , "04. Intensity" : Float
+      , "05. Power" : Nullable Float
+      , "06. Tc temperature" : Integer
+      , "07. supply_voltage" : Nullable Float
+      , "08. on_hours" : Nullable Integer
+      , "09. signal_strength" : Nullable Integer
+      , "10. status" : Nullable Integer
+      , "11. Last Update" : Nullable Float
+      , "12. Adv Interval" : Nullable Float
+      , "NetworkName" : Nullable String
+      }
+    , "groupId" : Nullable Integer (null indicates devices without any group membership)
+    , "groupName" : String
+    }
+    ```
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
+
+* **Notes:**
+
+  Current as of 2017-7-12
+
+ ----
+## Show Devices with Groups
 **Change Status:** No API call changes made in V1.7.0. 
  
   Return a list of devices at the given gateway, along with some information
@@ -295,8 +389,7 @@
   Current as of 2017-10-3
 
 ----
-**Show Devices with Scenes**
-----
+## Show Devices with Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
   Return a list of devices at the given gateway, along with scene information
@@ -397,8 +490,7 @@
 
 
 ----
-**Show Devices with Groups and Scenes**
-----
+## Show Devices with Groups and Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
   Return a list of devices at the given gateway, along with some information
@@ -516,8 +608,7 @@
   To see a pretty-printed version of this call, issue a `GET` request to `/devices/with_everything/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render properly.
 
 ----
-**Histograms**
-----
+## Histograms
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Return an intensity or temperature histogram for a given device.
@@ -579,8 +670,7 @@
   Occasionally, the gateway may return an empty list. This means it hasn't had the opportunity to retrieve the histogram from the device yet. Please allow some time for histograms to populate into the device list.
 
 ----
-**Device Details**
-----
+## Device Details
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Retrieve detailed information for a given device.
@@ -655,8 +745,7 @@
   Current as of 2017-7-31.
 
 ----
-**Get Device Groups**
-----
+## Get Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Gets the group membership for a given device (XID or XIM).
@@ -713,8 +802,7 @@
   Current as of 2017-9-20.
 
 ----
-**Get Device Scenes**
-----
+## Get Device Scenes
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Gets the scene configuration for a given device (XID or XIM).
@@ -778,8 +866,7 @@
   Current as of 2017-9-20.
 
 ----
-**Basic Gateway Info**
-----
+## Basic Gateway Info
 **Change Status:** No API call changes made in V1.7.0.  
 
   Returns some basic information about the gateway.
@@ -836,8 +923,7 @@
   Current as of 2017-2-24
 
 ----
-**Gateway Status**
-----
+## Gateway Status
 **Change Status:** No API call changes made in V1.7.0.  
 
   Get the status of the gateway, in string form (as opposed to the `/gateway_info` call).
@@ -882,9 +968,8 @@
   Current as of 2017-2-24
 
 ----
-**Download Gateway Groups List**
-----
-**Change Status:** Add API call to documentation. No API call changes made in V1.7.0.  
+## Download Gateway Groups List
+**Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated IDs. If a group name is not defined for a given group ID on a given network, then no information for that group ID will be returned. Previous versions of this call returned a CSV file that did not specify groups by network. For a complete list of discovered groups with networks specified use the call `/devices/with_groups`. For a complete list of groups with associated networks and devices use the call `/groups`.   
 
   Download `groups.txt` list from the XIG.
 
@@ -931,9 +1016,8 @@
   Current as of 2018-5-21.
 
 ----
-**Download Gateway Scenes List**
-----
-**Change Status:** No API call changes made in V1.7.0.  
+## Download Gateway Scenes List
+**Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated IDs. If a scene name is not defined for a given scene ID on a given network, then no information for that scene ID will be returned. Previous versions of this call returned a CSV file that did not specify scenes by network. For a complete list of discovered scenes with networks specified use the call `/devices/with_groups_and_scenes`.   
 
   Download `scenes.txt` list from the XIG.
 
@@ -981,11 +1065,10 @@
   Current as of 2018-5-21.
 
 ----
-***Control Permission API Calls***
+# Control Permission API Calls
 ----
 ----
-**Set Intensity (with Optional Fading)**
-----
+## Set Intensity (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
  
   Set intensity for a device or a group of devices, with optional fade time.
@@ -1050,8 +1133,7 @@
   Current as of 2016-12-20
 
 ----
-**Multi-Channel Set Intensity (with Optional Fading)**
-----
+## Multi-Channel Set Intensity (with Optional Fading)
 **Change Status:** New in 1.7.2. 
  
   Set intensity for a device or a group of devices, with optional fade time.
@@ -1121,8 +1203,7 @@
   Current as of 2018-8-14.
 
 ----
-**Recall Scene (with Optional Fading)**
-----
+## Recall Scene (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Recall a scene on a light or a group of lights, with optional fade time.
@@ -1187,8 +1268,7 @@
   Current as of 2016-12-20
 
 ----
-**Device Dismissal**
-----
+## Device Dismissal
 **Change Status:** No API call changes made in V1.7.0.  
 
   Remove a device from the device list.
@@ -1253,8 +1333,7 @@
 
 
 ----
-**Enable and Disable Sensor Response**
-----
+## Enable and Disable Sensor Response
 **Change Status:** Disable calls are new in 1.7.0. Documentation was added for _all_ calls with the release of 1.7.0. 
 
   Enable or disable the sensor mode for a given ID.
@@ -1317,8 +1396,7 @@
 
   Current as of 2018-4-17
 
-**Send and Clear Button Presses**
-----
+## Send and Clear Button Presses
 **Change Status:** <>
 
   Sends or clears a button press to a device or group (add `0xC000` to the group ID to use this API).
@@ -1389,11 +1467,9 @@
 
   Current as of 2018-10-16
 ----
-***Configure Permission API Calls***
 ----
-----
-**Set Device Groups**
-----
+# Configure Permission API Calls
+## Set Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
 
   Sets the group membership for a given device (XID or XIM).
@@ -1462,8 +1538,7 @@
   Current as of 2017-9-18.
 
 ----
-**Set Device Scenes**
-----
+## Set Device Scenes
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
 
   Sets the scene configuration for a given device (XID or XIM).
@@ -1538,8 +1613,7 @@
   Current as of 2017-9-18.
 
 ----
-**Get Device Light Setup**
-----
+## Get Device Light Setup
 **Change Status:** Initial release in V1.7.0. 
 
   Gets the light configuration for a given device (XID or XIM).
@@ -1612,8 +1686,7 @@
   Current as of 2018-4-11.
 
 ----
-**Set Device Light Setup**
-----
+## Set Device Light Setup
 **Change Status:** Initial release in V1.7.0. 
 
   Sets the light configuration for a given device (XID or XIM).
@@ -1694,8 +1767,7 @@
   Current as of 2018-4-6.
 
 ----
-**Get Device Wired Light Setup**
-----
+## Get Device Wired Light Setup
 **Change Status:** Initial release in V1.7.1. 
 
   Gets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
@@ -1785,8 +1857,7 @@
   Current as of 2018-5-17.
 
 ----
-**Set Device Wired Light Setup**
-----
+## Set Device Wired Light Setup
 **Change Status:** Initial release in V1.7.1. 
 
   Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
@@ -1882,8 +1953,7 @@
   Current as of 2018-5-17.
 
 ----
-**Get Device Sensor Response**
-----
+## Get Device Sensor Response
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the sensor response configuration for a given device. 
@@ -1958,8 +2028,7 @@
   Current as of 2018-9-20.
 
 ----
-**Set Device Sensor Response**
-----
+## Set Device Sensor Response
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
@@ -2046,8 +2115,7 @@
   Current as of 2018-9-20.
 
 ----
-**Get Device Tracking**
-----
+## Get Device Tracking
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the tracked ID configuration for a given device. 
@@ -2119,8 +2187,7 @@
   Current as of 2018-9-27.
 
 ----
-**Set Device Tracking**
-----
+## Set Device Tracking
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the lux, intensity, buttons, and motion sensors to track on a given device. 
@@ -2206,8 +2273,7 @@
   Current as of 2018-9-27.
 
 ----
-**Get Device Schedules**
-----
+## Get Device Schedules
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the scheduling configuration for a given device. 
@@ -2279,8 +2345,7 @@
   Current as of 2018-9-27.
 
 ----
-**Set Device Schedules**
-----
+## Set Device Schedules
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the scheduling configuration on a given device. 
@@ -2362,13 +2427,10 @@
 * **Notes:**
 
   Current as of 2018-9-27.
-
-----
-***Manage Permission API Calls***
 ----
 ----
-**Set Device Name**
-----
+# Manage Permission API Calls
+## Set Device Name
 **Change Status:** No API call changes made in V1.7.0.  
 
   Sets the name value for a given device.
@@ -2436,8 +2498,7 @@
   Current as of 2017-11-21.
 
 ----
-**Set Device ID**
-----
+## Set Device ID
 **Change Status:** No API call changes made in V1.7.0.  
 
   Sets the device (node) ID value for a given device.
@@ -2507,8 +2568,7 @@
   Current as of 2017-11-21.
 
 ----
-**Set Device Network**
-----
+## Set Device Network
 **Change Status:** No API call changes made in V1.7.0.  
 
   Sets the secure network for a given device.
@@ -2577,8 +2637,7 @@
   Current as of 2017-11-21.
 
 ----
-**Name Group**
-----
+## Name Group
 **Change Status:** No API call changes made in V1.7.0.  
 
   Name or change the name of a group. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
@@ -2636,8 +2695,7 @@
   Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
 
 ----
-**Name Scene**
-----
+## Name Scene
 **Change Status:** No API call changes made in V1.7.0.  
 
   Name or change the name of a scene. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
@@ -2695,8 +2753,7 @@
   Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
 
 ----
-**Get Firmware Available**
-----
+## Get Firmware Available
 **Change Status:** No API call changes made in V1.7.0.  
 
   Returns the available firmware for a device.
@@ -2762,8 +2819,7 @@
   Current as of 2017-11-21.
 
 ----
-**Enqueue A Firmware Update**
-----
+## Enqueue A Firmware Update
 **Change Status:** Updated API call in V1.7.1 to match documented method (`PUT` | `POST`) used to perform update. Previous API versions were supporting the incorrect method (`GET`).   
 
   Enqueue a firmware update for a device.
@@ -2829,8 +2885,7 @@
   Current as of 2017-11-21.
 
 ----
-**Check Firmware Update Status**
-----
+## Check Firmware Update Status
 **Change Status:** No API call changes made in V1.7.0.  
 
   Check on the status of a firmware update.
@@ -2946,8 +3001,7 @@
   Current as of 2017-11-21.
 
 ----
-**Get Device Communication Configuration**
-----
+## Get Device Communication Configuration
 **Change Status:** V1.7.0 API call changes: Corrected reported values of txPower and highRxGain, added JSON dict entry for device specific Tx power settings (availableTxPowers). The list of device specific Tx power settings should be used to ensure only valid values are used in the Set Device Communication Configuration call.   
 
   Gets the communication configuration for a given device (XID or XIM).
@@ -3034,8 +3088,7 @@
   Current as of 2018-4-11.
 
 ----
-**Get Device Communication Configuration (New Call)**
-----
+## Get Device Communication Configuration (New Call)
 **Change Status:** V1.7.1 API call changes: This call is new; it duplicates all the existing functionality of the `/device/getconfig` call, but in a way that's more consistent with other device configuration calls.
 
   Gets the communication configuration for a given device (XID or XIM).
@@ -3126,8 +3179,7 @@
   Current as of 2018-5-22.
 
 ----
-**Set Device Communication Configuration**
-----
+## Set Device Communication Configuration
 **Change Status:** Initial release in V1.7.0. 
 
   Sets the communication configuration for a given device (XID or XIM).
@@ -3236,8 +3288,7 @@
   Current as of 2018-4-5.
 
 ----
-**Upload Gateway Groups List**
-----
+## Upload Gateway Groups List
 **Change Status:** No API call changes made in V1.7.0.  
 
   Upload `groups.txt` to the XIG.
@@ -3289,8 +3340,7 @@
   Current as of 2018-4-25.
 
 ----
-**Upload Gateway Scenes List**
-----
+## Upload Gateway Scenes List
 **Change Status:** No API call changes made in V1.7.0.  
 
   Upload `scenes.txt` to the XIG.
@@ -3342,8 +3392,7 @@
   Current as of 2018-4-25.
 
 ----
-**Get Device Relay Configuration**
-----
+## Get Device Relay Configuration
 **Change Status:** Initial release in V1.7.1. 
 
   Gets the light configuration for a given device (XID or XIM).
@@ -3410,8 +3459,7 @@
   Current as of 2018-5-17.
 
 ----
-**Set Device Relay Configuration**
-----
+## Set Device Relay Configuration
 **Change Status:** Initial release in V1.7.1. 
 
   Gets the light configuration for a given device (XID or XIM).
@@ -3486,11 +3534,10 @@
   Current as of 2018-5-17.
 
 ----
-***Beacon Permission API Calls***
+# Beacon Permission API Calls
 ----
 ----
-**Get Device iBeacon Configuration**
-----
+## Get Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
   Retrieve the iBeacon configuration of a selected device.
@@ -3555,8 +3602,7 @@
   Current as of 2018-04-10.
 
 ----
-**Get Device Eddystone URL Configuration**
-----
+## Get Device Eddystone URL Configuration
 **Change Status:** Initial release in V1.7.0. 
 
   Retrieve the Eddystone URL configuration of a selected device.
@@ -3618,8 +3664,7 @@
   Current as of 2018-04-10.
 
 ----
-**Get Device AltBeacon Config**
-----
+## Get Device AltBeacon Config
 **Change Status:** Initial release in V1.7.0. 
 
   Retrieve the AltBeacon configuration of a selected device.
@@ -3681,8 +3726,7 @@
   Current as of 2018-04-10.
 
 ----
-**Set Device iBeacon Configuration**
-----
+## Set Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
   Set the iBeacon configuration of a selected device.
@@ -3772,8 +3816,7 @@
   Current as of 2018-04-10.
 
 ----
-**Set Device Eddystone URL Configuration**
-----
+## Set Device Eddystone URL Configuration
 **Change Status:** Initial release in V1.7.0. 
 
   Set the Eddystone URL configuration of a selected device.
@@ -3860,8 +3903,7 @@
   Current as of 2018-04-10.
 
 ----
-**Set Device AltBeacon Configuration**
-----
+## Set Device AltBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
   Set the AltBeacon configuration of a selected device.
@@ -3935,7 +3977,7 @@
 * **Example Call:**
 
   ```
-  curl -u <username>:<password> <gateway address: port>/device/beacon/altbeacon/set/Xicato/1 \
+  curl -u <username>:<password> <gateway address:port>/device/beacon/altbeacon/set/Xicato/1 \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept-Encoding: gzip, deflate' \
@@ -3948,16 +3990,9 @@
   Current as of 2018-04-10.
 
 ----
-
-
-
-
-
-***Administrate Permission API Calls***
 ----
-----
-**Get Local ID**
-----
+# Administrate Permission API Calls
+## Get Local ID
 **Change Status:** No API call changes made in V1.7.0.
 
   Reports the local logical BLE address.
@@ -4006,8 +4041,7 @@
   Current as of 2017-11-30
 
 ----
-**Set Local ID**
-----
+## Set Local ID
 **Change Status:** Initial release in V1.7.1.
 
   Set the local logical BLE address.
@@ -4068,8 +4102,7 @@
   Current as of 2018-5-17
 
 ----
-**Randomize Local ID**
-----
+## Randomize Local ID
 **Change Status:** No API call changes made in V1.7.0.  
 
   Randomize the local logical BLE address.
@@ -4123,8 +4156,7 @@
   Current as of 2016-12-20
 
 ----
-**Reload Gateway**
-----
+## Reload Gateway
 **Change Status:** No API call changes made in V1.7.0.  
 
   Manually reload the gateway by restarting the process.
@@ -4221,8 +4253,7 @@
 
 
 ----
-**Enable/Disable Network Time Sync**
-----
+## Enable/Disable Network Time Sync
 **Change Status:** No API call changes made in V1.7.0.  
 
   Set the minimum advertising interval for outgoing commands. Default is 500ms.
@@ -4285,8 +4316,7 @@
   Current as of 2017-5-10
 
   ----
-**Enable/Disable Device Autoremoval**
-----
+## Enable/Disable Device Autoremoval
 **Change Status:** No API call changes made in V1.7.0.  
 
   Enable or disable auto-purging (removal from the device list) after a specified period. If an update has not been received from a device after that period, the device will be removed. (Of course, it may reappear if it is still advertising). This function is not present in the Dashboard. *We strongly recommend that you do not enable this setting except in testing and as otherwise required.* The default timeout is 600 seconds (10 minutes).
@@ -4349,8 +4379,7 @@
   Current as of 2018-1-31.
 
 ----
-**Enable/Disable Packet Logging**
-----
+## Enable/Disable Packet Logging
 **Change Status:** New in V1.7.0.  
 
   Enable or disable packet logging. By default this feature is disabled and should only be enabled when debugging specific issues in conjuction with the Xicato technical support team. 
@@ -4405,8 +4434,7 @@
   Current as of 28 Germinal CCXXVI.
 
 ----
-**Enable/Disable Event Logging**
-----
+## Enable/Disable Event Logging
 **Change Status:** New in V1.7.0.  
 
   Enable or disable event logging. By default this feature is disabled and should only be enabled when debugging specific issues in conjuction with the Xicato technical support team.
@@ -4461,8 +4489,7 @@
   Current as of 2018-4-17.
 
 ----
-**Get Local TTL**
-----
+## Get Local TTL
 **Change Status:** Initial release in V1.7.1.
 
   Get the local TTL for a given network.
@@ -4517,8 +4544,7 @@
   Current as of 2018-5-17
 
 ----
-**Set Local TTL**
-----
+## Set Local TTL
 **Change Status:** Initial release in V1.7.1.
 
   Set the local TTL for a given network.
@@ -4579,8 +4605,7 @@
   Current as of 2018-5-17
 
 ----
-**Get Local Transmission Power**
-----
+## Get Local Transmission Power
 **Change Status:** Initial release in V1.7.1.
 
   Get the local transmission (Tx) power in decibel-milliwatts (dBm).
@@ -4633,8 +4658,7 @@
   Current as of 2018-5-17
 
 ----
-**Set Local Transmission Power**
-----
+## Set Local Transmission Power
 **Change Status:** Initial release in V1.7.1.
 
   Set the local BLE radio transmission (Tx) power in decibel-milliwatts (dBm). The default value is the maximum supported setting and it should not be modified except for specific diagnostic purposes.
@@ -4694,8 +4718,7 @@
   Current as of 2018-5-17.
 
 ----
-**Get Local Receiver Sensitivity**
-----
+## Get Local Receiver Sensitivity
 **Change Status:** Initial release in V1.7.1.
 
   Reports whether the radio in the XIG is configured to use high gain when receiving.
@@ -4748,8 +4771,7 @@
   Current as of 2018-5-17
 
 ----
-**Enable/Disable Local Receiver High Gain**
-----
+## Enable/Disable Local Receiver High Gain
 **Change Status:** New in V1.7.0.  
 
   Enable or disable high receiver (Rx) gain for the XIG radio.
@@ -4810,8 +4832,7 @@
   Current as of 2018-5-17.
 
 ----
-**Get Local RSSI Cutoff**
-----
+## Get Local RSSI Cutoff
 **Change Status:** Initial release in V1.7.1.
 
   Get the local RSSI (Received Signal Strength Indication) cutoff. This is a global value applied to all received packets. Any packets received with an RSSI value below this level are discarded.
@@ -4864,8 +4885,7 @@
   Current as of 2018-5-17
 
 ----
-**Set Local RSSI Cutoff**
-----
+## Set Local RSSI Cutoff
 **Change Status:** Initial release in V1.7.1.
 
   Set the RSSI cutoff. Below this RSSI, packets will not be decoded.
