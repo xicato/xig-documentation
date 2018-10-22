@@ -1,0 +1,81 @@
+# API Calls for the Xicato Intelligent Gateway
+# Table of Contents
+# A Note on Authorization
+## Get Token (Login Required)
+## Check User Permissions (Login Required)
+# View Permission API Calls
+## Show Devices
+## Show Groups with Devices
+## Show Devices with Groups
+## Show Devices with Scenes
+## Show Devices with Groups and Scenes
+## Histograms
+## Device Details
+## Get Device Groups
+## Get Device Scenes
+## Basic Gateway Info
+## Gateway Status
+## Download Gateway Groups List
+## Download Gateway Scenes List
+# Control Permission API Calls
+## Set Intensity (with Optional Fading)
+## Multi-Channel Set Intensity (with Optional Fading)
+## Recall Scene (with Optional Fading)
+## Device Dismissal
+## Enable and Disable Sensor Response
+## Send and Clear Button Presses
+# Configure Permission API Calls
+## Set Device Groups
+## Set Device Scenes
+## Get Device Light Setup
+## Set Device Light Setup
+## Get Device Wired Light Setup
+## Set Device Wired Light Setup
+## Get Device Sensor Response
+## Set Device Sensor Response
+## Get Device Tracking
+## Set Device Tracking
+## Get Device Schedules
+## Set Device Schedules
+# Manage Permission API Calls
+## Set Device Name
+## Set Device ID
+## Set Device Network
+## Name Group
+## Name Scene
+## Get Firmware Available
+## Enqueue A Firmware Update
+## Check Firmware Update Status
+## Get Device Communication Configuration
+## Get Device Communication Configuration (New Call)
+## Set Device Communication Configuration
+## Upload Gateway Groups List
+## Upload Gateway Scenes List
+## Get Device Relay Configuration
+## Set Device Relay Configuration
+## Set Group Name
+## Set Scene Name
+# Beacon Permission API Calls
+## Get Device iBeacon Configuration
+## Get Device Eddystone URL Configuration
+## Get Device AltBeacon Config
+## Set Device iBeacon Configuration
+## Set Device Eddystone URL Configuration
+## Set Device AltBeacon Configuration
+# Administrate Permission API Calls
+## Get Local ID
+## Set Local ID
+## Randomize Local ID
+## Reload Gateway
+## Enable/Disable Network Time Sync
+## Enable/Disable Device Autoremoval
+## Enable/Disable Packet Logging
+## Enable/Disable Event Logging
+## Get Local TTL
+## Set Local TTL
+## Get Local Transmission Power
+## Set Local Transmission Power
+## Get Local Receiver Sensitivity
+## Enable/Disable Local Receiver High Gain
+## Get Local RSSI Cutoff
+## Set Local RSSI Cutoff

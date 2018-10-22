@@ -1,9 +1,91 @@
-# API Calls for the Xicato Intelligent Gateway
+# Xicato Intelligent Gateway API
 ----
------
+<!-- TOC -->
 
-# A Note on Authorization
-----
+- [Xicato Intelligent Gateway API](#xicato-intelligent-gateway-api)
+- [User Authorization API Calls](#user-authorization-api-calls)
+    - [Get Token (Login Required)](#get-token-login-required)
+    - [Check User Permissions (Login Required)](#check-user-permissions-login-required)
+- [View Permission API Calls](#view-permission-api-calls)
+    - [Show Devices](#show-devices)
+    - [Show Groups with Devices [New in V1.7.2]](#show-groups-with-devices-new-in-v172)
+    - [Show Devices with Groups](#show-devices-with-groups)
+    - [Show Devices with Scenes](#show-devices-with-scenes)
+    - [Show Devices with Groups and Scenes](#show-devices-with-groups-and-scenes)
+    - [Histograms](#histograms)
+    - [Device Details](#device-details)
+    - [Get Device Groups](#get-device-groups)
+    - [Get Device Scenes](#get-device-scenes)
+    - [Basic Gateway Info](#basic-gateway-info)
+    - [Gateway Status](#gateway-status)
+    - [Download Gateway Groups List [Modified in V1.7.2]](#download-gateway-groups-list-modified-in-v172)
+    - [Download Gateway Scenes List [Modified in V1.7.2]](#download-gateway-scenes-list-modified-in-v172)
+- [Control Permission API Calls](#control-permission-api-calls)
+    - [Set Intensity (with Optional Fading)](#set-intensity-with-optional-fading)
+    - [Multi-Channel Set Intensity (with Optional Fading) [New in V1.7.2]](#multi-channel-set-intensity-with-optional-fading-new-in-v172)
+    - [Recall Scene (with Optional Fading)](#recall-scene-with-optional-fading)
+    - [Device Dismissal](#device-dismissal)
+    - [Enable and Disable Sensor Response](#enable-and-disable-sensor-response)
+    - [Send and Clear Button Presses [New in V1.7.2]](#send-and-clear-button-presses-new-in-v172)
+- [Configure Permission API Calls](#configure-permission-api-calls)
+    - [Set Device Groups](#set-device-groups)
+    - [Set Device Scenes](#set-device-scenes)
+    - [Get Device Light Setup](#get-device-light-setup)
+    - [Set Device Light Setup](#set-device-light-setup)
+    - [Get Device Wired Light Setup](#get-device-wired-light-setup)
+    - [Set Device Wired Light Setup](#set-device-wired-light-setup)
+    - [Get Device Sensor Response [New in V1.7.2]](#get-device-sensor-response-new-in-v172)
+    - [Set Device Sensor Response [New in V1.7.2]](#set-device-sensor-response-new-in-v172)
+    - [Get Device Tracking [New in V1.7.2]](#get-device-tracking-new-in-v172)
+    - [Set Device Tracking [New in V1.7.2]](#set-device-tracking-new-in-v172)
+    - [Get Device Schedules [New in V1.7.2]](#get-device-schedules-new-in-v172)
+    - [Set Device Schedules [New in V1.7.2]](#set-device-schedules-new-in-v172)
+- [Manage Permission API Calls](#manage-permission-api-calls)
+    - [Set Device Name](#set-device-name)
+    - [Set Device ID](#set-device-id)
+    - [Set Device Network](#set-device-network)
+    - [Get Firmware Available](#get-firmware-available)
+    - [Enqueue A Firmware Update](#enqueue-a-firmware-update)
+    - [Check Firmware Update Status](#check-firmware-update-status)
+    - [Get Device Communication Configuration](#get-device-communication-configuration)
+    - [Get Device Communication Configuration (New Call)](#get-device-communication-configuration-new-call)
+    - [Set Device Communication Configuration](#set-device-communication-configuration)
+    - [Upload Gateway Groups List [Modified in V1.7.2]](#upload-gateway-groups-list-modified-in-v172)
+    - [Upload Gateway Scenes List [Modified in V1.7.2]](#upload-gateway-scenes-list-modified-in-v172)
+    - [Get Device Relay Configuration](#get-device-relay-configuration)
+    - [Set Device Relay Configuration](#set-device-relay-configuration)
+    - [Name Group <Need to check - network name?>](#name-group-need-to-check---network-name)
+    - [Set Group Name [New in V1.7.2 - buggy]](#set-group-name-new-in-v172---buggy)
+    - [Name Scene <Need to check - network name?>](#name-scene-need-to-check---network-name)
+    - [Set Scene Name [New in V1.7.2]](#set-scene-name-new-in-v172)
+- [Beacon Permission API Calls](#beacon-permission-api-calls)
+    - [Get Device iBeacon Configuration](#get-device-ibeacon-configuration)
+    - [Get Device Eddystone URL Configuration](#get-device-eddystone-url-configuration)
+    - [Get Device AltBeacon Config](#get-device-altbeacon-config)
+    - [Set Device iBeacon Configuration](#set-device-ibeacon-configuration)
+    - [Set Device Eddystone URL Configuration](#set-device-eddystone-url-configuration)
+    - [Set Device AltBeacon Configuration](#set-device-altbeacon-configuration)
+- [Administrate Permission API Calls](#administrate-permission-api-calls)
+    - [Get Local ID](#get-local-id)
+    - [Set Local ID](#set-local-id)
+    - [Randomize Local ID](#randomize-local-id)
+    - [Reload Gateway](#reload-gateway)
+    - [Set Advertising Interval](#set-advertising-interval)
+    - [Enable/Disable Network Time Sync](#enabledisable-network-time-sync)
+    - [Enable/Disable Device Autoremoval](#enabledisable-device-autoremoval)
+    - [Enable/Disable Packet Logging](#enabledisable-packet-logging)
+    - [Enable/Disable Event Logging](#enabledisable-event-logging)
+    - [Get Local TTL](#get-local-ttl)
+    - [Set Local TTL](#set-local-ttl)
+    - [Get Local Transmission Power](#get-local-transmission-power)
+    - [Set Local Transmission Power](#set-local-transmission-power)
+    - [Get Local Receiver Sensitivity](#get-local-receiver-sensitivity)
+    - [Enable/Disable Local Receiver High Gain](#enabledisable-local-receiver-high-gain)
+    - [Get Local RSSI Cutoff](#get-local-rssi-cutoff)
+    - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
+
+<!-- /TOC -->
+# User Authorization API Calls
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
   * Bearer, using the API token provided by the `/api/token` call.
@@ -13,7 +95,6 @@
   **Permissions are per network per gateway. If multiple gateways are being accessed simultaneously, care should be taken by the XIG administrator (i.e., the user logging into and configuring the gateways through the XIG Admin Panel) to ensure that the permissions for a given user are consistent across the gateways they are given access to.**
 
 ----
-
 ## Get Token (Login Required)
 **Change Status:** No API call changes made in V1.7.0. 
 
@@ -51,7 +132,6 @@
 * **Notes:**
   Current as of 2017-7-31.
 ----
-
 ## Check User Permissions (Login Required)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -91,7 +171,6 @@
 * **Notes:**
   Current as of 2018-4-9.
 ----
-----
 # View Permission API Calls
 ## Show Devices
  **Change Status:** No API call changes made in V1.7.0. 
@@ -101,8 +180,7 @@
   To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
 * **URL:**
 
-  `/devices`
-
+  `/devices`</br>
   `/devices/pretty`
 
 * **Method:**
@@ -207,7 +285,7 @@
   Current as of 2017-7-12
 
 ----
-## Show Groups with Devices
+## Show Groups with Devices [New in V1.7.2]
  **Change Status:** API call added in V1.7.2. 
  
   Return a list of groups with all devices contained in each group as seen by the given gateway, along with some information about the gateway's status.
@@ -215,8 +293,7 @@
   To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
 * **URL:**
 
-  `/groups`
-  
+  `/groups`</br>  
   `/groups/pretty`
 
 * **Method:**
@@ -496,10 +573,8 @@
   Return a list of devices at the given gateway, along with some information
 * **URLs**
 
-  `/devices/with_everything`
-
-  `/devices/with_groups_and_scenes`
-
+  `/devices/with_everything`</br>
+  `/devices/with_groups_and_scenes`</br>
   `/devices/with_scenes_and_groups`
 
 * **Method:**
@@ -752,8 +827,7 @@
 
 * **URLs**
 
-  *`/device/groups/:network/:device_id`
-
+  *`/device/groups/:network/:device_id`</br>
   *`/device/getgroups/:network/:device_id`
 
 * **Methods:**
@@ -809,8 +883,7 @@
 
 * **URLs**
 
-  *`/device/scenes/:network/:device_id`
-
+  *`/device/scenes/:network/:device_id` </br>
   *`/device/getscenes/:network/:device_id`
 
 * **Methods:**
@@ -833,7 +906,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200 </br>
   **Content:** `/device/scenes` returns JSON:
   ```
   { "device_id" : String
@@ -968,7 +1041,7 @@
   Current as of 2017-2-24
 
 ----
-## Download Gateway Groups List
+## Download Gateway Groups List [Modified in V1.7.2]
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated IDs. If a group name is not defined for a given group ID on a given network, then no information for that group ID will be returned. Previous versions of this call returned a CSV file that did not specify groups by network. For a complete list of discovered groups with networks specified use the call `/devices/with_groups`. For a complete list of groups with associated networks and devices use the call `/groups`.   
 
   Download `groups.txt` list from the XIG.
@@ -1016,7 +1089,7 @@
   Current as of 2018-5-21.
 
 ----
-## Download Gateway Scenes List
+## Download Gateway Scenes List [Modified in V1.7.2]
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated IDs. If a scene name is not defined for a given scene ID on a given network, then no information for that scene ID will be returned. Previous versions of this call returned a CSV file that did not specify scenes by network. For a complete list of discovered scenes with networks specified use the call `/devices/with_groups_and_scenes`.   
 
   Download `scenes.txt` list from the XIG.
@@ -1066,8 +1139,6 @@
 
 ----
 # Control Permission API Calls
-----
-----
 ## Set Intensity (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
  
@@ -1133,7 +1204,7 @@
   Current as of 2016-12-20
 
 ----
-## Multi-Channel Set Intensity (with Optional Fading)
+## Multi-Channel Set Intensity (with Optional Fading) [New in V1.7.2]
 **Change Status:** New in 1.7.2. 
  
   Set intensity for a device or a group of devices, with optional fade time.
@@ -1266,7 +1337,6 @@
 * **Notes:**
 
   Current as of 2016-12-20
-
 ----
 ## Device Dismissal
 **Change Status:** No API call changes made in V1.7.0.  
@@ -1341,13 +1411,13 @@
 * **URLs:**
 
   To enable:
-  `/device/reset_response/:network/:device_id`
-  `/group/reset_response/:network/:group_id`
+  `/device/reset_response/:network/:device_id`</br>
+  `/group/reset_response/:network/:group_id`</br>
   `/broadcast/reset_response/:network`
 
   To disable:
-  `/device/disable_response/:network/:device_id`
-  `/group/disable_response/:network/:group_id`
+  `/device/disable_response/:network/:device_id`</br>
+  `/group/disable_response/:network/:group_id`</br>
   `/broadcast/disable_response/:network`
 
 * **Methods:**
@@ -1395,9 +1465,8 @@
 * **Notes:**
 
   Current as of 2018-4-17
-
-## Send and Clear Button Presses
-**Change Status:** <>
+## Send and Clear Button Presses [New in V1.7.2]
+**Change Status:** Added in V1.7.2
 
   Sends or clears a button press to a device or group (add `0xC000` to the group ID to use this API).
   Currently this API only supports pressing one button at a time.
@@ -1405,13 +1474,13 @@
 * **URLs:**
 
   To send:
-  `/device/button/:network/:device_id/:button_id`
-  `/device/sendbutton/:network/:device_id/:button_id`
-  `/device/button/:network/:device_id/:button_id/:number_of_buttons`
+  `/device/button/:network/:device_id/:button_id`</br>
+  `/device/sendbutton/:network/:device_id/:button_id`</br>
+  `/device/button/:network/:device_id/:button_id/:number_of_buttons`</br>
   `/device/sendbutton/:network/:device_id/:button_id/:number_of_buttons`
 
   To clear:
-  `/device/clearbutton/:network/:device_id`
+  `/device/clearbutton/:network/:device_id`</br>
   `/device/clearbutton/:network/:device_id/:number_of_buttons`
 
 * **Methods:**
@@ -1953,7 +2022,7 @@
   Current as of 2018-5-17.
 
 ----
-## Get Device Sensor Response
+## Get Device Sensor Response [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the sensor response configuration for a given device. 
@@ -2028,7 +2097,7 @@
   Current as of 2018-9-20.
 
 ----
-## Set Device Sensor Response
+## Set Device Sensor Response [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
@@ -2115,7 +2184,7 @@
   Current as of 2018-9-20.
 
 ----
-## Get Device Tracking
+## Get Device Tracking [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the tracked ID configuration for a given device. 
@@ -2187,7 +2256,7 @@
   Current as of 2018-9-27.
 
 ----
-## Set Device Tracking
+## Set Device Tracking [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the lux, intensity, buttons, and motion sensors to track on a given device. 
@@ -2273,7 +2342,7 @@
   Current as of 2018-9-27.
 
 ----
-## Get Device Schedules
+## Get Device Schedules [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the scheduling configuration for a given device. 
@@ -2345,7 +2414,7 @@
   Current as of 2018-9-27.
 
 ----
-## Set Device Schedules
+## Set Device Schedules [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the scheduling configuration on a given device. 
@@ -2635,122 +2704,6 @@
 * **Notes:**
 
   Current as of 2017-11-21.
-
-----
-## Name Group
-**Change Status:** No API call changes made in V1.7.0.  
-
-  Name or change the name of a group. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
-
-* **URLs**
-
-  `/group/setname/:group_id/:name`
-
-* **Methods:**
-
-  `PUT` | `POST`
-
-* **Permission:**
-
-  `manage`
-
-* **URL Parameters:**
-
-  Required:
-    * `group_id` : The target group ID. This can be any valid group ID.
-    * `name` : The desired name of the target group. (Ensure that any special characters are properly URL-encoded.)
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/group/setname` returns JSON:
-    ```
-    { "id": Int
-      "name": String
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
-
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/group/setname/7/Group%20Test` will set the name of group 7 to 'Group Test'.
-
-* **Notes:**
-
-  Current as of 2017-09-21.
-
-  Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
-
-----
-## Name Scene
-**Change Status:** No API call changes made in V1.7.0.  
-
-  Name or change the name of a scene. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
-
-* **URLs**
-
-  `/scene/setname/:scene_number/:name`
-
-* **Methods:**
-
-  `PUT` | `POST`
-
-* **Permission:**
-
-  `manage`
-
-* **URL Parameters:**
-
-  Required:
-    * `scene_number` : The target scene number. This can be any valid scene number.
-    * `name` : The desired name of the target scene. (Ensure that any special characters are properly URL-encoded.)
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/scene/setname` returns JSON:
-    ```
-    { "number": Int
-      "name": String
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
-
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/scene/setname/7/Scene%20Test` will set the name of scene 7 to 'Scene Test'.
-
-* **Notes:**
-
-  Current as of 2017-09-21.
-
-  Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
 
 ----
 ## Get Firmware Available
@@ -3080,7 +3033,7 @@
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/getconfig/Unsecured/111'
+    curl 'http://<gateway>:8000/device/getconfig/Uns8j8ecured/111'
   ``` 
   gets the communication configuration for device 111 on an unsecured network.
 * **Notes:**
@@ -3288,7 +3241,7 @@
   Current as of 2018-4-5.
 
 ----
-## Upload Gateway Groups List
+## Upload Gateway Groups List [Modified in V1.7.2]
 **Change Status:** No API call changes made in V1.7.0.  
 
   Upload `groups.txt` to the XIG.
@@ -3340,7 +3293,7 @@
   Current as of 2018-4-25.
 
 ----
-## Upload Gateway Scenes List
+## Upload Gateway Scenes List [Modified in V1.7.2]
 **Change Status:** No API call changes made in V1.7.0.  
 
   Upload `scenes.txt` to the XIG.
@@ -3534,10 +3487,68 @@
   Current as of 2018-5-17.
 
 ----
-## Set Group Name
+## Name Group <Need to check - network name?>
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Name or change the name of a group. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
+`/device/setname/:network/:group_id/:name`
+* **URLs**
+
+  `/group/setname/:group_id/:name`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `group_id` : The target group ID. This can be any valid group ID.
+    * `name` : The desired name of the target group. (Ensure that any special characters are properly URL-encoded.)
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/group/setname` returns JSON:
+    ```
+    { "id": Int
+      "name": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
+
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/group/setname/7/Group%20Test` will set the name of group 7 to 'Group Test'.
+
+* **Notes:**
+
+  Current as of 2017-09-21.
+
+  Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
+
+----
+## Set Group Name [New in V1.7.2 - buggy]
 **Change Status:** Accepts a network parameter as of 1.7.2.  
 
-  Sets the name for a given group.
+  Sets the name for a given group. This call replaces `/group/setname/:group_id/:name`
 
 * **URLs**
 
@@ -3594,7 +3605,65 @@
 
   Current as of 2018-10-19.
 ----
-## Set Scene Name
+## Name Scene <Need to check - network name?>
+**Change Status:** No API call changes made in V1.7.0.  
+
+  Name or change the name of a scene. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
+
+* **URLs**
+
+  `/scene/setname/:scene_number/:name`
+
+* **Methods:**
+
+  `PUT` | `POST`
+
+* **Permission:**
+
+  `manage`
+
+* **URL Parameters:**
+
+  Required:
+    * `scene_number` : The target scene number. This can be any valid scene number.
+    * `name` : The desired name of the target scene. (Ensure that any special characters are properly URL-encoded.)
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  **Content:** `/scene/setname` returns JSON:
+    ```
+    { "number": Int
+      "name": String
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error<br />
+  **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
+
+* **Example Call:**
+
+  `curl -u <username>:<password> <gateway address: port>/scene/setname/7/Scene%20Test` will set the name of scene 7 to 'Scene Test'.
+
+* **Notes:**
+
+  Current as of 2017-09-21.
+
+  Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
+
+----
+## Set Scene Name [New in V1.7.2]
 **Change Status:** Accepts a network parameter as of 1.7.2.  
 
   Sets the name for a given scene.
@@ -3655,8 +3724,6 @@
   Current as of 2018-10-19.
 ----
 # Beacon Permission API Calls
-----
-----
 ## Get Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -4312,8 +4379,7 @@
   **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 ----
-**Set Advertising Interval**
-----
+## Set Advertising Interval
   Set the minimum advertising interval for outgoing commands. Default is 500ms.
 
 * **URL**
@@ -5065,6 +5131,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ***Change Notes***
 ----
 ----
