@@ -121,12 +121,12 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/api/token` returns a JSON Web Token in the form of an encoded string. 
   This string should be used with the HTTP "Authorization: Bearer" header in lieu of sending out Basic Auth headers.
 
 * **Error Responses:**
-  * **Code:** 403 Forbidden<br/>
+  * **Code:** 403 Forbidden\
   **Meaning:** Bad credentials were used.
 
 * **Notes:**
@@ -162,11 +162,11 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/check_user/:network` returns a string with the list of permissions on the specified secure network for the user that is logged in.
 
 * **Error Responses:**
-  * **Code:** 403 Forbidden<br/>
+  * **Code:** 403 Forbidden\
   **Meaning:** Bad credentials were used.
 
 * **Notes:**
@@ -184,7 +184,7 @@
 
 * **URL:**
 
-  `/devices`</br>
+  `/devices`\
   `/devices/pretty`
 
 * **Method:**
@@ -205,7 +205,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/devices` returns JSON:
     ```
     { "network" : Nullable String
@@ -277,12 +277,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
@@ -300,7 +300,7 @@
 
 * **URL:**
 
-  `/groups`</br>  
+  `/groups`\  
   `/groups/pretty`
 
 * **Method:**
@@ -321,7 +321,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/groups` returns JSON:
     ```
     { "network" : Nullable String
@@ -356,12 +356,12 @@
     ```
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
@@ -397,7 +397,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/devices/with_groups` returns JSON:
     ```
     { "network" : Nullable String
@@ -459,17 +459,17 @@
     , "network" : Nullable String
     }
     ```
-    _\*This is always an integer, but it can be null in the case of ungrouped devices._<br/>
+    _\*This is always an integer, but it can be null in the case of ungrouped devices._\
     (Optional means that the field may or may not be present. In this case, one of either devices or count will always be present, not both or neither.)
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
@@ -505,7 +505,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/devices/with_scenes` returns JSON:
     ```
     { "network" : Nullable String
@@ -567,12 +567,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
@@ -589,8 +589,8 @@
 
 * **URLs**
 
-  `/devices/with_everything`</br>
-  `/devices/with_groups_and_scenes`</br>
+  `/devices/with_everything`\
+  `/devices/with_groups_and_scenes`\
   `/devices/with_scenes_and_groups`
 
 * **Method:**
@@ -611,7 +611,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** /devices returns JSON:
     ```
     { "network" : Nullable String
@@ -686,12 +686,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Notes:**
@@ -732,7 +732,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/histogram` returns a list of JSON key-value pairs with the keys sorted, of the form:
     ```
     { <label> : <value>
@@ -742,15 +742,15 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -794,7 +794,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/details` returns JSON:
     ```
     { "color_temp": Optional String
@@ -818,17 +818,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -848,7 +848,7 @@
 
 * **URLs**
 
-  *`/device/groups/:network/:device_id`</br>
+  *`/device/groups/:network/:device_id`\
   *`/device/getgroups/:network/:device_id`
 
 * **Methods:**
@@ -871,7 +871,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/groups/:network` returns JSON:
   ```
   { "network" : String
@@ -881,12 +881,12 @@
   ```
 
 * **Error Responses:**
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means device ID provided did not match an ID in the device list.
 
 * **Example Call:**
@@ -905,7 +905,7 @@
 
 * **URLs**
 
-  *`/device/scenes/:network/:device_id` </br>
+  *`/device/scenes/:network/:device_id`\
   *`/device/getscenes/:network/:device_id`
 
 * **Methods:**
@@ -928,7 +928,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 </br>
+  * **Code:** 200\
   **Content:** `/device/scenes` returns JSON:
   ```
   { "device_id" : String
@@ -945,12 +945,12 @@
   ```
 
 * **Error Responses:**
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means device ID provided did not match an ID on the device list.
 
 * **Example Call:**
@@ -989,7 +989,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** /devices returns JSON:
     ```
     { "network" : Nullable String
@@ -1002,12 +1002,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1047,13 +1047,13 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** /devices returns one of two strings:
     * "Gateway running, CPU at {temperature}" -- The gateway is up, and the CPU temperature is {temperature}.
     * "Gateway not running" -- This shouldn't appear, now that the gateway auto-reloads on internal errors; if it does, restart the gateway.
 
 * **Error Responses**
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -1073,8 +1073,8 @@
 
 * **URLs**
 
-  `/groups.txt`<br/>
-  `/Groups.txt`<br/>
+  `/groups.txt`\
+  `/Groups.txt`\
   `/download_groups`
 
 * **Method:**
@@ -1095,14 +1095,14 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/groups.txt` will return the `groups.txt` file from the specified server.
 
 * **Error Responses**
-  * **Code:** 404 NOT FOUND<br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The `groups.txt` file doesn't exist on the gateway or the server isn't up.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -1144,15 +1144,15 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/scenes.txt` will return the `scenes.txt` file from the specified server.
 
 * **Error Responses**
 * **Error Responses**
-  * **Code:** 404 NOT FOUND<br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The `scenes.txt` file doesn't exist on the gateway or the server isn't up.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -1202,7 +1202,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** JSON:
     ```
     { "device_id" : String
@@ -1214,13 +1214,13 @@
 
 * **Error Response:**
 
-  * **Code:** 403 Forbidden <br />
+  * **Code:** 403 Forbidden\
   **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1240,11 +1240,12 @@
 
 * **URLs:**
 
-  `/device/multisetintensity/:network/:device_id/:master_intensity/:i1/:i2/:i3/:i4/`<br/>
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:i1/:i2/:i3/:i4/`\
   `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities`
 
   To use fading:
-  `/device/multisetintensity/:network/:device_id/:master_intensity/:i1/:i2/:i3/:i4/:fading`<br/>
+
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:i1/:i2/:i3/:i4/:fading`\
   `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities/:fading`
 
 * **Methods:**
@@ -1272,7 +1273,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** JSON:
     ```
     { "device_id" : String
@@ -1286,13 +1287,13 @@
 
 * **Error Response:**
 
-  * **Code:** 403 Forbidden <br />
+  * **Code:** 403 Forbidden\
   **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request.
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -1341,7 +1342,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** JSON:
     ```
     { "device_id" : String
@@ -1353,13 +1354,13 @@
 
 * **Error Response:**
 
-  * **Code:** 403 Forbidden <br />
+  * **Code:** 403 Forbidden\
   **Meaning** Controls haven't been enabled for the logged in used on the gateway receiving the request. Enable controls and try again.
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1399,7 +1400,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/remove` returns JSON:
     ```
     { "result": Boolean
@@ -1409,17 +1410,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1444,14 +1445,14 @@
 
 * **URLs:**
 
-  To enable:
-  `/device/reset_response/:network/:device_id`</br>
-  `/group/reset_response/:network/:group_id`</br>
+  To enable:\
+  `/device/reset_response/:network/:device_id`\
+  `/group/reset_response/:network/:group_id`\
   `/broadcast/reset_response/:network`
 
-  To disable:
-  `/device/disable_response/:network/:device_id`</br>
-  `/group/disable_response/:network/:group_id`</br>
+  To disable:\
+  `/device/disable_response/:network/:device_id`\
+  `/group/disable_response/:network/:group_id`\
   `/broadcast/disable_response/:network`
 
 * **Methods:**
@@ -1475,7 +1476,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** JSON:
     ```
     { "result" : Boolean
@@ -1486,10 +1487,10 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1508,13 +1509,13 @@
 * **URLs:**
 
   To send:
-  `/device/button/:network/:device_id/:button_id`</br>
-  `/device/sendbutton/:network/:device_id/:button_id`</br>
-  `/device/button/:network/:device_id/:button_id/:number_of_buttons`</br>
+  `/device/button/:network/:device_id/:button_id`\
+  `/device/sendbutton/:network/:device_id/:button_id`\
+  `/device/button/:network/:device_id/:button_id/:number_of_buttons`\
   `/device/sendbutton/:network/:device_id/:button_id/:number_of_buttons`
 
   To clear:
-  `/device/clearbutton/:network/:device_id`</br>
+  `/device/clearbutton/:network/:device_id`\
   `/device/clearbutton/:network/:device_id/:number_of_buttons`
 
 * **Methods:**
@@ -1543,7 +1544,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** Both APIs return JSON:
     ```
     { "device_id" : String
@@ -1556,10 +1557,10 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1602,7 +1603,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setgroups` returns JSON:
     ```
     { "device_id" : String
@@ -1613,17 +1614,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -1679,7 +1680,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setscenes` returns JSON:
     ```
     { "device_id": String
@@ -1690,16 +1691,16 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -1747,7 +1748,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getlightsetup` returns JSON:
     ```
     { "setup":
@@ -1767,17 +1768,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -1834,7 +1835,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setlightsetup` returns JSON:
     ```
     { "result": Bool
@@ -1846,25 +1847,25 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setlightsetup/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
+    curl 'http://<gateway>:8000/device/setlightsetup/Unsecured/111'\
+      -X POST\
+      -H 'Content-Type: application/json'\
       --data '{"max_level":100,"min_level":0.1,"power_on_type":1,"power_on_level":0,\
       "power_on_fade_time":0,"power_on_start_time":0,"dimming_curve":1,"fade_smoothing":1}'
   ``` 
@@ -1904,7 +1905,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getwiredsetup` returns JSON:
     ```
     { "result": Bool
@@ -1941,17 +1942,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -1993,7 +1994,7 @@
 * **Data Parameters:**
 
   Required:
-    * In the body: A JSON object. \
+    * In the body: A JSON object.\
     For **1-10V** devices this is as follows:
     ```
     { modes : 4-bit bitfield cast to Int (b0 is MSB)
@@ -2023,7 +2024,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setwiredsetup` returns JSON:
     ```
     { "result": Bool
@@ -2035,25 +2036,25 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
+    curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111'\
+      -X POST\
+      -H 'Content-Type: application/json'\
       --data '{"max_level":254,"min_level":1,"power_on_level":0,"system_failure_level":255,\
       "dimming_curve":1,"fade_rate":7,"fade_time":4,"fast_fade_time":27}'
   ``` 
@@ -2093,7 +2094,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getsensorresponse` returns a JSON-serialized representation of the sensor response state machine programmed into the device:
     ```
     { "sensor_response": List State
@@ -2115,17 +2116,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -2167,7 +2168,7 @@
 * **Data Parameters:**
 
   Required:
-    * In the body: A List (`[]`) of JSON objects, one for each state. \
+    * In the body: A List (`[]`) of JSON objects, one for each state.\
     Each State has the following JSON structure:
     ```
     { "Action": String
@@ -2188,7 +2189,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setsensorresponse` returns JSON:
     ```
     { "result": Bool
@@ -2200,25 +2201,25 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
+    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111'\
+      -X POST\
+      -H 'Content-Type: application/json'\
       --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0",\
       "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "},\
       {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0",\
@@ -2264,7 +2265,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/gettracked` returns JSON:
     ```
     { "tracked": Tracked
@@ -2283,17 +2284,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -2350,7 +2351,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/settracked` returns JSON:
     ```
     { "results": 
@@ -2367,25 +2368,25 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
+    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111'\
+      -X POST\
+      -H 'Content-Type: application/json'\
       --data '{"motion":[11,22,33,44],"lux":[55,66,77,88],"intensity":[99,1234,56],\
       "buttons":[[24,45,67,32,41,32]]}'
   ``` 
@@ -2425,7 +2426,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getschedules` returns JSON:
     ```
     { "schedules": List Schedules
@@ -2444,17 +2445,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -2496,7 +2497,7 @@
 * **Data Parameters:**
 
   Required:
-    * In the body:A List (`[]`) of JSON objects, one for each schedule. \
+    * In the body:A List (`[]`) of JSON objects, one for each schedule.\
     Each Schedule has the following JSON structure:
     ```
     { "#": String
@@ -2514,7 +2515,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setschedules` returns JSON:
     ```
     { "result": Bool
@@ -2526,25 +2527,25 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
+    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111'\
+      -X POST\
+      -H 'Content-Type: application/json'\
       --data '[{"#":"T0","Days":"","End Time":"00:00:00","Start Time":"00:00:00"},\
       {"#":"T1","Days":"M,W,F","End Time":"00:00:00","Start Time":"03:30:45"},\
       {"#":"T2","Days":"Tu,Th","End Time":"11:00:00","Start Time":"23:00:00"},\
@@ -2587,7 +2588,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setname` returns JSON:
     ```
     { "device_id": String
@@ -2599,17 +2600,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -2656,7 +2657,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setid` returns JSON:
     ```
     { "device_id": String
@@ -2669,17 +2670,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -2727,7 +2728,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setnetwork` returns JSON:
     ```
     { "device_id": String
@@ -2740,17 +2741,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -2796,7 +2797,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/firmware/available` returns JSON:
     ```
     { "device_id": String
@@ -2807,17 +2808,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -2865,7 +2866,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/firmware/update` returns JSON:
     ```
     { "device_id": String
@@ -2875,16 +2876,16 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -2930,7 +2931,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/firmware/update/check` returns JSON:
     ```
     { "device_id": String
@@ -2992,17 +2993,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
@@ -3048,7 +3049,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getconfig` returns JSON:
     ```
     { txPower : Float
@@ -3081,17 +3082,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -3136,7 +3137,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getcommconfig` returns JSON:
     ```
     { "config":
@@ -3173,17 +3174,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
@@ -3261,7 +3262,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setconfig` returns JSON:
     ```
     { "results": Results for each setting
@@ -3278,26 +3279,26 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setconfig/Unsecured/111' \
-      -X POST \
+    curl 'http://<gateway>:8000/device/setconfig/Unsecured/111'\
+      -X POST\
       -u <user>:<password>
-      -H 'Content-Type: application/json' \
+      -H 'Content-Type: application/json'\
       --data '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":\
       {"warnInterval":1000,"warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,\
       "warnTemperatureMin":0,"warnVinMax":53,"warnVinMin":43,"changeBursts":3,\
@@ -3340,11 +3341,11 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/upload_groups` will return the same JSON as `/groups/light`.
 
 * **Error Responses**
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error which it couldn't recover from. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -3393,11 +3394,11 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/upload_scenes` will return the same JSON as `/devices/with_scenes`.
 
 * **Error Responses**
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
  
 * **Example Call**
@@ -3448,7 +3449,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/getrelayconfig` returns JSON:
     ```
     { "relay_config":
@@ -3462,17 +3463,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
@@ -3520,7 +3521,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/device/setrelayconfig` returns JSON:
     ```
     { "relay_config":
@@ -3535,25 +3536,25 @@
 
 * **Error Response:**
 
-  * **Code:** 400 Bad Request<br />
+  * **Code:** 400 Bad Request\
   **Meaning:** The device requested could not be found.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setrelayconfig/Unsecured/111' \
-      -X POST \
-      -H 'Content-Type: application/json' \
+    curl 'http://<gateway>:8000/device/setrelayconfig/Unsecured/111'\
+      -X POST\
+      -H 'Content-Type: application/json'\
       --data '{"repeatEnabled":true,"ttlStart":4}'
   ```
   sets the relay config for device 111.
@@ -3593,7 +3594,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/group/setname` returns JSON:
     ```
     { "network": Nullable String
@@ -3604,12 +3605,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
 
 * **Example Call:**
@@ -3658,7 +3659,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/scene/setname` returns JSON:
     ```
     { "network": Nullable String
@@ -3669,12 +3670,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
 
 * **Example Call:**
@@ -3724,7 +3725,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/device/beacon/ibeacon/get` returns JSON:
   ```
   { "device_id": String
@@ -3743,12 +3744,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 * **Example Call:**
 
@@ -3790,7 +3791,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/device/beacon/eddystone/get` returns JSON:
   ```
   { "device_id": String
@@ -3807,12 +3808,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 * **Example Call:**
 
@@ -3853,7 +3854,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/device/beacon/altbeacon/get` returns JSON:
   ```
   { "device_id": String
@@ -3870,12 +3871,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 * **Example Call:**
 
@@ -3928,7 +3929,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/device/beacon/ibeacon/set` returns JSON:
   ```
   { "device_id": String
@@ -3954,20 +3955,20 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the input data was not formatted properly
 * **Example Call:**
 
   ```
-  curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/set/Xicato/1 \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Encoding: gzip, deflate' \
+  curl -u <username>:<password> <gateway address: port>/device/beacon/ibeacon/set/Xicato/1\
+    -X POST\
+    -H 'Content-Type: application/json'\
+    -H 'Accept-Encoding: gzip, deflate'\
     --data-binary '{"uuid":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"major":1,"minor":1,\
     "measured_power":-50,"tx_power":10,"period":5000}'
   ```
@@ -4019,7 +4020,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/device/beacon/eddystone/set` returns JSON:
   ```
   { "device_id": String
@@ -4043,20 +4044,20 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the input data was not formatted properly
 * **Example Call:**
 
   ```
-  curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/set/Xicato/1 \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Encoding: gzip, deflate' \
+  curl -u <username>:<password> <gateway address: port>/device/beacon/eddystone/set/Xicato/1\
+    -X POST\
+    -H 'Content-Type: application/json'\
+    -H 'Accept-Encoding: gzip, deflate'\
     --data-binary '{"url":"http://xicato.com","flags":16,"tx_power_mode":3,\
     "tx_power_levels":[-80,-70,-60,-50],"period":5000}'
   ```
@@ -4108,7 +4109,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200<br/>
+  * **Code:** 200\
   **Content:** `/device/beacon/altbeacon/set` returns JSON:
   ```
   { "device_id": String
@@ -4132,20 +4133,20 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Generally this means the input data was not formatted properly
 * **Example Call:**
 
   ```
-  curl -u <username>:<password> <gateway address:port>/device/beacon/altbeacon/set/Xicato/1 \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Encoding: gzip, deflate' \
+  curl -u <username>:<password> <gateway address:port>/device/beacon/altbeacon/set/Xicato/1\
+    -X POST\
+    -H 'Content-Type: application/json'\
+    -H 'Accept-Encoding: gzip, deflate'\
     --data-binary '{"company_id":[16,16],"beacon_id":[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8],\
     "mfg_data":37,"measured_power":-45,"period":5000}'
   ```
@@ -4181,7 +4182,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/local_id` returns JSON:
     ```
     { local_id : Integer
@@ -4190,12 +4191,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4237,7 +4238,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/set_local_id` returns JSON:
     ```
     { local_id : Integer
@@ -4247,12 +4248,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -4298,7 +4299,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/reload/randomize_id` returns JSON:
     ```
     { new_id : Integer
@@ -4307,12 +4308,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4354,10 +4355,10 @@
 
 * **Error Responses**
 
-  * **Code:** 403 Forbidden <br />
+  * **Code:** 403 Forbidden\
   **Meaning:** The credentials provided were not correct.
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 ----
@@ -4388,7 +4389,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/set_advertising_interval` returns JSON:
     ```
     { interval : Float
@@ -4399,17 +4400,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+  * **Code:** 400 BAD REQUEST\
   **Meaning:** The parameter passed in was invalid (most likely below the minimum allowed parameter.)
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4453,7 +4454,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/enable_time_sync` returns JSON:
     ```
     { sync : Boolean
@@ -4464,17 +4465,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+  * **Code:** 400 BAD REQUEST\
   **Meaning:** The parameter passed in was invalid.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4518,7 +4519,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/enable_auto_purge` returns JSON:
     ```
     { timeout : Integer
@@ -4528,17 +4529,17 @@
 
 * **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+  * **Code:** 400 BAD REQUEST\
   **Meaning:** The parameter passed in was invalid.
 
     OR
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4579,7 +4580,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/enable_packet_logging` returns JSON:
     ```
     { packet_logging : Boolean
@@ -4589,12 +4590,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4635,7 +4636,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/enable_event_logging` returns JSON:
     ```
     { event_logging : Boolean
@@ -4645,12 +4646,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
@@ -4691,7 +4692,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/get_local_ttl` returns JSON:
     ```
     { network : String
@@ -4701,12 +4702,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -4748,7 +4749,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/get_local_ttl` returns JSON:
     ```
     { network : String
@@ -4758,12 +4759,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -4808,7 +4809,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/get_local_tx_power` returns JSON:
     ```
     { tx_power : Float
@@ -4817,12 +4818,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -4863,7 +4864,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/set_local_tx_power` returns JSON:
     ```
     { tx_power : Float
@@ -4873,12 +4874,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -4923,7 +4924,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/get_local_rx_gain` returns JSON:
     ```
     { high_gain : Boolean
@@ -4932,12 +4933,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -4978,7 +4979,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/enable_local_rx_gain` and `/disable_local_rx_gain` return JSON:
     ```
     { high_gain : Boolean
@@ -4989,12 +4990,12 @@
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error.
 
 * **Example Call**
@@ -5039,7 +5040,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/get_rssi_filter` returns JSON:
     ```
     { rssi_filter : Int
@@ -5048,12 +5049,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
@@ -5094,7 +5095,7 @@
 
 * **Success Response**
 
-  * **Code:** 200 <br />
+  * **Code:** 200\
   **Content:** `/set_rssi_filter` returns JSON:
     ```
     { rssi_filter : Int
@@ -5104,12 +5105,12 @@
 
 * **Error Response**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND\
   **Meaning:** The server isn't up or an incorrect URL was requested.
 
     OR
 
-  * **Code:** 500 Internal Server Error<br />
+  * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. Tail the error log and send it over for someone to examine.
 
 * **Example Call**
