@@ -1,7 +1,6 @@
 **Xicato Intelligent Gateway API**
 ----
-<!-- TOC -->
-
+----
 - [User Authorization API Calls](#user-authorization-api-calls)
     - [Get Token (Login Required)](#get-token-login-required)
     - [Check User Permissions (Login Required)](#check-user-permissions-login-required)
@@ -53,10 +52,8 @@
     - [Upload Gateway Scenes List [Modified in V1.7.2]](#upload-gateway-scenes-list-modified-in-v172)
     - [Get Device Relay Configuration](#get-device-relay-configuration)
     - [Set Device Relay Configuration](#set-device-relay-configuration)
-    - [Name Group <Need to check - network name?>](#name-group-need-to-check---network-name)
-    - [Set Group Name [New in V1.7.2 - buggy]](#set-group-name-new-in-v172---buggy)
-    - [Name Scene <Need to check - network name?>](#name-scene-need-to-check---network-name)
-    - [Set Scene Name [New in V1.7.2]](#set-scene-name-new-in-v172)
+    - [Set Group Name [Modified in V1.7.2]](#set-group-name-modified-in-v172)
+    - [Name Scene [Modified in V1.7.2]](#name-scene-modified-in-v172)
 - [Beacon Permission API Calls](#beacon-permission-api-calls)
     - [Get Device iBeacon Configuration](#get-device-ibeacon-configuration)
     - [Get Device Eddystone URL Configuration](#get-device-eddystone-url-configuration)
@@ -82,9 +79,7 @@
     - [Enable/Disable Local Receiver High Gain](#enabledisable-local-receiver-high-gain)
     - [Get Local RSSI Cutoff](#get-local-rssi-cutoff)
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
-
-<!-- /TOC -->
-<a id="markdown-user-authorization-api-calls" name="user-authorization-api-calls"></a>
+----
 # User Authorization API Calls
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
@@ -95,7 +90,6 @@
   **Permissions are per network per gateway. If multiple gateways are being accessed simultaneously, care should be taken by the XIG administrator (i.e., the user logging into and configuring the gateways through the XIG Admin Panel) to ensure that the permissions for a given user are consistent across the gateways they are given access to.**
 
 ----
-<a id="markdown-get-token-login-required" name="get-token-login-required"></a>
 ## Get Token (Login Required)
 **Change Status:** No API call changes made in V1.7.0. 
 
@@ -133,7 +127,6 @@
 * **Notes:**
   Current as of 2017-7-31.
 ----
-<a id="markdown-check-user-permissions-login-required" name="check-user-permissions-login-required"></a>
 ## Check User Permissions (Login Required)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -173,9 +166,7 @@
 * **Notes:**
   Current as of 2018-4-9.
 ----
-<a id="markdown-view-permission-api-calls" name="view-permission-api-calls"></a>
 # View Permission API Calls
-<a id="markdown-show-devices" name="show-devices"></a>
 ## Show Devices
  **Change Status:** No API call changes made in V1.7.0. 
  
@@ -289,7 +280,6 @@
   Current as of 2017-7-12
 
 ----
-<a id="markdown-show-groups-with-devices-new-in-v172" name="show-groups-with-devices-new-in-v172"></a>
 ## Show Groups with Devices [New in V1.7.2]
  **Change Status:** API call added in V1.7.2. 
  
@@ -367,7 +357,6 @@
   Current as of 2017-7-12
 
  ----
-<a id="markdown-show-devices-with-groups" name="show-devices-with-groups"></a>
 ## Show Devices with Groups
 **Change Status:** No API call changes made in V1.7.0. 
  
@@ -472,7 +461,6 @@
   Current as of 2017-10-3
 
 ----
-<a id="markdown-show-devices-with-scenes" name="show-devices-with-scenes"></a>
 ## Show Devices with Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
@@ -574,7 +562,6 @@
 
 
 ----
-<a id="markdown-show-devices-with-groups-and-scenes" name="show-devices-with-groups-and-scenes"></a>
 ## Show Devices with Groups and Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
@@ -691,7 +678,6 @@
   To see a pretty-printed version of this call, issue a `GET` request to `/devices/with_everything/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render properly.
 
 ----
-<a id="markdown-histograms" name="histograms"></a>
 ## Histograms
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -754,7 +740,6 @@
   Occasionally, the gateway may return an empty list. This means it hasn't had the opportunity to retrieve the histogram from the device yet. Please allow some time for histograms to populate into the device list.
 
 ----
-<a id="markdown-device-details" name="device-details"></a>
 ## Device Details
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -830,7 +815,6 @@
   Current as of 2017-7-31.
 
 ----
-<a id="markdown-get-device-groups" name="get-device-groups"></a>
 ## Get Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -887,7 +871,6 @@
   Current as of 2017-9-20.
 
 ----
-<a id="markdown-get-device-scenes" name="get-device-scenes"></a>
 ## Get Device Scenes
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -951,7 +934,6 @@
   Current as of 2017-9-20.
 
 ----
-<a id="markdown-basic-gateway-info" name="basic-gateway-info"></a>
 ## Basic Gateway Info
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -1009,7 +991,6 @@
   Current as of 2017-2-24
 
 ----
-<a id="markdown-gateway-status" name="gateway-status"></a>
 ## Gateway Status
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -1055,7 +1036,6 @@
   Current as of 2017-2-24
 
 ----
-<a id="markdown-download-gateway-groups-list-modified-in-v172" name="download-gateway-groups-list-modified-in-v172"></a>
 ## Download Gateway Groups List [Modified in V1.7.2]
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated IDs. If a group name is not defined for a given group ID on a given network, then no information for that group ID will be returned. Previous versions of this call returned a CSV file that did not specify groups by network. For a complete list of discovered groups with networks specified use the call `/devices/with_groups`. For a complete list of groups with associated networks and devices use the call `/groups`.   
 
@@ -1104,7 +1084,6 @@
   Current as of 2018-5-21.
 
 ----
-<a id="markdown-download-gateway-scenes-list-modified-in-v172" name="download-gateway-scenes-list-modified-in-v172"></a>
 ## Download Gateway Scenes List [Modified in V1.7.2]
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated IDs. If a scene name is not defined for a given scene ID on a given network, then no information for that scene ID will be returned. Previous versions of this call returned a CSV file that did not specify scenes by network. For a complete list of discovered scenes with networks specified use the call `/devices/with_groups_and_scenes`.   
 
@@ -1154,9 +1133,7 @@
   Current as of 2018-5-21.
 
 ----
-<a id="markdown-control-permission-api-calls" name="control-permission-api-calls"></a>
 # Control Permission API Calls
-<a id="markdown-set-intensity-with-optional-fading" name="set-intensity-with-optional-fading"></a>
 ## Set Intensity (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
  
@@ -1222,7 +1199,6 @@
   Current as of 2016-12-20
 
 ----
-<a id="markdown-multi-channel-set-intensity-with-optional-fading-new-in-v172" name="multi-channel-set-intensity-with-optional-fading-new-in-v172"></a>
 ## Multi-Channel Set Intensity (with Optional Fading) [New in V1.7.2]
 **Change Status:** New in 1.7.2. 
  
@@ -1293,7 +1269,6 @@
   Current as of 2018-8-14.
 
 ----
-<a id="markdown-recall-scene-with-optional-fading" name="recall-scene-with-optional-fading"></a>
 ## Recall Scene (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -1358,7 +1333,6 @@
 
   Current as of 2016-12-20
 ----
-<a id="markdown-device-dismissal" name="device-dismissal"></a>
 ## Device Dismissal
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -1424,7 +1398,6 @@
 
 
 ----
-<a id="markdown-enable-and-disable-sensor-response" name="enable-and-disable-sensor-response"></a>
 ## Enable and Disable Sensor Response
 **Change Status:** Disable calls are new in 1.7.0. Documentation was added for _all_ calls with the release of 1.7.0. 
 
@@ -1487,12 +1460,11 @@
 * **Notes:**
 
   Current as of 2018-4-17
-<a id="markdown-send-and-clear-button-presses-new-in-v172" name="send-and-clear-button-presses-new-in-v172"></a>
 ## Send and Clear Button Presses [New in V1.7.2]
 **Change Status:** Added in V1.7.2
 
-  Sends or clears a button press to a device or group (add `0xC000` to the group ID to use this API).
-  Currently this API only supports pressing one button at a time.
+  Sends or clears a button press to a device, group (add `0xC000` to the group ID to use this API) or broadcast to mimic a switch button press.
+  Currently the API only supports pressing one button at a time.
 
 * **URLs:**
 
@@ -1560,9 +1532,7 @@
   Current as of 2018-10-16
 ----
 ----
-<a id="markdown-configure-permission-api-calls" name="configure-permission-api-calls"></a>
 # Configure Permission API Calls
-<a id="markdown-set-device-groups" name="set-device-groups"></a>
 ## Set Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
 
@@ -1632,7 +1602,6 @@
   Current as of 2017-9-18.
 
 ----
-<a id="markdown-set-device-scenes" name="set-device-scenes"></a>
 ## Set Device Scenes
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
 
@@ -1708,7 +1677,6 @@
   Current as of 2017-9-18.
 
 ----
-<a id="markdown-get-device-light-setup" name="get-device-light-setup"></a>
 ## Get Device Light Setup
 **Change Status:** Initial release in V1.7.0. 
 
@@ -1782,7 +1750,6 @@
   Current as of 2018-4-11.
 
 ----
-<a id="markdown-set-device-light-setup" name="set-device-light-setup"></a>
 ## Set Device Light Setup
 **Change Status:** Initial release in V1.7.0. 
 
@@ -1864,7 +1831,6 @@
   Current as of 2018-4-6.
 
 ----
-<a id="markdown-get-device-wired-light-setup" name="get-device-wired-light-setup"></a>
 ## Get Device Wired Light Setup
 **Change Status:** Initial release in V1.7.1. 
 
@@ -1955,7 +1921,6 @@
   Current as of 2018-5-17.
 
 ----
-<a id="markdown-set-device-wired-light-setup" name="set-device-wired-light-setup"></a>
 ## Set Device Wired Light Setup
 **Change Status:** Initial release in V1.7.1. 
 
@@ -2052,7 +2017,6 @@
   Current as of 2018-5-17.
 
 ----
-<a id="markdown-get-device-sensor-response-new-in-v172" name="get-device-sensor-response-new-in-v172"></a>
 ## Get Device Sensor Response [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2128,7 +2092,6 @@
   Current as of 2018-9-20.
 
 ----
-<a id="markdown-set-device-sensor-response-new-in-v172" name="set-device-sensor-response-new-in-v172"></a>
 ## Set Device Sensor Response [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2216,7 +2179,6 @@
   Current as of 2018-9-20.
 
 ----
-<a id="markdown-get-device-tracking-new-in-v172" name="get-device-tracking-new-in-v172"></a>
 ## Get Device Tracking [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2289,7 +2251,6 @@
   Current as of 2018-9-27.
 
 ----
-<a id="markdown-set-device-tracking-new-in-v172" name="set-device-tracking-new-in-v172"></a>
 ## Set Device Tracking [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2376,7 +2337,6 @@
   Current as of 2018-9-27.
 
 ----
-<a id="markdown-get-device-schedules-new-in-v172" name="get-device-schedules-new-in-v172"></a>
 ## Get Device Schedules [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2449,7 +2409,6 @@
   Current as of 2018-9-27.
 
 ----
-<a id="markdown-set-device-schedules-new-in-v172" name="set-device-schedules-new-in-v172"></a>
 ## Set Device Schedules [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2534,9 +2493,7 @@
   Current as of 2018-9-27.
 ----
 ----
-<a id="markdown-manage-permission-api-calls" name="manage-permission-api-calls"></a>
 # Manage Permission API Calls
-<a id="markdown-set-device-name" name="set-device-name"></a>
 ## Set Device Name
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2605,7 +2562,6 @@
   Current as of 2017-11-21.
 
 ----
-<a id="markdown-set-device-id" name="set-device-id"></a>
 ## Set Device ID
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2676,7 +2632,6 @@
   Current as of 2017-11-21.
 
 ----
-<a id="markdown-set-device-network" name="set-device-network"></a>
 ## Set Device Network
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2746,7 +2701,6 @@
   Current as of 2017-11-21.
 
 ----
-<a id="markdown-get-firmware-available" name="get-firmware-available"></a>
 ## Get Firmware Available
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2813,7 +2767,6 @@
   Current as of 2017-11-21.
 
 ----
-<a id="markdown-enqueue-a-firmware-update" name="enqueue-a-firmware-update"></a>
 ## Enqueue A Firmware Update
 **Change Status:** Updated API call in V1.7.1 to match documented method (`PUT` | `POST`) used to perform update. Previous API versions were supporting the incorrect method (`GET`).   
 
@@ -2880,7 +2833,6 @@
   Current as of 2017-11-21.
 
 ----
-<a id="markdown-check-firmware-update-status" name="check-firmware-update-status"></a>
 ## Check Firmware Update Status
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2997,7 +2949,6 @@
   Current as of 2017-11-21.
 
 ----
-<a id="markdown-get-device-communication-configuration" name="get-device-communication-configuration"></a>
 ## Get Device Communication Configuration
 **Change Status:** V1.7.0 API call changes: Corrected reported values of txPower and highRxGain, added JSON dict entry for device specific Tx power settings (availableTxPowers). The list of device specific Tx power settings should be used to ensure only valid values are used in the Set Device Communication Configuration call.   
 
@@ -3085,7 +3036,6 @@
   Current as of 2018-4-11.
 
 ----
-<a id="markdown-get-device-communication-configuration-new-call" name="get-device-communication-configuration-new-call"></a>
 ## Get Device Communication Configuration (New Call)
 **Change Status:** V1.7.1 API call changes: This call is new; it duplicates all the existing functionality of the `/device/getconfig` call, but in a way that's more consistent with other device configuration calls.
 
@@ -3177,7 +3127,6 @@
   Current as of 2018-5-22.
 
 ----
-<a id="markdown-set-device-communication-configuration" name="set-device-communication-configuration"></a>
 ## Set Device Communication Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3287,7 +3236,6 @@
   Current as of 2018-4-5.
 
 ----
-<a id="markdown-upload-gateway-groups-list-modified-in-v172" name="upload-gateway-groups-list-modified-in-v172"></a>
 ## Upload Gateway Groups List [Modified in V1.7.2]
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -3340,7 +3288,6 @@
   Current as of 2018-4-25.
 
 ----
-<a id="markdown-upload-gateway-scenes-list-modified-in-v172" name="upload-gateway-scenes-list-modified-in-v172"></a>
 ## Upload Gateway Scenes List [Modified in V1.7.2]
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -3393,7 +3340,6 @@
   Current as of 2018-4-25.
 
 ----
-<a id="markdown-get-device-relay-configuration" name="get-device-relay-configuration"></a>
 ## Get Device Relay Configuration
 **Change Status:** Initial release in V1.7.1. 
 
@@ -3461,7 +3407,6 @@
   Current as of 2018-5-17.
 
 ----
-<a id="markdown-set-device-relay-configuration" name="set-device-relay-configuration"></a>
 ## Set Device Relay Configuration
 **Change Status:** Initial release in V1.7.1. 
 
@@ -3537,15 +3482,14 @@
   Current as of 2018-5-17.
 
 ----
-<a id="markdown-name-group-need-to-check---network-name" name="name-group-need-to-check---network-name"></a>
-## Name Group <Need to check - network name?>
-**Change Status:** No API call changes made in V1.7.0.  
+## Set Group Name [Modified in V1.7.2]
+**Change Status:** The API call has changed in V1.7.2 to support unique group names per network. The previous call just supported a flat name list that did not allow group names to be uniquely identified per network. 
 
-  Name or change the name of a group. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
-`/device/setname/:network/:group_id/:name`
+  Name or change the name of a group on a given network. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified networks and Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
+
 * **URLs**
 
-  `/group/setname/:group_id/:name`
+  `/group/setname/:network/:group_id/:name`
 
 * **Methods:**
 
@@ -3558,7 +3502,8 @@
 * **URL Parameters:**
 
   Required:
-    * `group_id` : The target group ID. This can be any valid group ID.
+    * `network` : The network that the name value should be associated with. For the unsecured network use 'Unsecured' for the network name.
+    * `group_id` : The target group ID. This can be any valid group ID value.
     * `name` : The desired name of the target group. (Ensure that any special characters are properly URL-encoded.)
 
 * **Data Parameters:**
@@ -3570,7 +3515,8 @@
   * **Code:** 200 <br />
   **Content:** `/group/setname` returns JSON:
     ```
-    { "id": Int
+    { "network": String
+      "id": Int
       "name": String
     }
     ```
@@ -3584,143 +3530,26 @@
 
   * **Code:** 500 Internal Server Error<br />
   **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
-
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/group/setname/7/Group%20Test` will set the name of group 7 to 'Group Test'.
-
-* **Notes:**
-
-  Current as of 2017-09-21.
-
-  Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
-
-----
-<a id="markdown-set-group-name-new-in-v172---buggy" name="set-group-name-new-in-v172---buggy"></a>
-## Set Group Name [New in V1.7.2 - buggy]
-**Change Status:** Accepts a network parameter as of 1.7.2.  
-
-  Sets the name for a given group. This call replaces `/group/setname/:group_id/:name`
-
-* **URLs**
-
-  `/device/setname/:network/:group_id/:name`
-
-* **Methods:**
-
-  `PUT` | `POST`
-
-* **Permission:**
-
-  `manage`
-
-* **URL Parameters:**
-
-  Required:
-    * `network` : The network the target device is on. For unsecured devices, use 'unsecured'.
-    * `group_id` : The target group ID.
-    * `name` : The desired name (URL-encoded).
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/group/setname` returns JSON:
-    ```
-    { "name": String
-    , "id": Int
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
 
 * **Example Call:**
 
   ```
-     curl -X PUT
-          -u <username>:<password>
-          <gateway address: port>/group/setname/Xicato/25/Boardroom
-  ``` 
-  sets the name for Xicato group 25 to 'Boardroom'.
-* **Notes:**
-
-  Current as of 2018-10-19.
-----
-<a id="markdown-name-scene-need-to-check---network-name" name="name-scene-need-to-check---network-name"></a>
-## Name Scene <Need to check - network name?>
-**Change Status:** No API call changes made in V1.7.0.  
-
-  Name or change the name of a scene. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
-
-* **URLs**
-
-  `/scene/setname/:scene_number/:name`
-
-* **Methods:**
-
-  `PUT` | `POST`
-
-* **Permission:**
-
-  `manage`
-
-* **URL Parameters:**
-
-  Required:
-    * `scene_number` : The target scene number. This can be any valid scene number.
-    * `name` : The desired name of the target scene. (Ensure that any special characters are properly URL-encoded.)
-
-* **Data Parameters:**
-
-  None.
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-  **Content:** `/scene/setname` returns JSON:
-    ```
-    { "number": Int
-      "name": String
-    }
-    ```
-
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-  **Meaning:** The server isn't up or an incorrect URL was requested.
-
-    OR
-
-  * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
-
-* **Example Call:**
-
-  `curl -u <username>:<password> <gateway address: port>/scene/setname/7/Scene%20Test` will set the name of scene 7 to 'Scene Test'.
+    curl -X PUT 
+        -u <username>:<password> 
+        <gateway address: port>/group/setname/Unsecured/7/Group%20Test`
+  ```
+  sets the name of group 7 on the unsecured network to 'Group Test'.
 
 * **Notes:**
 
-  Current as of 2017-09-21.
+  Current as of 2018-10-22.
 
-  Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
-
+  Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
 ----
-<a id="markdown-set-scene-name-new-in-v172" name="set-scene-name-new-in-v172"></a>
-## Set Scene Name [New in V1.7.2]
-**Change Status:** Accepts a network parameter as of 1.7.2.  
+## Name Scene [Modified in V1.7.2]
+**Change Status:** The API call has changed in V1.7.2 to support unique scene names per network. The previous call just supported a flat name list that did not allow scene names to be uniquely identified per network. 
 
-  Sets the name for a given scene.
+  Name or change the name of a scene on a given network. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified networks and Scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
 
 * **URLs**
 
@@ -3737,9 +3566,9 @@
 * **URL Parameters:**
 
   Required:
-    * `network` : The network the target scene is on. For scenes using unsecured devices, use 'unsecured'.
-    * `scene_id` : The target scene ID.
-    * `name` : The desired name (URL-encoded).
+    * `network` : The network that the name value should be associated with. For the unsecured network use 'Unsecured' for the network name.
+    * `scene_id` : The target scene number. This can be any valid scene number.
+    * `name` : The desired name of the target scene. (Ensure that any special characters are properly URL-encoded.)
 
 * **Data Parameters:**
 
@@ -3750,8 +3579,9 @@
   * **Code:** 200 <br />
   **Content:** `/scene/setname` returns JSON:
     ```
-    { "name": String
-    , "number": Int
+    { "network": String
+      "number": Int
+      "name": String
     }
     ```
 
@@ -3763,23 +3593,25 @@
     OR
 
   * **Code:** 500 Internal Server Error<br />
-  **Meaning:** The server had an error. Generally this means the data provided was improperly formatted, but if it persists there may be underlying issues.
+  **Meaning:** The server had an error. Generally this means there was an issue with the parameters provided.
 
 * **Example Call:**
 
-  ```
+ ```
      curl -X PUT
           -u <username>:<password>
           <gateway address: port>/scene/setname/Xicato/41/Track%20On
   ``` 
-  sets the name for Xicato scene 41 to 'Track On'.
+  sets the name for Xicato scene 41 to 'Track On'. 
+
 * **Notes:**
 
-  Current as of 2018-10-19.
+  Current as of 2018-10-22.
+
+  Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
+
 ----
-<a id="markdown-beacon-permission-api-calls" name="beacon-permission-api-calls"></a>
 # Beacon Permission API Calls
-<a id="markdown-get-device-ibeacon-configuration" name="get-device-ibeacon-configuration"></a>
 ## Get Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3845,7 +3677,6 @@
   Current as of 2018-04-10.
 
 ----
-<a id="markdown-get-device-eddystone-url-configuration" name="get-device-eddystone-url-configuration"></a>
 ## Get Device Eddystone URL Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3908,7 +3739,6 @@
   Current as of 2018-04-10.
 
 ----
-<a id="markdown-get-device-altbeacon-config" name="get-device-altbeacon-config"></a>
 ## Get Device AltBeacon Config
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3971,7 +3801,6 @@
   Current as of 2018-04-10.
 
 ----
-<a id="markdown-set-device-ibeacon-configuration" name="set-device-ibeacon-configuration"></a>
 ## Set Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -4062,7 +3891,6 @@
   Current as of 2018-04-10.
 
 ----
-<a id="markdown-set-device-eddystone-url-configuration" name="set-device-eddystone-url-configuration"></a>
 ## Set Device Eddystone URL Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -4150,7 +3978,6 @@
   Current as of 2018-04-10.
 
 ----
-<a id="markdown-set-device-altbeacon-configuration" name="set-device-altbeacon-configuration"></a>
 ## Set Device AltBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -4239,9 +4066,7 @@
 
 ----
 ----
-<a id="markdown-administrate-permission-api-calls" name="administrate-permission-api-calls"></a>
 # Administrate Permission API Calls
-<a id="markdown-get-local-id" name="get-local-id"></a>
 ## Get Local ID
 **Change Status:** No API call changes made in V1.7.0.
 
@@ -4291,7 +4116,6 @@
   Current as of 2017-11-30
 
 ----
-<a id="markdown-set-local-id" name="set-local-id"></a>
 ## Set Local ID
 **Change Status:** Initial release in V1.7.1.
 
@@ -4353,7 +4177,6 @@
   Current as of 2018-5-17
 
 ----
-<a id="markdown-randomize-local-id" name="randomize-local-id"></a>
 ## Randomize Local ID
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4408,7 +4231,6 @@
   Current as of 2016-12-20
 
 ----
-<a id="markdown-reload-gateway" name="reload-gateway"></a>
 ## Reload Gateway
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4445,7 +4267,6 @@
   **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 ----
-<a id="markdown-set-advertising-interval" name="set-advertising-interval"></a>
 ## Set Advertising Interval
   Set the minimum advertising interval for outgoing commands. Default is 500ms.
 
@@ -4506,7 +4327,6 @@
 
 
 ----
-<a id="markdown-enabledisable-network-time-sync" name="enabledisable-network-time-sync"></a>
 ## Enable/Disable Network Time Sync
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4570,7 +4390,6 @@
   Current as of 2017-5-10
 
   ----
-<a id="markdown-enabledisable-device-autoremoval" name="enabledisable-device-autoremoval"></a>
 ## Enable/Disable Device Autoremoval
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4634,7 +4453,6 @@
   Current as of 2018-1-31.
 
 ----
-<a id="markdown-enabledisable-packet-logging" name="enabledisable-packet-logging"></a>
 ## Enable/Disable Packet Logging
 **Change Status:** New in V1.7.0.  
 
@@ -4690,7 +4508,6 @@
   Current as of 28 Germinal CCXXVI.
 
 ----
-<a id="markdown-enabledisable-event-logging" name="enabledisable-event-logging"></a>
 ## Enable/Disable Event Logging
 **Change Status:** New in V1.7.0.  
 
@@ -4746,7 +4563,6 @@
   Current as of 2018-4-17.
 
 ----
-<a id="markdown-get-local-ttl" name="get-local-ttl"></a>
 ## Get Local TTL
 **Change Status:** Initial release in V1.7.1.
 
@@ -4802,7 +4618,6 @@
   Current as of 2018-5-17
 
 ----
-<a id="markdown-set-local-ttl" name="set-local-ttl"></a>
 ## Set Local TTL
 **Change Status:** Initial release in V1.7.1.
 
@@ -4864,7 +4679,6 @@
   Current as of 2018-5-17
 
 ----
-<a id="markdown-get-local-transmission-power" name="get-local-transmission-power"></a>
 ## Get Local Transmission Power
 **Change Status:** Initial release in V1.7.1.
 
@@ -4918,7 +4732,6 @@
   Current as of 2018-5-17
 
 ----
-<a id="markdown-set-local-transmission-power" name="set-local-transmission-power"></a>
 ## Set Local Transmission Power
 **Change Status:** Initial release in V1.7.1.
 
@@ -4979,7 +4792,6 @@
   Current as of 2018-5-17.
 
 ----
-<a id="markdown-get-local-receiver-sensitivity" name="get-local-receiver-sensitivity"></a>
 ## Get Local Receiver Sensitivity
 **Change Status:** Initial release in V1.7.1.
 
@@ -5033,7 +4845,6 @@
   Current as of 2018-5-17
 
 ----
-<a id="markdown-enabledisable-local-receiver-high-gain" name="enabledisable-local-receiver-high-gain"></a>
 ## Enable/Disable Local Receiver High Gain
 **Change Status:** New in V1.7.0.  
 
@@ -5095,7 +4906,6 @@
   Current as of 2018-5-17.
 
 ----
-<a id="markdown-get-local-rssi-cutoff" name="get-local-rssi-cutoff"></a>
 ## Get Local RSSI Cutoff
 **Change Status:** Initial release in V1.7.1.
 
@@ -5149,7 +4959,6 @@
   Current as of 2018-5-17
 
 ----
-<a id="markdown-set-local-rssi-cutoff" name="set-local-rssi-cutoff"></a>
 ## Set Local RSSI Cutoff
 **Change Status:** Initial release in V1.7.1.
 
@@ -5221,3 +5030,4 @@
 * 2018-1-31: (Many intervening changes) Documentation should be complete up to ms1.6.12.
 * 2018-4-18: Many clarifications and ensured that the device network was properly included in the API calls, reordering calls based on permission required. New API calls added to the end of the respective permission sections.
 * 2018-5-21: Add new API calls for local radio settings and device (node) configuration
+* 2018-10-22: Added table of contents, more clearly identified new and modified calls.
