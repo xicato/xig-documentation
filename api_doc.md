@@ -80,6 +80,7 @@
     - [Get Local RSSI Cutoff](#get-local-rssi-cutoff)
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
 ----
+
 # User Authorization API Calls 
 <a name="user-authorization"></a>
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
@@ -91,6 +92,7 @@
   **Permissions are per network per gateway. If multiple gateways are being accessed simultaneously, care should be taken by the XIG administrator (i.e., the user logging into and configuring the gateways through the XIG Admin Panel) to ensure that the permissions for a given user are consistent across the gateways they are given access to.**
 
 ----
+
 ## Get Token (Login Required)
 <a name="get-token"></a>
 **Change Status:** No API call changes made in V1.7.0. 
@@ -129,6 +131,7 @@
 * **Notes:**
   Current as of 2017-7-31.
 ----
+
 ## Check User Permissions (Login Required)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -168,7 +171,9 @@
 * **Notes:**
   Current as of 2018-4-9.
 ----
+
 # View Permission API Calls
+
 ## Show Devices
  **Change Status:** No API call changes made in V1.7.0. 
  
@@ -282,6 +287,7 @@
   Current as of 2017-7-12
 
 ----
+
 ## Show Groups with Devices [New in V1.7.2]
  **Change Status:** API call added in V1.7.2. 
  
@@ -359,6 +365,7 @@
   Current as of 2017-7-12
 
  ----
+
 ## Show Devices with Groups
 **Change Status:** No API call changes made in V1.7.0. 
  
@@ -463,6 +470,7 @@
   Current as of 2017-10-3
 
 ----
+
 ## Show Devices with Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
@@ -564,6 +572,7 @@
 
 
 ----
+
 ## Show Devices with Groups and Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
@@ -680,6 +689,7 @@
   To see a pretty-printed version of this call, issue a `GET` request to `/devices/with_everything/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render properly.
 
 ----
+
 ## Histograms
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -742,6 +752,7 @@
   Occasionally, the gateway may return an empty list. This means it hasn't had the opportunity to retrieve the histogram from the device yet. Please allow some time for histograms to populate into the device list.
 
 ----
+
 ## Device Details
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -817,6 +828,7 @@
   Current as of 2017-7-31.
 
 ----
+
 ## Get Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -873,6 +885,7 @@
   Current as of 2017-9-20.
 
 ----
+
 ## Get Device Scenes
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -936,6 +949,7 @@
   Current as of 2017-9-20.
 
 ----
+
 ## Basic Gateway Info
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -993,6 +1007,7 @@
   Current as of 2017-2-24
 
 ----
+
 ## Gateway Status
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -1038,6 +1053,7 @@
   Current as of 2017-2-24
 
 ----
+
 ## Download Gateway Groups List [Modified in V1.7.2]
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated IDs. If a group name is not defined for a given group ID on a given network, then no information for that group ID will be returned. Previous versions of this call returned a CSV file that did not specify groups by network. For a complete list of discovered groups with networks specified use the call `/devices/with_groups`. For a complete list of groups with associated networks and devices use the call `/groups`.   
 
@@ -1086,6 +1102,7 @@
   Current as of 2018-5-21.
 
 ----
+
 ## Download Gateway Scenes List [Modified in V1.7.2]
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated IDs. If a scene name is not defined for a given scene ID on a given network, then no information for that scene ID will be returned. Previous versions of this call returned a CSV file that did not specify scenes by network. For a complete list of discovered scenes with networks specified use the call `/devices/with_groups_and_scenes`.   
 
@@ -1135,6 +1152,7 @@
   Current as of 2018-5-21.
 
 ----
+
 # Control Permission API Calls
 ## Set Intensity (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
@@ -1201,6 +1219,7 @@
   Current as of 2016-12-20
 
 ----
+
 ## Multi-Channel Set Intensity (with Optional Fading) [New in V1.7.2]
 **Change Status:** New in 1.7.2. 
  
@@ -1271,6 +1290,7 @@
   Current as of 2018-8-14.
 
 ----
+
 ## Recall Scene (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
@@ -1335,6 +1355,7 @@
 
   Current as of 2016-12-20
 ----
+
 ## Device Dismissal
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -1400,6 +1421,7 @@
 
 
 ----
+
 ## Enable and Disable Sensor Response
 **Change Status:** Disable calls are new in 1.7.0. Documentation was added for _all_ calls with the release of 1.7.0. 
 
@@ -1533,7 +1555,7 @@
 
   Current as of 2018-10-16
 ----
-----
+
 # Configure Permission API Calls
 ## Set Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
@@ -1604,6 +1626,7 @@
   Current as of 2017-9-18.
 
 ----
+
 ## Set Device Scenes
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
 
@@ -1679,6 +1702,7 @@
   Current as of 2017-9-18.
 
 ----
+
 ## Get Device Light Setup
 **Change Status:** Initial release in V1.7.0. 
 
@@ -1752,6 +1776,7 @@
   Current as of 2018-4-11.
 
 ----
+
 ## Set Device Light Setup
 **Change Status:** Initial release in V1.7.0. 
 
@@ -1833,6 +1858,7 @@
   Current as of 2018-4-6.
 
 ----
+
 ## Get Device Wired Light Setup
 **Change Status:** Initial release in V1.7.1. 
 
@@ -1923,6 +1949,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ## Set Device Wired Light Setup
 **Change Status:** Initial release in V1.7.1. 
 
@@ -2019,6 +2046,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ## Get Device Sensor Response [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2094,6 +2122,7 @@
   Current as of 2018-9-20.
 
 ----
+
 ## Set Device Sensor Response [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2181,6 +2210,7 @@
   Current as of 2018-9-20.
 
 ----
+
 ## Get Device Tracking [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2253,6 +2283,7 @@
   Current as of 2018-9-27.
 
 ----
+
 ## Set Device Tracking [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2339,6 +2370,7 @@
   Current as of 2018-9-27.
 
 ----
+
 ## Get Device Schedules [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2411,6 +2443,7 @@
   Current as of 2018-9-27.
 
 ----
+
 ## Set Device Schedules [New in V1.7.2]
 **Change Status:** Initial release in V1.7.2. 
 
@@ -2494,7 +2527,7 @@
 
   Current as of 2018-9-27.
 ----
-----
+
 # Manage Permission API Calls
 ## Set Device Name
 **Change Status:** No API call changes made in V1.7.0.  
@@ -2564,6 +2597,7 @@
   Current as of 2017-11-21.
 
 ----
+
 ## Set Device ID
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2634,6 +2668,7 @@
   Current as of 2017-11-21.
 
 ----
+
 ## Set Device Network
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2703,6 +2738,7 @@
   Current as of 2017-11-21.
 
 ----
+
 ## Get Firmware Available
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2769,6 +2805,7 @@
   Current as of 2017-11-21.
 
 ----
+
 ## Enqueue A Firmware Update
 **Change Status:** Updated API call in V1.7.1 to match documented method (`PUT` | `POST`) used to perform update. Previous API versions were supporting the incorrect method (`GET`).   
 
@@ -2835,6 +2872,7 @@
   Current as of 2017-11-21.
 
 ----
+
 ## Check Firmware Update Status
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -2951,6 +2989,7 @@
   Current as of 2017-11-21.
 
 ----
+
 ## Get Device Communication Configuration
 **Change Status:** V1.7.0 API call changes: Corrected reported values of txPower and highRxGain, added JSON dict entry for device specific Tx power settings (availableTxPowers). The list of device specific Tx power settings should be used to ensure only valid values are used in the Set Device Communication Configuration call.   
 
@@ -3038,6 +3077,7 @@
   Current as of 2018-4-11.
 
 ----
+
 ## Get Device Communication Configuration (New Call)
 **Change Status:** V1.7.1 API call changes: This call is new; it duplicates all the existing functionality of the `/device/getconfig` call, but in a way that's more consistent with other device configuration calls.
 
@@ -3238,6 +3278,7 @@
   Current as of 2018-4-5.
 
 ----
+
 ## Upload Gateway Groups List [Modified in V1.7.2]
 **Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated group numbers. The format of the file to be uploaded matches the downloaded file format returned by `/groups.txt`. Previous versions of this call expected a CSV file that did not specify groups by network. 
 
@@ -3290,6 +3331,7 @@
   Current as of 2018-4-25.
 
 ----
+
 ## Upload Gateway Scenes List [Modified in V1.7.2]
 **Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated scene numbers. The format of the file to be uploaded matches the downloaded file format returned by `/scenes.txt`. Previous versions of this call expected a CSV file that did not specify scenes by network.
 
@@ -3342,6 +3384,7 @@
   Current as of 2018-4-25.
 
 ----
+
 ## Get Device Relay Configuration
 **Change Status:** Initial release in V1.7.1. 
 
@@ -3409,6 +3452,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ## Set Device Relay Configuration
 **Change Status:** Initial release in V1.7.1. 
 
@@ -3484,6 +3528,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ## Set Group Name [Modified in V1.7.2]
 **Change Status:** The API call has changed in V1.7.2 to support unique group names per network. The previous call just supported a flat name list that did not allow group names to be uniquely identified per network. The "id" field has also been renamed to "number" to better match the structure of the site file generated by the Control Panel.
 
@@ -3548,6 +3593,7 @@
 
   Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
 ----
+
 ## Set Scene Name [Modified in V1.7.2]
 **Change Status:** The API call has changed in V1.7.2 to support unique scene names per network. The previous call just supported a flat name list that did not allow scene names to be uniquely identified per network. 
 
@@ -3613,6 +3659,7 @@
   Names are currently *not* shared between gateways, and names are *not* stored on the devices configured to respond to that scene.
 
 ----
+
 # Beacon Permission API Calls
 ## Get Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
@@ -3679,6 +3726,7 @@
   Current as of 2018-04-10.
 
 ----
+
 ## Get Device Eddystone URL Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3741,6 +3789,7 @@
   Current as of 2018-04-10.
 
 ----
+
 ## Get Device AltBeacon Config
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3803,6 +3852,7 @@
   Current as of 2018-04-10.
 
 ----
+
 ## Set Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3893,6 +3943,7 @@
   Current as of 2018-04-10.
 
 ----
+
 ## Set Device Eddystone URL Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3980,6 +4031,7 @@
   Current as of 2018-04-10.
 
 ----
+
 ## Set Device AltBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -4067,7 +4119,7 @@
   Current as of 2018-04-10.
 
 ----
-----
+
 # Administrate Permission API Calls
 ## Get Local ID
 **Change Status:** No API call changes made in V1.7.0.
@@ -4118,6 +4170,7 @@
   Current as of 2017-11-30
 
 ----
+
 ## Set Local ID
 **Change Status:** Initial release in V1.7.1.
 
@@ -4179,6 +4232,7 @@
   Current as of 2018-5-17
 
 ----
+
 ## Randomize Local ID
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4233,6 +4287,7 @@
   Current as of 2016-12-20
 
 ----
+
 ## Reload Gateway
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4269,6 +4324,7 @@
   **Meaning:** The server had an error which it couldn't recover from (this is very bad in this case). If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 ----
+
 ## Set Advertising Interval
   Set the minimum advertising interval for outgoing commands. Default is 500ms.
 
@@ -4329,6 +4385,7 @@
 
 
 ----
+
 ## Enable/Disable Network Time Sync
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4392,6 +4449,7 @@
   Current as of 2017-5-10
 
   ----
+
 ## Enable/Disable Device Autoremoval
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -4455,6 +4513,7 @@
   Current as of 2018-1-31.
 
 ----
+
 ## Enable/Disable Packet Logging
 **Change Status:** New in V1.7.0.  
 
@@ -4510,6 +4569,7 @@
   Current as of 28 Germinal CCXXVI.
 
 ----
+
 ## Enable/Disable Event Logging
 **Change Status:** New in V1.7.0.  
 
@@ -4565,6 +4625,7 @@
   Current as of 2018-4-17.
 
 ----
+
 ## Get Local TTL
 **Change Status:** Initial release in V1.7.1.
 
@@ -4620,6 +4681,7 @@
   Current as of 2018-5-17
 
 ----
+
 ## Set Local TTL
 **Change Status:** Initial release in V1.7.1.
 
@@ -4681,6 +4743,7 @@
   Current as of 2018-5-17
 
 ----
+
 ## Get Local Transmission Power
 **Change Status:** Initial release in V1.7.1.
 
@@ -4734,6 +4797,7 @@
   Current as of 2018-5-17
 
 ----
+
 ## Set Local Transmission Power
 **Change Status:** Initial release in V1.7.1.
 
@@ -4794,6 +4858,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ## Get Local Receiver Sensitivity
 **Change Status:** Initial release in V1.7.1.
 
@@ -4847,6 +4912,7 @@
   Current as of 2018-5-17
 
 ----
+
 ## Enable/Disable Local Receiver High Gain
 **Change Status:** New in V1.7.0.  
 
@@ -4908,6 +4974,7 @@
   Current as of 2018-5-17.
 
 ----
+
 ## Get Local RSSI Cutoff
 **Change Status:** Initial release in V1.7.1.
 
@@ -4961,6 +5028,7 @@
   Current as of 2018-5-17
 
 ----
+
 ## Set Local RSSI Cutoff
 **Change Status:** Initial release in V1.7.1.
 
