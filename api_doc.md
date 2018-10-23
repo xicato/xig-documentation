@@ -1,8 +1,8 @@
 **Xicato Intelligent Gateway API**
 ----
 ----
-- User Authorization API Calls
-    - Get Token (Login Required)
+- <a href="#user-authorization">User Authorization API Calls</a>
+    - <a href="#get-token">Get Token (Login Required)</a>
     - Check User Permissions (Login Required)
 - View Permission API Calls
     - Show Devices
@@ -81,6 +81,7 @@
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
 ----
 # User Authorization API Calls 
+<a name="user-authorization"></a>
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
   * Bearer, using the API token provided by the `/api/token` call.
@@ -91,6 +92,7 @@
 
 ----
 ## Get Token (Login Required)
+<a name="get-token"></a>
 **Change Status:** No API call changes made in V1.7.0. 
 
   Returns a JSON Web Token to be used with Bearer Authorization.
