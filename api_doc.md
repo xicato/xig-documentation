@@ -1,8 +1,8 @@
 **Xicato Intelligent Gateway API**
 ----
 ----
-- [User Authorization API Calls](#user-authorization-api-calls)
-    - [Get Token (Login Required)](#get-token-login-required)
+- [User Authorization API Calls](#user-authorization)
+    - [Get Token (Login Required)](#get-token)
     - [Check User Permissions (Login Required)](#check-user-permissions-login-required)
 - [View Permission API Calls](#view-permission-api-calls)
     - [Show Devices](#show-devices)
@@ -80,7 +80,8 @@
     - [Get Local RSSI Cutoff](#get-local-rssi-cutoff)
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
 ----
-# User Authorization API Calls
+# User Authorization API Calls 
+<a href="#user-authorization"></a>
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
   * Bearer, using the API token provided by the `/api/token` call.
@@ -91,6 +92,7 @@
 
 ----
 ## Get Token (Login Required)
+<a href="#get-token"></a>
 **Change Status:** No API call changes made in V1.7.0. 
 
   Returns a JSON Web Token to be used with Bearer Authorization.
@@ -3237,7 +3239,7 @@
 
 ----
 ## Upload Gateway Groups List [Modified in V1.7.2]
-**Change Status:** No API call changes made in V1.7.0.  
+**Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated group numbers. The format of the file to be uploaded matches the downloaded file format returned by `/groups.txt`. Previous versions of this call expected a CSV file that did not specify groups by network. 
 
   Upload `groups.txt` to the XIG.
 
@@ -3289,7 +3291,7 @@
 
 ----
 ## Upload Gateway Scenes List [Modified in V1.7.2]
-**Change Status:** No API call changes made in V1.7.0.  
+**Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated scene numbers. The format of the file to be uploaded matches the downloaded file format returned by `/scenes.txt`. Previous versions of this call expected a CSV file that did not specify scenes by network.
 
   Upload `scenes.txt` to the XIG.
 
@@ -3546,7 +3548,7 @@
 
   Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
 ----
-## Name Scene [Modified in V1.7.2]
+## Set Scene Name [Modified in V1.7.2]
 **Change Status:** The API call has changed in V1.7.2 to support unique scene names per network. The previous call just supported a flat name list that did not allow scene names to be uniquely identified per network. 
 
   Name or change the name of a scene on a given network. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified networks and Scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
@@ -5030,4 +5032,4 @@
 * 2018-1-31: (Many intervening changes) Documentation should be complete up to ms1.6.12.
 * 2018-4-18: Many clarifications and ensured that the device network was properly included in the API calls, reordering calls based on permission required. New API calls added to the end of the respective permission sections.
 * 2018-5-21: Add new API calls for local radio settings and device (node) configuration
-* 2018-10-22: Added table of contents, more clearly identified new and modified calls.
+* 2018-10-22: Added table of contents, more clearly identified new and modified calls in V1.7.2.
