@@ -98,6 +98,7 @@
 **Change Status:** No API call changes made in V1.7.0. 
 
   Returns a JSON Web Token to be used with Bearer Authorization.
+
 * **URL:**
 
   `/api/token`
@@ -180,6 +181,7 @@
   Return a list of devices seen by the given gateway, along with some information about the gateway's status. 
 
   To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
+
 * **URL:**
 
   `/devices`</br>
@@ -219,7 +221,7 @@
 
     Each Device is a JSON dict containing the following fields and their associated types:
     ```
-    { "01. Device ID" : String (for various reasons, this can't be treated as an integer although it almost always is)
+    { "01. Device ID" : String*
     , "02. Name" : Nullable String
     , "03. Device" : Nullable String
     , "04. Intensity" : Float
@@ -234,6 +236,7 @@
     , "NetworkName" : Nullable String
     }
     ```
+    _\*For various reasons, this can't be treated as an integer, but it almost always is the string form of one._
     Each Sensor is a JSON dict containing the following fields and their associated types:
     ```
     { "01. Device ID" : String
@@ -294,6 +297,7 @@
   Return a list of groups with all devices contained in each group as seen by the given gateway, along with some information about the gateway's status.
 
   To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
+
 * **URL:**
 
   `/groups`</br>  
@@ -369,7 +373,8 @@
 ## Show Devices with Groups
 **Change Status:** No API call changes made in V1.7.0. 
  
-  Return a list of devices at the given gateway, along with some information
+  Return a list of devices at the given gateway, along with some information.
+
 * **URL**
 
   `/devices/with_groups`
@@ -409,7 +414,7 @@
     Each Device is a JSON dict containing the following fields and their associated types:
     ```
     { "00. Index" : Integer
-    , "01. Device ID" : String (for various reasons, this can't be treated as an integer although it almost always is)
+    , "01. Device ID" : String*
     , "02. Name" : Nullable String
     , "03. Device" : Nullable String
     , "04. Intensity" : Float
@@ -424,6 +429,7 @@
     , "NetworkName" : Nullable String
     }
     ```
+    _\*For various reasons, this can't be treated as an integer although it almost always is._
 
     Each Sensor is a JSON dict containing the following fields and their associated types:
     ```
@@ -447,12 +453,13 @@
     Each Group is a JSON dict containing the following fields and their associated types:
     ```
     { "groupName" : String
-    , "groupId" : Nullable Integer (this is always an integer, but it can be null in the case of ungrouped devices)
+    , "groupId" : Nullable Integer*
     , "devices" : Optional Nullable List Device
     , "count" : Optional Nullable Integer
     , "network" : Nullable String
     }
     ```
+    _\*This is always an integer, but it can be null in the case of ungrouped devices._<br/>
     (Optional means that the field may or may not be present. In this case, one of either devices or count will always be present, not both or neither.)
 
 * **Error Response:**
@@ -474,7 +481,8 @@
 ## Show Devices with Scenes
 **Change Status:** No API call changes made in V1.7.0.  
  
-  Return a list of devices at the given gateway, along with scene information
+  Return a list of devices at the given gateway, along with scene information.
+
 * **URLs:**
 
   `/devices/with_scenes`
@@ -514,7 +522,7 @@
     Each Device is a JSON dict containing the following fields and their associated types:
     ```
     { "00. Index" : Integer
-    , "01. Device ID" : String (for various reasons, this can't be treated as an integer although it almost always is)
+    , "01. Device ID" : String*
     , "02. Name" : Nullable String
     , "03. Device" : Nullable String
     , "04. Intensity" : Float
@@ -529,6 +537,7 @@
     , "NetworkName" : Nullable String
     }
     ```
+    _\*For various reasons, this can't be treated as an integer, although it almost always is._
 
     Each Sensor is a JSON dict containing the following fields and their associated types:
     ```
@@ -577,6 +586,7 @@
 **Change Status:** No API call changes made in V1.7.0.  
  
   Return a list of devices at the given gateway, along with some information
+
 * **URLs**
 
   `/devices/with_everything`</br>
@@ -619,7 +629,7 @@
     Each Device is a JSON dict containing the following fields and their associated types:
     ```
     { "00. Index" : Integer
-    , "01. Device ID" : String (for various reasons, this can't be treated as an integer although it almost always is)
+    , "01. Device ID" : String*
     , "02. Name" : Nullable String
     , "03. Device" : Nullable String
     , "04. Intensity" : Float
@@ -634,6 +644,7 @@
     , "NetworkName" : Nullable String
     }
     ```
+    _\*For various reasons, this can't be treated as an integer, although it almost always is._
 
     Each Sensor is a JSON dict containing the following fields and their associated types:
     ```
@@ -657,12 +668,13 @@
     Each Group is a JSON dict containing the following fields and their associated types:
     ```
     { "groupName" : String
-    , "groupId" : Nullable Integer (this is always an integer, but it can be null in the case of ungrouped devices)
+    , "groupId" : Nullable Integer*
     , "devices" : Optional Nullable List Device
     , "count" : Optional Nullable Integer
     , "network" : Nullable String
     }
     ```
+    _\*This is always an integer, but it can be null in the case of ungrouped devices._
     (Optional means that the field may or may not be present. In this case, one of either devices or count will always be present, not both or neither.)
 
     Each Scene is a JSON dict containing the following fields and their associated types:
@@ -1158,6 +1170,7 @@
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
  
   Set intensity for a device or a group of devices, with optional fade time.
+
 * **URLs:**
 
   `/device/setintensity/:network/:device_id/:intensity/`
@@ -1224,13 +1237,14 @@
 **Change Status:** New in 1.7.2. 
  
   Set intensity for a device or a group of devices, with optional fade time.
+
 * **URLs:**
 
-  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/`<br/>
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:i1/:i2/:i3/:i4/`<br/>
   `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities`
 
   To use fading:
-  `/device/multisetintensity/:network/:device_id/:master_intensity/:intensity1/:intensity2/:intensity3/:intensity4/:fading`<br/>
+  `/device/multisetintensity/:network/:device_id/:master_intensity/:i1/:i2/:i3/:i4/:fading`<br/>
   `/device/multisetintensity/:network/:device_id/:master_intensity/:intensities/:fading`
 
 * **Methods:**
@@ -1295,6 +1309,7 @@
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Recall a scene on a light or a group of lights, with optional fade time.
+
 * **URLs:**
 
   `/device/recallscene/:network/:device_id/:sceneNumber/`
@@ -1850,7 +1865,8 @@
     curl 'http://<gateway>:8000/device/setlightsetup/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '{"max_level":100,"min_level":0.1,"power_on_type":1,"power_on_level":0,"power_on_fade_time":0,"power_on_start_time":0,"dimming_curve":1,"fade_smoothing":1}'
+      --data '{"max_level":100,"min_level":0.1,"power_on_type":1,"power_on_level":0,\
+      "power_on_fade_time":0,"power_on_start_time":0,"dimming_curve":1,"fade_smoothing":1}'
   ``` 
   sets the communication configuration for device 111.
 * **Notes:**
@@ -2038,7 +2054,8 @@
     curl 'http://<gateway>:8000/device/setwiredsetup/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '{"max_level":254,"min_level":1,"power_on_level":0,"system_failure_level":255,"dimming_curve":1,"fade_rate":7,"fade_time":4,"fast_fade_time":27}'
+      --data '{"max_level":254,"min_level":1,"power_on_level":0,"system_failure_level":255,\
+      "dimming_curve":1,"fade_rate":7,"fade_time":4,"fast_fade_time":27}'
   ``` 
   sets the wired light setup for device 111, assuming it is a DALI device.
 * **Notes:**
@@ -2202,7 +2219,14 @@
     curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.1 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.1", "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.2 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "", "To #": "0", "Value": "", "From #'s": "0", "Action": "Stop Fading", "Conditions": "B0.3 Press "}]'
+      --data '[{"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "100.0",\
+      "From #'s": "0", "Action": "Direct Intensity", "Conditions": "B0.0 Press "},\
+      {"Delay/Lx-": "0.0", "Fade/Lx+": "2.0", "To #": "0", "Value": "0.0", "From #'s": "0",\
+      "Action": "Direct Intensity", "Conditions": "B0.1 Press "}, {"Delay/Lx-": "0.0",\
+      "Fade/Lx+": "2.0", "To #": "0", "Value": "0.1", "From #'s": "0", "Action":\
+      "Direct Intensity", "Conditions": "B0.2 Press "}, {"Delay/Lx-": "0.0", "Fade/Lx+": "",\
+      "To #": "0", "Value": "", "From #'s": "0", "Action": "Stop Fading",\
+      "Conditions": "B0.3 Press "}]'
   ``` 
   sets the sensor response for device 111.
 * **Notes:**
@@ -2362,7 +2386,8 @@
     curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '{"motion":[11,22,33,44],"lux":[55,66,77,88],"intensity":[99,1234,56],"buttons":[[24,45,67,32,41,32]]}'
+      --data '{"motion":[11,22,33,44],"lux":[55,66,77,88],"intensity":[99,1234,56],\
+      "buttons":[[24,45,67,32,41,32]]}'
   ``` 
   sets the tracked device IDs for device 111.
 * **Notes:**
@@ -2520,7 +2545,10 @@
     curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111' \
       -X POST \
       -H 'Content-Type: application/json' \
-      --data '[{"#":"T0","Days":"","End Time":"00:00:00","Start Time":"00:00:00"},{"#":"T1","Days":"M,W,F","End Time":"00:00:00","Start Time":"03:30:45"},{"#":"T2","Days":"Tu,Th","End Time":"11:00:00","Start Time":"23:00:00"},{"#":"T3","Days":"Sa,Su","End Time":"00:00:00","Start Time":"00:00:00"}]'
+      --data '[{"#":"T0","Days":"","End Time":"00:00:00","Start Time":"00:00:00"},\
+      {"#":"T1","Days":"M,W,F","End Time":"00:00:00","Start Time":"03:30:45"},\
+      {"#":"T2","Days":"Tu,Th","End Time":"11:00:00","Start Time":"23:00:00"},\
+      {"#":"T3","Days":"Sa,Su","End Time":"00:00:00","Start Time":"00:00:00"}]'
   ``` 
   sets the schedules for device 111.
 * **Notes:**
@@ -3203,7 +3231,7 @@
     , advertisementSettings : AdvertisementSettings
     }
     ```
-    * The available `txPower` settings for a given device are provided bn the Get Device Communication Configuration call. 
+    * The available `txPower` settings for a given device are provided by the Get Device Communication Configuration call. 
     * `dynamicLightStatusConfiguration` is structured as:
     ```
     { warnInterval : Int
@@ -3270,7 +3298,13 @@
       -X POST \
       -u <user>:<password>
       -H 'Content-Type: application/json' \
-      --data '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":{"warnInterval":1000,        "warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,"warnTemperatureMin":0,"warnVinMax":53,        "warnVinMin":43,"changeBursts":3,"changeBurstInterval":100,"changeIntervalMin":1000,"changeIntensity":0,        "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,        "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,"alwaysConnectable":false}}'
+      --data '{"txPower":9.5,"highRxGain":true,"dynamicLightStatusConfiguration":\
+      {"warnInterval":1000,"warnIntensityMax":100,"warnIntensityMin":0,"warnTemperatureMax":90,\
+      "warnTemperatureMin":0,"warnVinMax":53,"warnVinMin":43,"changeBursts":3,\
+      "changeBurstInterval":100,"changeIntervalMin":1000,"changeIntensity":0,\
+      "changeTemperature":5,"changeVin":1},"advertisementSettings":{"lightStatusAdvInterval":10000,\
+      "lightHistoryAdvInterval":0,"lightChangeBursts":3,"lightChangeBurstInterval":100,\
+      "alwaysConnectable":false}}'
   ``` 
   sets the communication configuration for device 111 on an unsecured network. Note that the `--data` value when submitted must be on a single line.
 * **Notes:**
@@ -3934,7 +3968,8 @@
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept-Encoding: gzip, deflate' \
-    --data-binary '{"uuid":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"major":1,"minor":1,"measured_power":-50,"tx_power":10,"period":5000}'
+    --data-binary '{"uuid":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"major":1,"minor":1,\
+    "measured_power":-50,"tx_power":10,"period":5000}'
   ```
     will set the iBeacon configuration for device 1 on the network named "Xicato".
 
@@ -4022,7 +4057,8 @@
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept-Encoding: gzip, deflate' \
-    --data-binary '{"url":"http://xicato.com","flags":16,"tx_power_mode":3,"tx_power_levels":[-80,-70,-60,-50],"period":5000}'
+    --data-binary '{"url":"http://xicato.com","flags":16,"tx_power_mode":3,\
+    "tx_power_levels":[-80,-70,-60,-50],"period":5000}'
   ```
     will set the Eddystone URL configuration for device 1 on the network named "Xicato".
 
@@ -4110,7 +4146,8 @@
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept-Encoding: gzip, deflate' \
-    --data-binary '{"company_id":[16,16],"beacon_id":[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8],"mfg_data":37,"measured_power":-45,"period":5000}'
+    --data-binary '{"company_id":[16,16],"beacon_id":[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8],\
+    "mfg_data":37,"measured_power":-45,"period":5000}'
   ```
     will set the AltBeacon configuration for device 1 on the network named "Xicato".
 
