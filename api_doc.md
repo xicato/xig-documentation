@@ -1,9 +1,9 @@
 **Xicato Intelligent Gateway API**
 ----
 ----
-- [User Authorization API Calls](#user-authorization)
-    - [Get Token (Login Required)](#get-token)
-    - [Check User Permissions (Login Required)](#check-user-permissions-login-required)
+- <a href="#user-authorization">User Authorization API Calls</a>
+    - <a href="#get-token">Get Token (Login Required)</a>
+    - <a href="#check-user-permissions">Check User Permissions (Login Required)</a>
 - [View Permission API Calls](#view-permission-api-calls)
     - [Show Devices](#show-devices)
     - [Show Groups with Devices [New in V1.7.2]](#show-groups-with-devices-new-in-v172)
@@ -81,7 +81,7 @@
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
 ----
 # User Authorization API Calls 
-<a href="#user-authorization"></a>
+<a name="#user-authorization"></a>
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
   * Bearer, using the API token provided by the `/api/token` call.
@@ -92,7 +92,7 @@
 
 ----
 ## Get Token (Login Required)
-<a href="#get-token"></a>
+<a name="#get-token"></a>
 **Change Status:** No API call changes made in V1.7.0. 
 
   Returns a JSON Web Token to be used with Bearer Authorization.
@@ -130,6 +130,7 @@
   Current as of 2017-7-31.
 ----
 ## Check User Permissions (Login Required)
+<a name="#check-user-permissions"></a>
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
   Returns the permissions that the currently logged in user has. 
