@@ -292,6 +292,63 @@
 
  ----
 
+## Show Scenes - New in V1.7.2
+ **Change Status:** API call added in V1.7.2. 
+ 
+  Returns the gateway's list of named scenes.
+
+  To see a pretty-printed version of this call, use the `/pretty` modifier; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render in a more human readable format.
+
+* **URL:**
+
+  `/scenes`\  
+  `/scenes/pretty`
+
+* **Method:**
+
+  `GET`
+
+* **Permission:**
+
+  `view`
+
+* **URL Parameters:**
+
+  None.
+
+* **Data Parameters:**
+
+  None.
+
+* **Success Response:**
+
+  * **Code:** 200\
+  **Content:** `/scenes` returns a JSON list of Scene objects, each structured as follows:
+    ```
+    { "name" : Nullable String
+    , "number" : Integer
+    , "network" : Nullable String
+    }
+    ```
+    (Nullable means that the field contains either just a value of that type, or null. This is equivalent to Haskell's, Elm's, etc. Maybe-Just-Nothing concept)
+
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND\
+  **Meaning:** The server isn't up or an incorrect URL was requested.
+
+    OR
+
+  * **Code:** 500 Internal Server Error\
+  **Meaning:** The server had an error. If the error is persistent, a `/reload` request should be sent to the gateway to clear the issue. For further analysis, pull the logs from the gateway through the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
+
+* **Notes:**
+
+  Current as of 2018-10-24
+
+ ----
+
 ## Show Devices with Groups
 **Change Status:** No API call changes made in V1.7.0. 
  
@@ -484,6 +541,7 @@
     ```
     { "name" : Nullable String
     , "number" : Integer
+    , "network" : Nullable String
     }
     ```
 
@@ -499,7 +557,7 @@
 
 * **Notes:**
 
-  Current as of 2017-7-12
+  Current as of 2017-10-24
 
 
 ----
@@ -603,6 +661,7 @@
     ```
     { "name" : Nullable String
     , "number" : Integer
+    , "network" : Nullable String
     }
     ```
 
@@ -618,7 +677,7 @@
 
 * **Notes:**
 
-  Current as of 2017-10-3
+  Current as of 2018-10-24
 
   To see a pretty-printed version of this call, issue a `GET` request to `/devices/with_everything/pretty`; this is _*NOT*_ interchangeable with the regular version as it is wrapped in HTML tags so it will render properly.
 
