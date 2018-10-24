@@ -1,23 +1,25 @@
 **Xicato Intelligent Gateway API**
 ----
 ----
-- <a href="#user-authorization">User Authorization API Calls</a>
-    - <a href="#get-token">Get Token (Login Required)</a>
-    - Check User Permissions (Login Required)
-- View Permission API Calls
-    - Show Devices
-    - Show Groups with Devices [New in V1.7.2]
-    - Show Devices with Groups
-    - Show Devices with Scenes
-    - Show Devices with Groups and Scenes
-    - Histograms
-    - Device Details
-    - Get Device Groups
-    - Get Device Scenes
-    - Basic Gateway Info
-    - Gateway Status
-    - Download Gateway Groups List [Modified in V1.7.2]
-    - Download Gateway Scenes List [Modified in V1.7.2]
+<!-- TOC -->
+
+- [User Authorization API Calls](#user-authorization-api-calls)
+    - [Get Token (Login Required)](#get-token-login-required)
+    - [Check User Permissions (Login Required)](#check-user-permissions-login-required)
+- [View Permission API Calls](#view-permission-api-calls)
+    - [Show Devices](#show-devices)
+    - [Show Groups with Devices [New in V1.7.2]](#show-groups-with-devices-new-in-v172)
+    - [Show Devices with Groups](#show-devices-with-groups)
+    - [Show Devices with Scenes](#show-devices-with-scenes)
+    - [Show Devices with Groups and Scenes](#show-devices-with-groups-and-scenes)
+    - [Histograms](#histograms)
+    - [Device Details](#device-details)
+    - [Get Device Groups](#get-device-groups)
+    - [Get Device Scenes](#get-device-scenes)
+    - [Basic Gateway Info](#basic-gateway-info)
+    - [Gateway Status](#gateway-status)
+    - [Download Gateway Groups List [Modified in V1.7.2]](#download-gateway-groups-list-modified-in-v172)
+    - [Download Gateway Scenes List [Modified in V1.7.2]](#download-gateway-scenes-list-modified-in-v172)
 - [Control Permission API Calls](#control-permission-api-calls)
     - [Set Intensity (with Optional Fading)](#set-intensity-with-optional-fading)
     - [Multi-Channel Set Intensity (with Optional Fading) [New in V1.7.2]](#multi-channel-set-intensity-with-optional-fading-new-in-v172)
@@ -53,7 +55,7 @@
     - [Get Device Relay Configuration](#get-device-relay-configuration)
     - [Set Device Relay Configuration](#set-device-relay-configuration)
     - [Set Group Name [Modified in V1.7.2]](#set-group-name-modified-in-v172)
-    - [Name Scene [Modified in V1.7.2]](#name-scene-modified-in-v172)
+    - [Set Scene Name [Modified in V1.7.2]](#set-scene-name-modified-in-v172)
 - [Beacon Permission API Calls](#beacon-permission-api-calls)
     - [Get Device iBeacon Configuration](#get-device-ibeacon-configuration)
     - [Get Device Eddystone URL Configuration](#get-device-eddystone-url-configuration)
@@ -79,6 +81,8 @@
     - [Enable/Disable Local Receiver High Gain](#enabledisable-local-receiver-high-gain)
     - [Get Local RSSI Cutoff](#get-local-rssi-cutoff)
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
+
+<!-- /TOC -->
 ----
 
 # User Authorization API Calls 
