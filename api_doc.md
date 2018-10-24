@@ -3326,7 +3326,7 @@
 * **Success Response**
 
   * **Code:** 200\
-  **Content:** `/upload_groups` will return the same JSON as `/groups/light`.
+  **Content:** `/upload_groups` will return the `groups.txt` file back, so as to check for serialization errors.
 
 * **Error Responses**
   * **Code:** 500 Internal Server Error\
@@ -3347,7 +3347,7 @@
 
 * **Notes**
 
-  Current as of 2018-4-25.
+  Current as of 2018-10-24.
 
 ----
 
@@ -3379,7 +3379,7 @@
 * **Success Response**
 
   * **Code:** 200\
-  **Content:** `/upload_scenes` will return the same JSON as `/devices/with_scenes`.
+  **Content:** `/upload_scenes`will return the `scenes.txt` file back, so as to check for serialization errors.
 
 * **Error Responses**
   * **Code:** 500 Internal Server Error\
@@ -3400,7 +3400,7 @@
 
 * **Notes**
 
-  Current as of 2018-4-25.
+  Current as of 2018-10-24.
 
 ----
 
