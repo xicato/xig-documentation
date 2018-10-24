@@ -131,6 +131,7 @@
 
 * **Notes:**
   Current as of 2017-7-31.
+
 ----
 
 ## Check User Permissions (Login Required)
@@ -171,6 +172,7 @@
 
 * **Notes:**
   Current as of 2018-4-9.
+
 ----
 
 # View Permission API Calls
@@ -1370,6 +1372,7 @@
 * **Notes:**
 
   Current as of 2016-12-20
+
 ----
 
 ## Device Dismissal
@@ -1570,6 +1573,7 @@
 * **Notes:**
 
   Current as of 2018-10-16
+
 ----
 
 # Configure Permission API Calls
@@ -2555,6 +2559,7 @@
 * **Notes:**
 
   Current as of 2018-9-27.
+
 ----
 
 # Manage Permission API Calls
@@ -3627,6 +3632,7 @@
   Current as of 2018-10-22.
 
   Names currently are *not* shared between gateways, and Names are *not* stored on the XIMs or XIDs in the group.
+
 ----
 
 ## Set Scene Name [Modified in V1.7.2]
