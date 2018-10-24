@@ -137,7 +137,8 @@
 ## Check User Permissions (Login Required)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
 
-  Returns the permissions that the currently logged in user has. 
+  Returns the permissions that the currently logged in user has.
+
 * **URLs:**
 
     `/check_user/:network`
@@ -4610,7 +4611,7 @@
 
 * **Notes**
 
-  Current as of 28 Germinal CCXXVI.
+  Current as of 2018-10-22.
 
 ----
 
