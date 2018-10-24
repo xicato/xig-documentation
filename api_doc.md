@@ -1,7 +1,6 @@
 **Xicato Intelligent Gateway API**
 ----
 ----
-<!-- TOC -->
 
 - [User Authorization API Calls](#user-authorization-api-calls)
     - [Get Token (Login Required)](#get-token-login-required)
@@ -82,7 +81,6 @@
     - [Get Local RSSI Cutoff](#get-local-rssi-cutoff)
     - [Set Local RSSI Cutoff](#set-local-rssi-cutoff)
 
-<!-- /TOC -->
 ----
 
 # User Authorization API Calls 
