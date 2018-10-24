@@ -7,7 +7,7 @@
     - [Check User Permissions (Login Required)](#check-user-permissions-login-required)
 - [View Permission API Calls](#view-permission-api-calls)
     - [Show Devices](#show-devices)
-    - [Show Groups with Devices \[New in V1.7.2\]](#show-groups-with-devices-new-in-v172)
+    - [Show Groups with Devices - New in V1.7.2](#show-groups-with-devices-new-in-v172)
     - [Show Devices with Groups](#show-devices-with-groups)
     - [Show Devices with Scenes](#show-devices-with-scenes)
     - [Show Devices with Groups and Scenes](#show-devices-with-groups-and-scenes)
@@ -17,15 +17,15 @@
     - [Get Device Scenes](#get-device-scenes)
     - [Basic Gateway Info](#basic-gateway-info)
     - [Gateway Status](#gateway-status)
-    - [Download Gateway Groups List \[Modified in V1.7.2\]](#download-gateway-groups-list-modified-in-v172)
-    - [Download Gateway Scenes List \[Modified in V1.7.2\]](#download-gateway-scenes-list-modified-in-v172)
+    - [Download Gateway Groups List - Modified in V1.7.2](#download-gateway-groups-list-modified-in-v172)
+    - [Download Gateway Scenes List - Modified in V1.7.2](#download-gateway-scenes-list-modified-in-v172)
 - [Control Permission API Calls](#control-permission-api-calls)
     - [Set Intensity (with Optional Fading)](#set-intensity-with-optional-fading)
-    - [Multi-Channel Set Intensity (with Optional Fading) \[New in V1.7.2\]](#multi-channel-set-intensity-with-optional-fading-new-in-v172)
+    - [Multi-Channel Set Intensity (with Optional Fading) - New in V1.7.2](#multi-channel-set-intensity-with-optional-fading-new-in-v172)
     - [Recall Scene (with Optional Fading)](#recall-scene-with-optional-fading)
     - [Device Dismissal](#device-dismissal)
     - [Enable and Disable Sensor Response](#enable-and-disable-sensor-response)
-    - [Send and Clear Button Presses \[New in V1.7.2\]](#send-and-clear-button-presses-new-in-v172)
+    - [Send and Clear Button Presses - New in V1.7.2](#send-and-clear-button-presses-new-in-v172)
 - [Configure Permission API Calls](#configure-permission-api-calls)
     - [Set Device Groups](#set-device-groups)
     - [Set Device Scenes](#set-device-scenes)
@@ -33,12 +33,12 @@
     - [Set Device Light Setup](#set-device-light-setup)
     - [Get Device Wired Light Setup](#get-device-wired-light-setup)
     - [Set Device Wired Light Setup](#set-device-wired-light-setup)
-    - [Get Device Sensor Response \[New in V1.7.2\]](#get-device-sensor-response-new-in-v172)
-    - [Set Device Sensor Response \[New in V1.7.2\]](#set-device-sensor-response-new-in-v172)
-    - [Get Device Tracking \[New in V1.7.2\]](#get-device-tracking-new-in-v172)
-    - [Set Device Tracking \[New in V1.7.2\]](#set-device-tracking-new-in-v172)
-    - [Get Device Schedules \[New in V1.7.2\]](#get-device-schedules-new-in-v172)
-    - [Set Device Schedules \[New in V1.7.2\]](#set-device-schedules-new-in-v172)
+    - [Get Device Sensor Response - New in V1.7.2](#get-device-sensor-response-new-in-v172)
+    - [Set Device Sensor Response - New in V1.7.2](#set-device-sensor-response-new-in-v172)
+    - [Get Device Tracking - New in V1.7.2](#get-device-tracking-new-in-v172)
+    - [Set Device Tracking - New in V1.7.2](#set-device-tracking-new-in-v172)
+    - [Get Device Schedules - New in V1.7.2](#get-device-schedules-new-in-v172)
+    - [Set Device Schedules - New in V1.7.2](#set-device-schedules-new-in-v172)
 - [Manage Permission API Calls](#manage-permission-api-calls)
     - [Set Device Name](#set-device-name)
     - [Set Device ID](#set-device-id)
@@ -49,12 +49,12 @@
     - [Get Device Communication Configuration](#get-device-communication-configuration)
     - [Get Device Communication Configuration (New Call)](#get-device-communication-configuration-new-call)
     - [Set Device Communication Configuration](#set-device-communication-configuration)
-    - [Upload Gateway Groups List \[Modified in V1.7.2\]](#upload-gateway-groups-list-modified-in-v172)
-    - [Upload Gateway Scenes List \[Modified in V1.7.2\]](#upload-gateway-scenes-list-modified-in-v172)
+    - [Upload Gateway Groups List - Modified in V1.7.2](#upload-gateway-groups-list-modified-in-v172)
+    - [Upload Gateway Scenes List - Modified in V1.7.2](#upload-gateway-scenes-list-modified-in-v172)
     - [Get Device Relay Configuration](#get-device-relay-configuration)
     - [Set Device Relay Configuration](#set-device-relay-configuration)
-    - [Set Group Name \[Modified in V1.7.2\]](#set-group-name-modified-in-v172)
-    - [Set Scene Name \[Modified in V1.7.2\]](#set-scene-name-modified-in-v172)
+    - [Set Group Name - Modified in V1.7.2](#set-group-name-modified-in-v172)
+    - [Set Scene Name - Modified in V1.7.2](#set-scene-name-modified-in-v172)
 - [Beacon Permission API Calls](#beacon-permission-api-calls)
     - [Get Device iBeacon Configuration](#get-device-ibeacon-configuration)
     - [Get Device Eddystone URL Configuration](#get-device-eddystone-url-configuration)
@@ -84,7 +84,6 @@
 ----
 
 # User Authorization API Calls 
-<a name="user-authorization"></a>
   All calls, except the call to get the API token and the call to check user permissions accept two forms of authorization:
   * Basic, using the HTTP "Authorization: Basic" headers and the username and password colon-separated and then base64-encoded.
   * Bearer, using the API token provided by the `/api/token` call.
@@ -96,7 +95,6 @@
 ----
 
 ## Get Token (Login Required)
-<a name="get-token"></a>
 **Change Status:** No API call changes made in V1.7.0. 
 
   Returns a JSON Web Token to be used with Bearer Authorization.
@@ -296,7 +294,7 @@
 
 ----
 
-## Show Groups with Devices [New in V1.7.2]
+## Show Groups with Devices - New in V1.7.2
  **Change Status:** API call added in V1.7.2. 
  
   Return a list of groups with all devices contained in each group as seen by the given gateway, along with some information about the gateway's status.
@@ -1071,7 +1069,7 @@
 
 ----
 
-## Download Gateway Groups List [Modified in V1.7.2]
+## Download Gateway Groups List - Modified in V1.7.2
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated IDs. If a group name is not defined for a given group ID on a given network, then no information for that group ID will be returned. Previous versions of this call returned a CSV file that did not specify groups by network. For a complete list of discovered groups with networks specified use the call `/devices/with_groups`. For a complete list of groups with associated networks and devices use the call `/groups`.   
 
   Download `groups.txt` list from the XIG.
@@ -1120,7 +1118,7 @@
 
 ----
 
-## Download Gateway Scenes List [Modified in V1.7.2]
+## Download Gateway Scenes List - Modified in V1.7.2
 **Change Status:** The API call return data has changed in V1.7.2. The call now returns a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated IDs. If a scene name is not defined for a given scene ID on a given network, then no information for that scene ID will be returned. Previous versions of this call returned a CSV file that did not specify scenes by network. For a complete list of discovered scenes with networks specified use the call `/devices/with_groups_and_scenes`.   
 
   Download `scenes.txt` list from the XIG.
@@ -1238,7 +1236,7 @@
 
 ----
 
-## Multi-Channel Set Intensity (with Optional Fading) [New in V1.7.2]
+## Multi-Channel Set Intensity (with Optional Fading) - New in V1.7.2
 **Change Status:** New in 1.7.2. 
  
   Set intensity for a device or a group of devices, with optional fade time.
@@ -1506,7 +1504,7 @@
 * **Notes:**
 
   Current as of 2018-4-17
-## Send and Clear Button Presses [New in V1.7.2]
+## Send and Clear Button Presses - New in V1.7.2
 **Change Status:** Added in V1.7.2
 
   Sends or clears a button press to a device, group (add `0xC000` to the group ID to use this API) or broadcast to mimic a switch button press.
@@ -2072,7 +2070,7 @@
 
 ----
 
-## Get Device Sensor Response [New in V1.7.2]
+## Get Device Sensor Response - New in V1.7.2
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the sensor response configuration for a given device. 
@@ -2148,7 +2146,7 @@
 
 ----
 
-## Set Device Sensor Response [New in V1.7.2]
+## Set Device Sensor Response - New in V1.7.2
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the wired (1-10V or DALI) light configuration for a given device (XID or XIM). 
@@ -2243,7 +2241,7 @@
 
 ----
 
-## Get Device Tracking [New in V1.7.2]
+## Get Device Tracking - New in V1.7.2
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the tracked ID configuration for a given device. 
@@ -2316,7 +2314,7 @@
 
 ----
 
-## Set Device Tracking [New in V1.7.2]
+## Set Device Tracking - New in V1.7.2
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the lux, intensity, buttons, and motion sensors to track on a given device. 
@@ -2404,7 +2402,7 @@
 
 ----
 
-## Get Device Schedules [New in V1.7.2]
+## Get Device Schedules - New in V1.7.2
 **Change Status:** Initial release in V1.7.2. 
 
   Gets the scheduling configuration for a given device. 
@@ -2477,7 +2475,7 @@
 
 ----
 
-## Set Device Schedules [New in V1.7.2]
+## Set Device Schedules - New in V1.7.2
 **Change Status:** Initial release in V1.7.2. 
 
   Sets the scheduling configuration on a given device. 
@@ -3322,7 +3320,7 @@
 
 ----
 
-## Upload Gateway Groups List [Modified in V1.7.2]
+## Upload Gateway Groups List - Modified in V1.7.2
 **Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated group numbers. The format of the file to be uploaded matches the downloaded file format returned by `/groups.txt`. Previous versions of this call expected a CSV file that did not specify groups by network. 
 
   Upload `groups.txt` to the XIG.
@@ -3375,7 +3373,7 @@
 
 ----
 
-## Upload Gateway Scenes List [Modified in V1.7.2]
+## Upload Gateway Scenes List - Modified in V1.7.2
 **Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined scene names and their associated scene numbers. The format of the file to be uploaded matches the downloaded file format returned by `/scenes.txt`. Previous versions of this call expected a CSV file that did not specify scenes by network.
 
   Upload `scenes.txt` to the XIG.
@@ -3572,7 +3570,7 @@
 
 ----
 
-## Set Group Name [Modified in V1.7.2]
+## Set Group Name - Modified in V1.7.2
 **Change Status:** The API call has changed in V1.7.2 to support unique group names per network. The previous call just supported a flat name list that did not allow group names to be uniquely identified per network. The "id" field has also been renamed to "number" to better match the structure of the site file generated by the Control Panel.
 
   Name or change the name of a group on a given network. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified networks and Group IDs on the gateway. The group names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
@@ -3638,7 +3636,7 @@
 
 ----
 
-## Set Scene Name [Modified in V1.7.2]
+## Set Scene Name - Modified in V1.7.2
 **Change Status:** The API call has changed in V1.7.2 to support unique scene names per network. The previous call just supported a flat name list that did not allow scene names to be uniquely identified per network. 
 
   Name or change the name of a scene on a given network. It will also save the name through software restarts. *NOTE* This call only creates a name list associated with the specified networks and Scene IDs on the gateway. The scene names are not stored on XIMs or XIDs, and the name list is not propagated to other gateways in the space. 
