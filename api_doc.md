@@ -1077,22 +1077,46 @@
 * **Success Response**
 
   * **Code:** 200\
-  **Content:** `/groups.txt` will return the `groups.txt` file from the specified server.
+  **Content:** `/groups.txt` will return the group namelist from the specified server. The data returned in the file will have the data elements as shown below:
+  ```
+  [
+    {"name": "first_secure_network_name",
+     "groupsInfo": [
+       {"name": "First Group Name",
+        "number": <first group number>
+       },
+       {"name": "Second Group Name",
+        "number": <second group number>
+       }
+     ]
+    },
+    {"name": "second_network_name",
+     "groupsInfo": [
+       {"name": "Group Name",
+        "number": <group number>
+       },
+       {"name": "Another Group Name",
+        "number": <another group number>
+       }
+     ]
+    }
+  ]
+  ```
 
 * **Error Responses**
   * **Code:** 404 NOT FOUND\
-  **Meaning:** The `groups.txt` file doesn't exist on the gateway or the server isn't up.
+  **Meaning:** There is not a group namelist stored on the gateway or the server isn't up.
 
   * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
-  `curl <gateway address: port>/groups.txt` gets the gateway's `groups.txt`.
+  `curl <gateway address: port>/groups.txt` gets the gateway's group name list.
 
 * **Notes**
 
-  Current as of 2018-5-21.
+  Current as of 2018-10-24.
 
 ----
 
@@ -1126,27 +1150,52 @@
 * **Success Response**
 
   * **Code:** 200\
-  **Content:** `/scenes.txt` will return the `scenes.txt` file from the specified server.
+  **Content:** `/scenes.txt` will return the scene namelist from the specified server. The JSON dict returned will have the data elements as shown below:
+  ```
+  [
+    {"scenesInfo": [
+       {"name": "First Scene Name",
+        "number": <first scene number>
+       },
+       {"name": "Second Scene Name",
+        "number": <second scene number>
+       }
+     ]
+     "name": "first_secure_network_name",
+    },
+    {"scenesInfo": [
+       {"name": "A Scene Name",
+        "number": <scene number>
+       },
+       {"name": "Another Scene Name",
+        "number": <another scene number>
+       }
+     ]
+     "name": "second_network_name",
+    }
+  ]
+  ```
 
 * **Error Responses**
 * **Error Responses**
   * **Code:** 404 NOT FOUND\
-  **Meaning:** The `scenes.txt` file doesn't exist on the gateway or the server isn't up.
+  **Meaning:** There is not scene namelist stored on the gateway or the server isn't up.
 
   * **Code:** 500 Internal Server Error\
   **Meaning:** The server had an error. If the error is persistent, get the log files from the server using the XIG Admin Panel and send along with details of the issue being seen to support@xicato.com.
 
 * **Example Call**
 
-  `curl <gateway address: port>/scenes.txt` gets the gateway's `scenes.txt`.
+  `curl <gateway address: port>/scenes.txt` gets the gateway's scene namelist.
 
 * **Notes**
 
-  Current as of 2018-5-21.
+  Current as of 2018-10-24.
 
 ----
 
 # Control Permission API Calls
+
 ## Set Intensity (with Optional Fading)
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to clarify command details specifying secure network. 
  
@@ -1482,6 +1531,7 @@
 * **Notes:**
 
   Current as of 2018-4-17
+
 ## Send and Clear Button Presses - New in V1.7.2
 **Change Status:** Added in V1.7.2
 
@@ -1556,6 +1606,7 @@
 ----
 
 # Configure Permission API Calls
+
 ## Set Device Groups
 **Change Status:** No API call changes made in V1.7.0. Documentation updated to correctly define Permission required and clarify command details specifying secure network. 
 
@@ -2542,6 +2593,7 @@
 ----
 
 # Manage Permission API Calls
+
 ## Set Device Name
 **Change Status:** No API call changes made in V1.7.0.  
 
@@ -3182,6 +3234,7 @@
   Current as of 2018-5-22.
 
 ----
+
 ## Set Device Communication Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -3301,9 +3354,7 @@
 ## Upload Gateway Groups List - Modified in V1.7.2
 **Change Status:** No API call changes made in V1.7.0; however, the data format in the file has changed to allow for groups to be named uniquely per network. The call now expects the file to include a JSON dict specifying each secure network along with all of the explicitly defined group names and their associated group numbers. The format of the file to be uploaded matches the downloaded file format returned by `/groups.txt`. Previous versions of this call expected a CSV file that did not specify groups by network. 
 
-  Upload `groups.txt` to the XIG.
-
-* **URL:**
+ * **URL:**
 
   `/upload_groups`
 
@@ -3335,15 +3386,12 @@
 * **Example Call**
 
   ```
-  var formData = new FormData();
-  formData.append('file', document.getElementById('groupsUploadField').files[0]);
-  var url = "http://" + address + "/upload_groups";
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Authorization", "Bearer " + token);
-  xhr.send(formData);
-  ``` 
-  will upload the `groups.txt` file selected in the `groupsUploadField` input (n.b. `groupsUploadField` should be type `file`) to the gateway at `address` using the token `token`.
+    curl -X PUT
+         -H "Authorization: Bearer <token>"
+         -F "file=@<full path to file>/group_namefile.txt
+         <gateway address: port>/upload_groups
+  ```  
+  will upload the `group_namefile.txt` file to the gateway at `<gateway address>` using the Bearer token `<token>`.
 
 * **Notes**
 
@@ -3681,6 +3729,7 @@
 ----
 
 # Beacon Permission API Calls
+
 ## Get Device iBeacon Configuration
 **Change Status:** Initial release in V1.7.0. 
 
@@ -4144,6 +4193,7 @@
 ----
 
 # Administrate Permission API Calls
+
 ## Get Local ID
 **Change Status:** No API call changes made in V1.7.0.
 
