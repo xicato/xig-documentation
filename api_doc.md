@@ -197,6 +197,33 @@
     }
     ```
 
+    `status` is a bitfield representing the following:
+      * Bits 1:0
+        * 00: Valid LED load
+        * 01: LED load change warning
+        * 10: LED Open Circuit
+        * 11: LED Short Circuit
+      * Bits 3:2
+        * 00: Input Voltage Not Yet Measured
+        * 01: Valid Input Voltage
+        * 10: Input Voltage Too Low
+        * 11: Under-voltage Lockout (Requires full power cycle or light control off then on to recover)
+      * Bits 6:4
+        * 000: Valid Temperature
+        * 001: Thermal Overload (Intensity reduced by 15% over 60 seconds)
+        * 010: Thermal Overload Latch (Maximum intensity set to 10%)
+        * 011: Cold-Start (Maximum intensity set to 50% output until device warms up)
+        * 100: Thermal Shutdown (Intensity set to 0%)
+        * 101: Temperature Sensor Failure (Intensity set to 0%)
+      * Bit 7
+        * 0: Direct Mode: Intensity is determined by the user
+        * 1: Sensor Mode. Intensity is determined by autonomous sensor response
+
+    Note that a given device (node) may have bit 7 set, but it will only respond to sensors if the sensor response has been programmed. For example:
+      * 132 = Sensor mode, valid temperature, valid input voltage, valid LED load
+      * 133 = Sensor mode, valid temperature, valid input voltage, LED load change warning
+      * 144 = Sensor mode, thermal overload, valid input voltage, valid LED load
+
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND\
@@ -209,7 +236,7 @@
 
 * **Notes:**
 
-  Current as of 2017-7-12
+  Current as of 2018-12-20.
 
 ----
 
