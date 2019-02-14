@@ -2339,7 +2339,13 @@
     { "motion": List Int
     , "lux": List Int
     , "intensity": List Int
-    , "buttons": List (List Int)
+    , "buttons": List Button
+    }
+    ```
+    Each Button has the following JSON structure:
+    ```
+    { "type": Int
+    , "address": Int or List Int
     }
     ```
 
@@ -2366,7 +2372,7 @@
   gets the tracked ID setup for Unsecured device 111.
 * **Notes:**
 
-  Current as of 2018-9-27.
+  Current as of 2019-2-14.
 
 ----
 
@@ -2402,7 +2408,13 @@
     { "motion": List Int
     , "lux": List Int
     , "intensity": List Int
-    , "buttons": List (List Int)
+    , "buttons": List Button
+    }
+    ```
+    Each Button has the following JSON structure:
+    ```
+    { "type": Int
+    , "address": Int
     }
     ```
     *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
@@ -2448,13 +2460,13 @@
     curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111'\
       -X POST\
       -H 'Content-Type: application/json'\
-      --data '{"motion":[11,22,33,44],"lux":[55,66,77,88],"intensity":[99,1234,56],\
-      "buttons":[[24,45,67,32,41,32]]}'
+      --data '{"motion": [12333,12345,0,0], "lux": [12333,0],\
+      "intensity": [790,0], "buttons": [{"type": 1,"address":11631}]}'
   ``` 
   sets the tracked device IDs for device 111.
 * **Notes:**
 
-  Current as of 2018-9-27.
+  Current as of 2019-2-14.
 
 ----
 
