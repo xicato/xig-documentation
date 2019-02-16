@@ -2348,9 +2348,11 @@
     Each Button has the following JSON structure:
     ```
     { "type": Int
-    , "address": Int or List Int
+    , "address": Int or List Int*
     }
     ```
+    _\*This depends on the `"type"` value._
+    _If `type` is 0 or 1, it will be an Int. If `type` is 2, then it will be a List Int._
 
 * **Error Response:**
 
@@ -2417,9 +2419,12 @@
     Each Button has the following JSON structure:
     ```
     { "type": Int
-    , "address": Int
+    , "address": Int or List Int*
     }
     ```
+    _\*This depends on the `"type"` value._
+    _If `type` is 1 (XBeacon), it will be an Int. If `type` is is 0 (no switch) or 2 (Enocean), then it will be a List Int._
+    
     *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
     You should _probably_ include a Content-Length header as well.
 
