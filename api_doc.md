@@ -2195,7 +2195,7 @@
   ```
     curl http://<gateway>:8000/device/getsensorresponse/Unsecured/111
   ``` 
-  gets the wired light setup for Unsecured device 111.
+  gets the response configuration for Unsecured device 111.
 * **Notes:**
 
   Current as of 2018-9-20.
@@ -2425,7 +2425,7 @@
     _\*This depends on the `"type"` value._
     _If `type` is 1 (XBeacon), it will be an Int. If `type` is is 0 (no switch) or 2 (Enocean), then it will be a List Int._
     
-    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
+    *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this call.
     You should _probably_ include a Content-Length header as well.
 
     _For appropriate values to use here, please consult the Sensor Programming Guide._
@@ -2465,7 +2465,7 @@
 * **Example Call:**
 
   ```
-    curl 'http://<gateway>:8000/device/setsensorresponse/Unsecured/111'\
+    curl 'http://<gateway>:8000/device/settracked/Unsecured/111'\
       -X POST\
       -H 'Content-Type: application/json'\
       --data '{"motion": [12333,12345,0,0], "lux": [12333,0],\
@@ -2523,6 +2523,10 @@
     , "Start Time": String
     }
     ```
+    * "#" is the schedule (Time) program window and values must be "T0", "T1", "T2" and "T3"
+    * "Days" refers to the days of the week the schedule is run. The desired days are a concatenated list in order from Monday (M) through Sunday (Su) - e.g., "MWF", "MTuWThF", "SaSu", etc.
+    * "Start Time" is specified using 24 hour time and defines when the program should start. 
+    * "End Time" is specified using 24 hour time and defines when the program should end.
 
 * **Error Response:**
 
@@ -2578,29 +2582,30 @@
 * **Data Parameters:**
 
   Required:
-    * In the body:A List (`[]`) of JSON objects, one for each schedule.\
+    * In the body:A List (`[]`) of JSON objects, one for each schedule. All four objects must be defined in the list to ensure correct functionality of the call.\
     Each Schedule has the following JSON structure:
     ```
     { "#": String
     , "Days": String
-    , "End Time": String
     , "Start Time": String
+    , "End Time": String
     }
     ```
+    * "#" is the schedule (Time) program window and values must be "T0", "T1", "T2" and "T3"
+    * "Days" refers to the days of the week the schedule is run. The desired days are a concatenated list in order from Monday (M) through Sunday (Su) - e.g., "MWF", "MTuWThF", "SaSu", etc.
+    * "Start Time" is specified using 24 hour time and defines when the program should start. 
+    * "End Time" is specified using 24 hour time and defines when the program should end.\
+
     *NOTE*: You must provide a "Content-Type:application/json" HTTP Header with this.
     You should _probably_ include a Content-Length header as well.
     
-    * Alternatively, you may attach the sensor response file produced by the Xicato Control Panel. The `name` of the file should be `"file"`.
-
-    _For appropriate values to use here, please consult the Sensor Programming Guide._
-
 * **Success Response:**
 
   * **Code:** 200\
   **Content:** `/device/setschedules` returns JSON:
     ```
     { "result": Bool
-    , "tracked": List Schedule
+    , "schedules": List Schedule
     , "network": String
     , "device_id": String
     }
@@ -2628,14 +2633,14 @@
       -X POST\
       -H 'Content-Type: application/json'\
       --data '[{"#":"T0","Days":"","End Time":"00:00:00","Start Time":"00:00:00"},\
-      {"#":"T1","Days":"M,W,F","End Time":"00:00:00","Start Time":"03:30:45"},\
-      {"#":"T2","Days":"Tu,Th","End Time":"11:00:00","Start Time":"23:00:00"},\
-      {"#":"T3","Days":"Sa,Su","End Time":"00:00:00","Start Time":"00:00:00"}]'
+      {"#":"T1","Days":"MWF","End Time":"00:00:00","Start Time":"03:30:45"},\
+      {"#":"T2","Days":"TuTh","End Time":"11:00:00","Start Time":"23:00:00"},\
+      {"#":"T3","Days":"SaSu","End Time":"00:00:00","Start Time":"00:00:00"}]'
   ``` 
   sets the schedules for device 111.
 * **Notes:**
 
-  Current as of 2018-9-27.
+  Current as of 2019-2-20.
 
 ----
 
